@@ -14,3 +14,11 @@ h1 {
 
 
 }
+
+.text-color{
+  color: rgb(195, 168, 232);
+}
+
+.button-color{
+  background-color: rgb(35, 145, 209) ;
+}
