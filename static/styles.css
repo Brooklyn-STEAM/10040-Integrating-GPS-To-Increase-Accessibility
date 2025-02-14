@@ -7,3 +7,10 @@ body {
     background-color: rgb(237, 232, 253) ;
 
   }
+h1 {
+  text-align: center;
+  position:fixed;
+  color:rgb(237, 232, 253);
+
+
+}
