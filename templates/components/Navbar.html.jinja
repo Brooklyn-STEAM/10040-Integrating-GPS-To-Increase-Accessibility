@@ -30,7 +30,12 @@
           <a class="nav-link" href="#">Reviews</a>
         </li>
       </ul>
-      <a class="btn btn-primary" href="#" role="button">Sign in</a>
+       {%if current_user.is_authenticated %}
+             <span style = "color: rgb(56, 4, 111);">Hi, {{current_user.username }}</span>
+             <a href = "/sign_out" class = "btn btn-outline-dark ">Log Out</a>
+        {%else%}
+            <a href = "/sign_in" class = "btn btn-outline-dark">Log In</a>
+        {% endif %}
     </div>
   </div>
 </nav>
