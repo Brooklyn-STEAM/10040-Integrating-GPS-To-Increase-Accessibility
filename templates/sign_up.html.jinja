@@ -2,83 +2,99 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hand In Hand</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hand In Hand</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<body style = "background-color:rgb(56, 4, 111)">
-    {% include "components/navbar.html.jinja"%}
+<body style="background-color:rgb(56, 4, 111)">
+  {% include "components/navbar.html.jinja"%}
 
-    <div class = "container mt-2">
+  <div class="container mt-2">
 
     {%for message in get_flashed_messages() %}
-        <div class="alert alert-info" role="alert">
-            {{message}}
-        </div>
+    <div class="alert alert-info" role="alert">
+      {{message}}
+    </div>
     {% endfor %}
 
     <form action="/sign_up" method="post">
-      
-      <h4 class="card-title text-color text-left ml-2 mt-4" >First Name:</h4>
-      <input type="text" class="form-control "  placeholder="John" name = "first_name" required value="{{ request.form.get('first_name', '') }}">
-      <br>
-      
-      <h4 class="card-title text-color text-left ml-2" >Last Name:</h4>
-      <input type="text" class="form-control "  placeholder="Doe" name = "last_name" required value="{{ request.form.get('last_name', '') }}">
-      <br>
-      
-      <h4 class="card-title text-color text-left ml-2" >Email:</h4>
-      <input type="email" class="form-control" id="exampleFormControlInput1" name = "email" placeholder="email@seedsnshrubs.com" required value="{{ request.form.get('email', '') }}">
-      <br>
-      
-      <h4 class="card-title text-color text-left ml-2" >Address:</h4>
-      <input type="text" class="form-control "  placeholder="1234 Greenery Ave." name = "address" required value="{{ request.form.get('address', '') }}">
-      <br>
 
-      <h4 class="card-title text-color text-left ml-2" >Age:</h4>
-      <input type="number" class="form-control "  min="1" value="1" name = "address" required value="{{ request.form.get('age', '') }}">
-      <br>
-      
-      <h4 class="card-title text-color text-left ml-2" >Username:</h4>
-      <input type="text" class="form-control "  placeholder="MyPl4ntR0cks" name = "user_name"required value="{{ request.form.get('user_name', '') }}">
-      <br>
+      <div class="container">
+        <div class="row">
+          <div class="col-4"></div>
+          <div class="col-4">
+            <h4 class="card-title text-color text-left ml-2 mt-4">First Name:</h4>
+            <input type="text" class="form-control " placeholder="John" name="first_name" required
+              value="{{ request.form.get('first_name', '') }}">
+            <br>
 
-      <h4 class="card-title text-color text-left ml-2" >Phone Number:</h4>
-      <input type="text" class="form-control "  placeholder="XXX-XXX-XXXX" name = "phone_number"required value="{{ request.form.get('phone_number', '') }}">
-      <br>
-      
-      <h4 class="card-title text-color text-left ml-2" >Password:</h4>
-      <input type="password" class="form-control"  placeholder="Password123%" name = "password"required>
-      <br>
-      
-      <h4 class="card-title text-color text-left ml-2" >Comfirm Password:</h4>
-      <input type="password" class="form-control"  placeholder="Password123%" name = "verify_password" required>
-      <br>
-      
-      <div class="d-grid gap-2 col-4 mx-auto">
-        <input class="btn btn-success btn-lg" type="submit" value="Sign Up">
+            <h4 class="card-title text-color text-left ml-2">Last Name:</h4>
+            <input type="text" class="form-control " placeholder="Doe" name="last_name" required
+              value="{{ request.form.get('last_name', '') }}">
+            <br>
+
+            <h4 class="card-title text-color text-left ml-2">Email:</h4>
+            <input type="email" class="form-control" id="exampleFormControlInput1" name="email"
+              placeholder="email@handinhand.com" required value="{{ request.form.get('email', '') }}">
+            <br>
+
+            <h4 class="card-title text-color text-left ml-2">Address:</h4>
+            <input type="text" class="form-control " placeholder="1234 Helper Ave." name="address" required
+              value="{{ request.form.get('address', '') }}">
+            <br>
+
+            <h4 class="card-title text-color text-left ml-2">Age:</h4>
+            <input type="number" class="form-control " min="1" value="1" name="age" required
+              value="{{ request.form.get('age', '') }}">
+            <br>
+
+            <h4 class="card-title text-color text-left ml-2">Username:</h4>
+            <input type="text" class="form-control " placeholder="L3ND_4_H4ND" name="user_name" required
+              value="{{ request.form.get('user_name', '') }}">
+            <br>
+
+            <h4 class="card-title text-color text-left ml-2">Phone Number:</h4>
+            <input type="text" class="form-control " placeholder="XXX-XXX-XXXX" name="phone_number" required
+              value="{{ request.form.get('phone_number', '') }}">
+            <br>
+
+            <h4 class="card-title text-color text-left ml-2">Password:</h4>
+            <input type="password" class="form-control" placeholder="Password123%" name="password" required>
+            <br>
+
+            <h4 class="card-title text-color text-left ml-2">Comfirm Password:</h4>
+            <input type="password" class="form-control" placeholder="Password123%" name="verify_password" required>
+            <br>
+
+            <label class="card-title text-color text-left ml-2" for="role" name = "role" >Are You A Caretaker?</label>
+            <br>
+
+            <label for="student" class = "text-color">Yes</label>
+            <input type="radio" id="Caretaker" name="role" value="Yes" required
+              value="{{ request.form.get('roll', '') }}">
+
+            <label for="teacher" class = "text-color">No</label>
+            <input type="radio" id="teacher" name="role" value="No" required value="{{ request.form.get('roll', '') }}">
+            <br>
+            <br>
+
+            <label class="card-title text-color text-left ml-2" for="with_parent" name = "with_parent">Is A Parent/Gaurdian With You?</label>
+            <br>
+
+            <label for="student" class = "text-color">Yes</label>
+            <input type="radio" id="Caretaker" name="with_parent" value="Yes" required value="{{ request.form.get('with_parent', '') }}">
+
+            <label for="teacher" class = "text-color">No</label>
+            <input type="radio" id="Non-caretaker" name="with_parent" value="No" required value="{{ request.form.get('with_parent', '') }}">
+
+          </div>
+          <div class="col-4"></div>
+        </div>
       </div>
       <br>
-
-      <label class="card-title text-color text-left ml-2" for = "role" >Are You A Caretaker?</label>
-
-      <label for = "student">Yes</label>
-      <input type = "radio" id = "Caretaker" name = "role" value = "Yes" required value="{{ request.form.get('roll', '') }}">
-
-      <label for = "teacher">No</label>
-      <input type = "radio" id ="teacher" name = "role" value= "No" required value="{{ request.form.get('roll', '') }}">
-      <br>
-
-      <label class="card-title text-color text-left ml-2" for = "with_parent" >Is A Parent/Gaurdian With You?</label>
-
-      <label for = "student">Yes</label>
-      <input type = "radio" id = "Caretaker" name = "with_parent" value = "Yes" required value="{{ request.form.get('with_parent', '') }}">
-
-      <label for = "teacher">No</label>
-      <input type = "radio" id ="Non-caretaker" name = "with_parent" value= "No" required value="{{ request.form.get('with_parent', '') }}">
 
       <div class="d-grid gap-2 col-4 mx-auto">
         <input class="btn button-color btn-lg" type="submit" value="Sign Up">
@@ -88,8 +104,8 @@
       <br>
       <input name="send-to" value="" hidden>
     </form>
-    
-    </div>
+
+  </div>
 </body>
 
 </html>

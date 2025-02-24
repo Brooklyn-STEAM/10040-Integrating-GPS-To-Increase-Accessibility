@@ -23,3 +23,7 @@ h1 {
 .button-color{
   background-color: rgb(35, 145, 209) ;
 }
+
+.button-color:hover{
+  background-color: rgb(35, 145, 209) ;
+}
