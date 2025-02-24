@@ -50,7 +50,7 @@ def connect_db():
     conn = pymysql.connect(
         host = "db.steamcenter.tech",
         database = "hand_in_hand",
-        user = conf.user,
+        user = conf.username,
         password = conf.password,
         autocommit = True,
         cursorclass = pymysql.cursors.DictCursor
@@ -79,17 +79,18 @@ def sign_up_page():
             password = request.form["password"]
             age = request.form["age"]
 
+
             phone_number = request.form["phone_number"]
 
-            if request.form["roll"] == "Yes":
-                role = "Caretaker"
+            if request.form["role"] == "Yes":
+                role = 1
             else: 
-                role = "Need Of Assistance"
+                role = 0
 
             if request.form["with_parent"] == "Yes":
-                with_parent = "Yes"
+                with_parent = 1
             else:
-                with_parent = "No"
+                with_parent = 0
 
             comfirm_password = request.form["verify_password"]
 
@@ -101,8 +102,10 @@ def sign_up_page():
                 flash("Sorry, those passwords do not match")
             elif len(password) < 12:
                 flash("Sorry, that password is too short")
-            elif (age <= 18 and with_parent == "No"):
-                flash("Must have a parent or gaurdian present")
+            elif role == 0 and (int(age) < 18 and with_parent == 0):
+                    flash("Must have a parent or gaurdian present")
+            elif role == 1 and (int(age) < 18):
+                    flash("Must be 18 and up to be a caretaker")
             else:
                 try:
                     cursor.execute(f""" 
