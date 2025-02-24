@@ -8,6 +8,14 @@ body {
 
   }
 
+h1 {
+  text-align: center;
+  position:fixed;
+  color:rgb(237, 232, 253);
+
+
+}
+
 .text-color{
   color: rgb(195, 168, 232);
 }
