@@ -179,5 +179,17 @@ def updates():
 
 @app.route("/hiring")
 def hiring():
-    return render_template("hiring.html.jinja")
+
+    conn = connect_db()
+
+    cursor = conn.cursor()
+
+    cursor.execute(f"SELECT * FROM `User` WHERE `role` = 1;")
+    
+    results = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return render_template("hiring.html.jinja", caretakers = results)
     
