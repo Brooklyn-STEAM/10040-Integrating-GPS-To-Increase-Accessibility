@@ -193,7 +193,7 @@ def hiring():
 
     return render_template("hiring.html.jinja", caretakers = results)
     
-@app.route("/hiring/<user_id>")
+@app.route("/hiree_profile/<user_id>")
 def hiree_profile(user_id):
     
     conn = connect_db()
