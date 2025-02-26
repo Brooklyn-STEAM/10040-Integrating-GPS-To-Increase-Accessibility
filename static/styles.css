@@ -45,3 +45,35 @@ h1 {
 .h-card-text-color-py{
   color:rgb(255, 255, 255);
 }
+
+
+
+.u-bg-card-color{
+  background-color: rgb(255, 215, 160);
+}
+
+.u-card-text-color-sd{
+  color:rgb(244, 140, 4);
+}
+
+.u-card-text-color-py{
+  color:rgb(241, 141, 94);
+}
+
+.small-font{
+  font-size: 14px;
+}
+
+
+
+.r-bg-card-color{
+  background-color: rgb(194, 228, 255);
+}
+
+.r-card-text-color-sd{
+  color:rgb(59, 162, 246);
+}
+
+.r-card-text-color-py{
+  color:rgb(17, 145, 249);
+}
