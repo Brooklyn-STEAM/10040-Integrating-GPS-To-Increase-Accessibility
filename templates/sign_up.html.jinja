@@ -26,6 +26,7 @@
         <div class="row">
           <div class="col-4"></div>
           <div class="col-4">
+            <br>
             <h4 class="card-title text-color text-left ml-2 mt-4">First Name:</h4>
             <input type="text" class="form-control " placeholder="John" name="first_name" required
               value="{{ request.form.get('first_name', '') }}">
@@ -69,26 +70,29 @@
             <input type="password" class="form-control" placeholder="Password123%" name="verify_password" required>
             <br>
 
-            <label class="card-title text-color text-left ml-2" for="role" name = "role" >Are You A Caretaker?</label>
+            <label class="card-title text-color text-left ml-2" for="role" name="role">Are You A Caretaker?</label>
             <br>
 
-            <label for="student" class = "text-color">Yes</label>
+            <label for="student" class="text-color">Yes</label>
             <input type="radio" id="Caretaker" name="role" value="Yes" required
               value="{{ request.form.get('roll', '') }}">
 
-            <label for="teacher" class = "text-color">No</label>
+            <label for="teacher" class="text-color">No</label>
             <input type="radio" id="teacher" name="role" value="No" required value="{{ request.form.get('roll', '') }}">
             <br>
             <br>
 
-            <label class="card-title text-color text-left ml-2" for="with_parent" name = "with_parent">Is A Parent/Gaurdian With You?</label>
+            <label class="card-title text-color text-left ml-2" for="with_parent" name="with_parent">Is A
+              Parent/Gaurdian With You?</label>
             <br>
 
-            <label for="student" class = "text-color">Yes</label>
-            <input type="radio" id="Caretaker" name="with_parent" value="Yes" required value="{{ request.form.get('with_parent', '') }}">
+            <label for="student" class="text-color">Yes</label>
+            <input type="radio" id="Caretaker" name="with_parent" value="Yes" required
+              value="{{ request.form.get('with_parent', '') }}">
 
-            <label for="teacher" class = "text-color">No</label>
-            <input type="radio" id="Non-caretaker" name="with_parent" value="No" required value="{{ request.form.get('with_parent', '') }}">
+            <label for="teacher" class="text-color">No</label>
+            <input type="radio" id="Non-caretaker" name="with_parent" value="No" required
+              value="{{ request.form.get('with_parent', '') }}">
 
           </div>
           <div class="col-4"></div>
@@ -97,7 +101,7 @@
       <br>
 
       <div class="d-grid gap-2 col-4 mx-auto">
-        <input class="btn button-color btn-lg" type="submit" value="Sign Up">
+        <input class="btn h-button-color btn-lg" type="submit" value="Sign Up">
       </div>
       <br>
 
