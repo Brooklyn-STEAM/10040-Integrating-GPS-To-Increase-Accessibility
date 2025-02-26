@@ -1,6 +1,7 @@
 Nav {
     color: rgb(69,9,147);
     text-align: top;
+    position: sticky
   }
   
 body {
