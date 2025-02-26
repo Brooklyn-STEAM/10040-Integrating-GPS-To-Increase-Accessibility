@@ -193,3 +193,21 @@ def hiring():
 
     return render_template("hiring.html.jinja", caretakers = results)
     
+@app.route("/hiring/<user_id>")
+def hiree_profile(user_id):
+    
+    conn = connect_db()
+
+    cursor = conn.cursor()
+
+    cursor.execute(f"SELECT * FROM `User` WHERE `id` = {user_id}")
+
+    result = cursor.fetchone()
+
+    if result is None:
+        abort (404)
+
+    cursor.close()
+    conn.close()
+
+    return render_template("hiree_profile.html.jinja", caretaker = result)
