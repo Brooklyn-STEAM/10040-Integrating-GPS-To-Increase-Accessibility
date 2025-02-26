@@ -10,7 +10,7 @@
 </head>
 
 <body style="background-color:rgb(56, 4, 111)">
-  {% include "components/navbar.html.jinja"%}
+{% include "components/navbar.html.jinja"%}
   <div class="container mt-2">
     {%for message in get_flashed_messages() %}
     <div class="alert alert-info" role="alert">
@@ -32,7 +32,7 @@
             <br>
 
             <div class="d-grid gap-2 col-4 mx-auto">
-              <input class="btn button-color btn-lg" type="submit" value="Sign In">
+              <input class="btn h-button-color btn-lg" type="submit" value="Sign In">
             </div>
             <input name="send-to" value="" hidden>
 
@@ -41,7 +41,7 @@
             <h5 class="text-color text-center">Dont Have An Account?</h5>
             <br>
             <div class="d-grid gap-2 col-4 mx-auto">
-              <a class="btn button-color btn-md" type="submit" value="Sign Up" href="/sign_up">Sign Up!</a>
+              <a class="btn h-button-color btn-md" type="submit" value="Sign Up" href="/sign_up">Sign Up!</a>
             </div>
           </div>
           <div class="col-4"></div>

@@ -1,6 +1,7 @@
 Nav {
     color: rgb(69,9,147);
     text-align: top;
+    position: sticky
   }
   
 body {
@@ -20,10 +21,27 @@ h1 {
   color: rgb(195, 168, 232);
 }
 
-.button-color{
-  background-color: rgb(35, 145, 209) ;
+
+.h-button-color{
+  background-color: rgb(117, 75, 217) ;
 }
 
-.button-color:hover{
-  background-color: rgb(35, 145, 209) ;
+.h-button-color:hover{
+  background-color: rgb(117, 75, 217) ;
+}
+
+.h-card-head-color{
+  background-color: rgb(157, 119, 211);
+}
+
+.h-bg-card-color{
+  background-color: rgb(195, 168, 232);
+}
+
+.h-card-text-color-sd{
+  color:rgb(106, 66, 239);
+}
+
+.h-card-text-color-py{
+  color:rgb(255, 255, 255);
 }
