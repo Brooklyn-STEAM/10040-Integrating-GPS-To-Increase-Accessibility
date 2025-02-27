@@ -172,6 +172,7 @@ def reviews():
     return render_template("reviews.html.jinja")
 
 
+
 @app.route("/updates")
 def updates():
     return render_template("updates.html.jinja")
@@ -195,19 +196,22 @@ def hiring():
     
 @app.route("/hiring/<user_id>")
 def hiree_profile(user_id):
+    if flask_login.current_user.is_authenticated:
     
-    conn = connect_db()
+        conn = connect_db()
 
-    cursor = conn.cursor()
+        cursor = conn.cursor()
 
-    cursor.execute(f"SELECT * FROM `User` WHERE `id` = {user_id}")
+        cursor.execute(f"SELECT * FROM `User` WHERE `id` = {user_id}")
 
-    result = cursor.fetchone()
+        result = cursor.fetchone()
 
-    if result is None:
-        abort (404)
+        if result is None:
+            abort (404)
 
-    cursor.close()
-    conn.close()
+        cursor.close()
+        conn.close()
 
-    return render_template("hiree_profile.html.jinja", caretaker = result)
+        return render_template("hiree_profile.html.jinja", caretaker = result)
+    else:
+        return redirect("/sign_in")
