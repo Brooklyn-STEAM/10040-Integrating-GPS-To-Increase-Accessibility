@@ -88,3 +88,67 @@ h1{
   color:white;
   background-color:rgb(46, 149, 234);
 }
+
+.u-button {
+  background-color: rgb(255, 215, 160);
+  border: none;
+  color: rgb(241, 141, 94);
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  margin: 4px 2px;
+  border-radius:50%;
+  height: 75px;
+  width: 75px;
+}
+
+.u-textarea  {
+  box-sizing: border-box;
+  max-width: 100%;
+  background-color: rgb(255, 215, 160);
+  border-color:rgb(241, 141, 94);
+  resize:none; 
+}
+
+.add-update{
+  background-color: rgb(255, 215, 160);
+  border-color:rgb(241, 141, 94);
+ }
+ .add-update:hover{
+  background-color: rgb(241, 141, 94)
+ }
+
+
+ .h-button {
+  background-color: rgb(195, 168, 232);
+  border: none;
+  color:rgb(106, 66, 239);
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  margin: 4px 2px;
+  border-radius:50%;
+  height: 75px;
+  width: 75px;
+}
+
+.h-textarea  {
+  box-sizing: border-box;
+  max-width: 100%;
+  background-color: rgb(195, 168, 232);
+  border-color: rgb(157, 119, 211);
+  resize:none; 
+  
+}
+
+.add-hiree{
+  background-color: rgb(195, 168, 232);
+  border-color: rgb(157, 119, 211);
+ }
+ .add-hiree:hover{
+  background-color: rgb(157, 119, 211);
+ }
