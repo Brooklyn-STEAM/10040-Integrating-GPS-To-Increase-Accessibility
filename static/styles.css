@@ -102,11 +102,12 @@ h1{
   border-radius:50%;
   height: 75px;
   width: 75px;
+  margin: 20px 60px 20px 0px;
 }
 
 .u-textarea  {
   box-sizing: border-box;
-  max-width: 100%;
+  width: 100%;
   background-color: rgb(255, 215, 160);
   border-color:rgb(241, 141, 94);
   resize:none; 
@@ -134,11 +135,12 @@ h1{
   border-radius:50%;
   height: 75px;
   width: 75px;
+  margin: 20px 60px 20px 0px;
 }
 
 .h-textarea  {
   box-sizing: border-box;
-  max-width: 100%;
+  width: 100%;
   background-color: rgb(195, 168, 232);
   border-color: rgb(157, 119, 211);
   resize:none; 
@@ -152,3 +154,10 @@ h1{
  .add-hiree:hover{
   background-color: rgb(157, 119, 211);
  }
+
+ .center {
+  margin: auto;
+  width: 75%;
+  border: 3px;
+  padding: 10px;
+}
