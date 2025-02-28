@@ -23,10 +23,12 @@ h1{
 }
 
 .h-button-color{
+  color:white;
   background-color: rgb(117, 75, 217) ;
 }
 
 .h-button-color:hover{
+  color:white;
   background-color: rgb(135, 101, 214) ;
 }
 
@@ -65,7 +67,6 @@ h1{
 }
 
 
-
 .r-bg-card-color{
   background-color: rgb(194, 228, 255);
 }
@@ -76,4 +77,14 @@ h1{
 
 .r-card-text-color-py{
   color:rgb(17, 145, 249);
+}
+
+.r-button-color{
+  color:rgb(181, 217, 251);
+  background-color:rgb(21, 126, 212);
+}
+
+.r-button-color:hover{
+  color:white;
+  background-color:rgb(46, 149, 234);
 }

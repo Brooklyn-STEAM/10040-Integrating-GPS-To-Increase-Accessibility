@@ -167,12 +167,6 @@ def maps():
     return render_template("maps.html.jinja")
 
 
-@app.route("/reviews")
-def reviews():
-    return render_template("reviews.html.jinja")
-
-
-
 @app.route("/updates")
 def updates():
     return render_template("updates.html.jinja")
@@ -194,24 +188,72 @@ def hiring():
 
     return render_template("hiring.html.jinja", caretakers = results)
     
-@app.route("/hiree_profile/<user_id>")
-def hiree_profile(user_id):
-    if flask_login.current_user.is_authenticated:
+@app.route("/hiree_profile/<caretaker_id>")
+def hiree_profile(caretaker_id):
+    if not flask_login.current_user.is_authenticated:
+        return redirect("/sign_in")
+    else:
     
         conn = connect_db()
 
         cursor = conn.cursor()
 
-        cursor.execute(f"SELECT * FROM `User` WHERE `id` = {user_id}")
+        cursor.execute(f"SELECT * FROM `User` WHERE `id` = {caretaker_id}")
 
         result = cursor.fetchone()
-
+        
         if result is None:
             abort (404)
+        
+        cursor.execute(f""" SELECT
+                            `reviewer_id`,
+                            `written_review`,
+                            `rating`,
+                            `Reviews`.`timestamp`,
+                            `username`
+                        FROM `Reviews`
+                        JOIN `User` ON `reviewer_id` = `User`.`id`
+                        WHERE `caretaker_id` = {caretaker_id};""")
+    
+        results = cursor.fetchall()
+
+        total = 0 
+        try:
+
+            for rating in results:
+                number = rating['rating']
+
+                total += number
+            
+            count = len(results)
+            average = total/count
+        except:
+                average = 0
+    
 
         cursor.close()
         conn.close()
 
-        return render_template("hiree_profile.html.jinja", caretaker = result)
-    else:
-        return redirect("/sign_in")
+        return render_template("hiree_profile.html.jinja", caretaker = result, reviews = results, average = average)
+    
+    
+@app.route("/hiree_profile/<caretaker_id>/review", methods = ["POST"])
+def review(caretaker_id):
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    reviewer_id = flask_login.current_user.id
+
+    written_review = request.form["written_review"]
+    rating = request.form["rating"]
+
+    cursor.execute(f"""INSERT INTO `Reviews`
+                   (`caretaker_id`, `reviewer_id`, `written_review`, `rating`)
+                   VALUES
+                   ("{caretaker_id}", "{reviewer_id}", "{written_review}", "{rating}")
+                   ON DUPLICATE KEY UPDATE
+                   `written_review` = "{written_review}",
+                   `rating` = "{rating}";
+                    """)
+    
+    return redirect(f"/hiree_profile/{caretaker_id}")
