@@ -16,11 +16,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-</body>
-
-</html>
 
 
+    
     {% for caretaker in caretakers%}
         <div class="card mt-5 w-75 mx-auto">
             <h5 class="card-header h-card-head-color h-card-text-color-py">{{caretaker["first_name"]}} {{caretaker["last_name"]}}</h5>
@@ -44,3 +42,7 @@
           </div>
       </form>
     </div>
+   <br>
+</body>
+
+</html>
