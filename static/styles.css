@@ -161,3 +161,10 @@ h1{
   border: 3px;
   padding: 10px;
 }
+
+.s-center{
+  margin: auto;
+  width: 50%;
+  border: 3px;
+  padding: 10px;
+}
