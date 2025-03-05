@@ -10,21 +10,7 @@
 <body>
   {%include "components/navbar.html.jinja"%}
 
-    <div class=" card mt-5 w-75 mx-auto">
-
-        <div class="card-body u-bg-card-color">
-        <h5 class="card-text text-center u-card-text-color-py">Update</h5>
-          <p class="card-title u-card-text-color-sd">Username </p>
-          <p class="card-text u-card-text-color-sd">"What happened"</p>
-          <p class="card-text small-font u-card-text-color-sd text-end">Timestamp</p>
-        </div>
-
-      </div>
-      <div class="text-end">
-        <button class="u-button">+</button>
-      </div>
-
-      <div class="mx-auto w-75">
+      <div class="mx-auto w-75 center">
         <form method = "post" action="/updates/update">
         <label for = "place" class="u-card-text-color-py">Review A Place Recently Visited:</label>
         <br>
@@ -49,10 +35,6 @@
           <textarea placeholder="Write any changes on the accesibility of a place here:" rows="7" cols="100" 
           name="written_update" value = '{{request.form.get("written_update", "")}}' maxlength = "1500" class="u-textarea"></textarea>
 
-      <div class="center">
-        <form action="#" method = "post" action="postupdate">
-          <textarea placeholder="Write any changes on the accesibility of a place here:" rows="7" cols="100" name="comment" class="u-textarea "></textarea>
-          <br>
           <div class="d-grid justify-content-end">
             <button type="submit" class="btn btn-light mt-3 add-update" action="postupdate">Add Update </button>
           </div>
