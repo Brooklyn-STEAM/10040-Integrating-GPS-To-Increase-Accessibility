@@ -162,14 +162,80 @@ def sign_out():
     return redirect('/')
 
 
+
+
 @app.route("/maps")
 def maps():
     return render_template("maps.html.jinja")
 
 
+
+
 @app.route("/updates")
+@flask_login.login_required
 def updates():
-    return render_template("updates.html.jinja")
+
+    user_id = flask_login.current_user.id
+
+    conn = connect_db()
+    cursor = conn.cursor()
+
+
+    cursor.execute(f"SELECT * FROM `Updates` WHERE `user_id` = {user_id}")
+
+    result = cursor.fetchone()
+
+    cursor.execute(f"""SELECT
+                        `user_id`,
+                        `places_id`,
+                        `written_update`,
+                        `accessable`,
+                        `Updates`.`timestamp`,
+                        `Places`.`name`,
+                        `User`.`username`
+                    FROM `Updates`
+                    JOIN `User` ON `user_id` = `User`.`id`
+                    JOIN `Places` ON `places_id` = `Places`.`id`
+                    WHERE `user_id` = {user_id};""")
+    
+    results = cursor.fetchall()
+
+    cursor.execute(f"""SELECT * FROM `Places` ORDER BY `name`""")
+
+    results2 = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+
+    return render_template("updates.html.jinja", user = result, updates = results, locations = results2 )
+
+
+@app.route("/updates/update", methods = ["POST"])
+def update():
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    user_id = flask_login.current_user.id
+
+    written_update = request.form["written_update"]
+
+    places_id = request.form["place"]
+
+    if request.form["accessable"] == "Yes":
+        accessable = 1
+    else: 
+        accessable = 0
+
+    cursor.execute(f"""INSERT INTO `Updates`
+                    (`user_id`, `places_id`, `written_update`, `accessable`)
+                    VALUES
+                    ("{user_id}", "{places_id}", "{written_update}", "{accessable}");""")
+
+    return redirect("/updates")
+
+
+
 
 
 @app.route("/hiring")
@@ -238,6 +304,7 @@ def hiree_profile(caretaker_id):
     
     
 @app.route("/hiree_profile/<caretaker_id>/review", methods = ["POST"])
+@flask_login.login_required
 def review(caretaker_id):
     conn = connect_db()
     cursor = conn.cursor()
