@@ -9,7 +9,7 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<body style="background-color:rgb(56, 4, 111)">
+<body style="background-color:rgb(89, 52, 140)">
 {% include "components/navbar.html.jinja"%}
   <div class="container mt-2">
     {%for message in get_flashed_messages() %}
@@ -17,39 +17,57 @@
       {{message}}
     </div>
     {% endfor %}
-    <form action="/sign_in" method="post">
+    <form action="/sign_in" method="post" class="p-3">
 
       <div class="container">
-        <div class="row">
-          <div class="col-4"></div>
-          <div class="col-4">
-          <h2 class = "text-color text-center">Sign In</h2>
-            <h4 class="card-title text-color text-left ml-2 mt-3">Username:</h4>
-            <input type="text" class="form-control " name="username" placeholder="ne3d#4#HaNd?" required>
+ 
+          <h2 class = "text-color text-center p-3">Sign In</h2>
+            <h4 class="card-title text-color text-left ml-2 mt-3 s-center">Username:</h4>
+            <input type="text" class="form-control p-2 s-center" name="username" placeholder="NeedAhand_1" required>
             <br>
 
-            <h4 class="card-title text-color text-left ml-2">Password:</h4>
-            <input type="password" class="form-control" name="password" placeholder="Password" required>
+            <h4 class="card-title text-color text-left s-center">Password:</h4>
+            <input type="password" class="form-control s-center" name="password" placeholder="Password" required>
             <br>
 
-            <div class="d-grid gap-2 col-4 mx-auto">
-              <input class="btn h-button-color btn-lg" type="submit" value="Sign In">
+            <div class="d-grid col-4 mx-auto s-center">
+              <input class="btn h-button-color btn-md s-center" type="submit" value="Sign In">
             </div>
             <input name="send-to" value="" hidden>
-
             <br>
             <br>
-            <h5 class="text-color text-center">Dont Have An Account?</h5>
             <br>
-            <div class="d-grid gap-2 col-4 mx-auto">
-              <a class="btn h-button-color btn-md" type="submit" value="Sign Up" href="/sign_up">Sign Up!</a>
+            <p class="text-color text-center">Dont Have An Account?</p>
+            <div class="d-grid col-4 mx-auto s-center">
+              <a class="btn h-button-color btn-md s-center" type="submit" value="Sign Up" href="/sign_up">Sign Up!</a>
             </div>
-          </div>
-          <div class="col-4"></div>
 
-        </div>
+      </div>
     </form>
   </div>
+
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=6AqfGK6s"></script>  <!-- replace with KEY-->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script> 
+function getSelectionText() {
+    var text = "";
+    if (window.getSelection) {
+        text = window.getSelection().toString();
+    // for Internet Explorer 8 and below. For Blogger, you should use &amp;&amp; instead of &&.
+    } else if (document.selection && document.selection.type != "Control") { 
+        text = document.selection.createRange().text;
+    }
+    return text;
+}
+$(document).ready(function (){ // when the document has completed loading
+   $(document).mouseup(function (e){ // attach the mouseup event for all div and pre tags
+      setTimeout(function() { // When clicking on a highlighted area, the value stays highlighted until after the mouseup event, and would therefore stil be captured by getSelection. This micro-timeout solves the issue. 
+         responsiveVoice.cancel(); // stop anything currently being spoken
+         responsiveVoice.speak(getSelectionText()); //speak the text as returned by getSelectionText
+      }, 1);
+   });
+});
+</script>
 </body>
 
 </html>

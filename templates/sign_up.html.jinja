@@ -9,7 +9,7 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<body style="background-color:rgb(56, 4, 111)">
+<body style="background-color:rgb(89, 52, 140)">
   {% include "components/navbar.html.jinja"%}
 
   <div class="container mt-2">
@@ -22,10 +22,7 @@
 
     <form action="/sign_up" method="post">
 
-      <div class="container">
-        <div class="row">
-          <div class="col-4"></div>
-          <div class="col-4">
+      <div class="container s-center">
           <h2 class = "text-color text-center">Sign Up</h2>
             <h4 class="card-title text-color text-left ml-2 mt-4">First Name:</h4>
             <input type="text" class="form-control " placeholder="John" name="first_name" required
@@ -94,14 +91,11 @@
             <input type="radio" id="Non-caretaker" name="with_parent" value="No" required
               value="{{ request.form.get('with_parent', '') }}">
 
-          </div>
-          <div class="col-4"></div>
-        </div>
       </div>
       <br>
 
       <div class="d-grid gap-2 col-4 mx-auto">
-        <input class="btn h-button-color btn-lg" type="submit" value="Sign Up">
+        <input class="btn h-button-color btn-md s-center" type="submit" value="Sign Up">
       </div>
       <br>
 
@@ -110,6 +104,29 @@
     </form>
 
   </div>
+
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=6AqfGK6s"></script>  <!-- replace with KEY-->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script> 
+function getSelectionText() {
+    var text = "";
+    if (window.getSelection) {
+        text = window.getSelection().toString();
+    // for Internet Explorer 8 and below. For Blogger, you should use &amp;&amp; instead of &&.
+    } else if (document.selection && document.selection.type != "Control") { 
+        text = document.selection.createRange().text;
+    }
+    return text;
+}
+$(document).ready(function (){ // when the document has completed loading
+   $(document).mouseup(function (e){ // attach the mouseup event for all div and pre tags
+      setTimeout(function() { // When clicking on a highlighted area, the value stays highlighted until after the mouseup event, and would therefore stil be captured by getSelection. This micro-timeout solves the issue. 
+         responsiveVoice.cancel(); // stop anything currently being spoken
+         responsiveVoice.speak(getSelectionText()); //speak the text as returned by getSelectionText
+      }, 1);
+   });
+});
+</script>
 </body>
 
 </html>
