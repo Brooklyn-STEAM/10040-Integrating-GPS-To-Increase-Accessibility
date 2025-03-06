@@ -175,15 +175,8 @@ def maps():
 @flask_login.login_required
 def updates():
 
-    user_id = flask_login.current_user.id
-
     conn = connect_db()
     cursor = conn.cursor()
-
-
-    cursor.execute(f"SELECT * FROM `Updates` WHERE `user_id` = {user_id}")
-
-    result = cursor.fetchone()
 
     cursor.execute(f"""SELECT
                         `user_id`,
@@ -196,7 +189,6 @@ def updates():
                     FROM `Updates`
                     JOIN `User` ON `user_id` = `User`.`id`
                     JOIN `Places` ON `places_id` = `Places`.`id`
-                    WHERE `user_id` = {user_id}
                     ORDER BY `timestamp` DESC LIMIT 4;""")
     
     results = cursor.fetchall()
@@ -209,7 +201,7 @@ def updates():
     conn.close()
 
 
-    return render_template("updates.html.jinja", user = result, updates = results, locations = results2 )
+    return render_template("updates.html.jinja", updates = results, locations = results2 )
 
 
 @app.route("/updates/update", methods = ["POST"])
