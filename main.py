@@ -196,11 +196,12 @@ def updates():
                     FROM `Updates`
                     JOIN `User` ON `user_id` = `User`.`id`
                     JOIN `Places` ON `places_id` = `Places`.`id`
-                    WHERE `user_id` = {user_id};""")
+                    WHERE `user_id` = {user_id}
+                    ORDER BY `timestamp` DESC LIMIT 4;""")
     
     results = cursor.fetchall()
 
-    cursor.execute(f"""SELECT * FROM `Places` ORDER BY `name`""")
+    cursor.execute(f"SELECT * FROM `Places` ORDER BY `name`")
 
     results2 = cursor.fetchall()
 
@@ -227,15 +228,13 @@ def update():
     else: 
         accessable = 0
 
-    cursor.execute(f"""INSERT INTO `Updates`
-                    (`user_id`, `places_id`, `written_update`, `accessable`)
-                    VALUES
-                    ("{user_id}", "{places_id}", "{written_update}", "{accessable}");""")
+        cursor.execute(f"""INSERT INTO `Updates`
+                        (`user_id`, `places_id`, `written_update`, `accessable`)
+                        VALUES
+                        ("{user_id}", "{places_id}", "{written_update}", "{accessable}");""")
+        
 
     return redirect("/updates")
-
-
-
 
 
 @app.route("/hiring")
@@ -279,7 +278,8 @@ def hiree_profile(caretaker_id):
                             `username`
                         FROM `Reviews`
                         JOIN `User` ON `reviewer_id` = `User`.`id`
-                        WHERE `caretaker_id` = {caretaker_id};""")
+                        WHERE `caretaker_id` = {caretaker_id}
+                        ORDER BY `timestamp` DESC LIMIT 4;""")
     
         results = cursor.fetchall()
 
