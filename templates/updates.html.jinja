@@ -29,7 +29,7 @@
               <label class="card-title u-card-text-color-py fs-5 pt-4" for="accessable" name="role">Was this location accessable?</label>
                 <br>
                 <label for="student" class="u-card-text-color-py fs-5">Yes</label>
-                <input type="radio" id="viable" name="accessable" value="Yes" requiredvalue="{{ request.form.get('accessable', '') }}">
+                <input type="radio" id="viable" name="accessable" value="Yes" required value="{{ request.form.get('accessable', '') }}">
 
                 <label for="teacher" class="u-card-text-color-py fs-5">No</label>
                 <input type="radio" id="non-viable" name="accessable" value="No" required value="{{ request.form.get('accessable', '') }}">
@@ -40,7 +40,7 @@
         </div>
           <div class="s-center">
             <textarea placeholder="Write any changes on the accesibility of a place here:" rows="7" cols="100" 
-            name="written_update" value = '{{request.form.get("written_update", "")}}' maxlength = "1500" class="u-textarea"></textarea>
+            name="written_update" value = '{{request.form.get("written_update", "")}}' maxlength = "1500" class="u-textarea" required></textarea>
           </div>
 
           <div class="update-b d-grid justify-content-end">

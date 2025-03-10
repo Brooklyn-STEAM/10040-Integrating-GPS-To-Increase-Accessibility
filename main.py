@@ -235,6 +235,8 @@ def update():
                         (`user_id`, `places_id`, `written_update`, `accessable`)
                         VALUES
                         ("{user_id}", "{places_id}", "{written_update}", "{accessable}");""")
+
+
         
 
     return redirect("/updates")
