@@ -55,7 +55,12 @@
      {%for update in updates%}
         <div class="card s-center">
           <div class="card-body u-bg-card-color">
-            <h4 class="u-card-text-color-py">{{update["name"]}}</h4>
+          {%if update["accessable"] == 0 %}
+            <h4 class="u-card-text-color-py">{{update["name"]}} ~ Inaccessable</h4>
+          {%endif%}
+          {%if update["accessable"] == 1 %}
+            <h4 class="u-card-text-color-py">{{update["name"]}} ~ Accessable</h4>
+          {%endif%}
             <br>
             <p class="u-card-text-color-sd">{{update["username"]}}</p>
             <p class="u-card-text-color-sd">{{update["written_update"]}}</p>

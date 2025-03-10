@@ -3,6 +3,7 @@ import pymysql
 from dynaconf import Dynaconf
 import flask_login
 
+
 app = Flask(__name__)
 
 conf = Dynaconf(
@@ -166,7 +167,17 @@ def sign_out():
 
 @app.route("/maps")
 def maps():
-    return render_template("maps.html.jinja")
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    cursor.execute(f"SELECT * FROM `Places`")
+
+    results = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return render_template("maps.html.jinja", coords = results)
 
 
 
@@ -271,7 +282,7 @@ def hiree_profile(caretaker_id):
                         FROM `Reviews`
                         JOIN `User` ON `reviewer_id` = `User`.`id`
                         WHERE `caretaker_id` = {caretaker_id}
-                        ORDER BY `timestamp` DESC LIMIT 4;""")
+                        ORDER BY `timestamp` DESC;""")
     
         results = cursor.fetchall()
 
