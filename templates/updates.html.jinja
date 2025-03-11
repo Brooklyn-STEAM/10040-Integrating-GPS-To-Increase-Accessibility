@@ -17,7 +17,9 @@
               <form method = "post" action="/updates/update" >
                 <label for = "place" class="u-card-text-color-py fs-5 text-center pt-4">Review A Place Recently Visited:</label>
                 <br>
+
                   <select size = "6" name = "place" id = "place" required class="u-card-text-color-py">
+
                   {%for location in locations%}
                   <option  value = "{{location['id']}}">{{location["name"]}}</option>
                   {% endfor%}
