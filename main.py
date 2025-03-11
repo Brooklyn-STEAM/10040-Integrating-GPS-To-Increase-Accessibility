@@ -157,10 +157,18 @@ def sign_in_page():
         return render_template("sign_in.html.jinja")
 
 
+
+
+
+
+
 @app.route('/sign_out')
 def sign_out():
     flask_login.logout_user()
     return redirect('/')
+
+
+
 
 
 
@@ -178,6 +186,8 @@ def maps():
     conn.close()
 
     return render_template("maps.html.jinja", coords = results)
+
+
 
 
 
@@ -204,6 +214,9 @@ def updates():
     
     results = cursor.fetchall()
 
+    if results is None:
+        flash("Please make sure all feilds are filled out in your responce")
+
     cursor.execute(f"SELECT * FROM `Places` ORDER BY `name`")
 
     results2 = cursor.fetchall()
@@ -213,6 +226,11 @@ def updates():
 
 
     return render_template("updates.html.jinja", updates = results, locations = results2 )
+
+
+
+
+
 
 
 @app.route("/updates/update", methods = ["POST"])
@@ -226,20 +244,19 @@ def update():
 
     places_id = request.form["place"]
 
-    if request.form["accessable"] == "Yes":
-        accessable = 1
-    else: 
-        accessable = 0
+    accessable = 1 if request.form.get("accessable") == "Yes" else 0
 
-        cursor.execute(f"""INSERT INTO `Updates`
+    cursor.execute(f"""INSERT INTO `Updates`
                         (`user_id`, `places_id`, `written_update`, `accessable`)
                         VALUES
                         ("{user_id}", "{places_id}", "{written_update}", "{accessable}");""")
 
-
-        
-
     return redirect("/updates")
+
+
+
+
+
 
 
 @app.route("/hiring")
@@ -257,6 +274,12 @@ def hiring():
     conn.close()
 
     return render_template("hiring.html.jinja", caretakers = results)
+
+
+
+
+
+
     
 @app.route("/hiree_profile/<caretaker_id>")
 def hiree_profile(caretaker_id):
@@ -308,6 +331,11 @@ def hiree_profile(caretaker_id):
         return render_template("hiree_profile.html.jinja", caretaker = result, reviews = results, average = average)
     
     
+
+
+
+
+
 @app.route("/hiree_profile/<caretaker_id>/review", methods = ["POST"])
 @flask_login.login_required
 def review(caretaker_id):
@@ -329,3 +357,15 @@ def review(caretaker_id):
                     """)
     
     return redirect(f"/hiree_profile/{caretaker_id}")
+
+
+
+
+
+
+
+
+@app.route("/listing")
+@flask_login.login_required
+def listing():
+    return render_template("listing.html.jinja")

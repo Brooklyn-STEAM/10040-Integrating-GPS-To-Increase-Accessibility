@@ -10,7 +10,6 @@
 <body>
   {%include "components/navbar.html.jinja"%}
 
-
         <div class="container text-center">
           <div class="row">
           <div class="col-sm-2"></div>
@@ -18,9 +17,9 @@
               <form method = "post" action="/updates/update" >
                 <label for = "place" class="u-card-text-color-py fs-5 text-center pt-4">Review A Place Recently Visited:</label>
                 <br>
-                  <select size = "6" name = "place" id = "place" class="u-card-text-color-py">
+                  <select size = "6" name = "place" id = "place" required class="u-card-text-color-py">
                   {%for location in locations%}
-                  <option value = "{{location['id']}}">{{location["name"]}}</option>
+                  <option  value = "{{location['id']}}">{{location["name"]}}</option>
                   {% endfor%}
                   </select>
                 <br>
@@ -32,10 +31,10 @@
               <label class="card-title u-card-text-color-py fs-5 pt-4" for="accessable" name="role">Was this location accessable?</label>
                 <br>
                 <label for="student" class="u-card-text-color-py fs-5">Yes</label>
-                <input type="radio" id="viable" name="accessable" value="Yes" required value="{{ request.form.get('accessable', '') }}">
+                <input type="radio" id="viable" name="accessable" value="Yes" value="{{ request.form.get('accessable', '') }}" required>
 
                 <label for="teacher" class="u-card-text-color-py fs-5">No</label>
-                <input type="radio" id="non-viable" name="accessable" value="No" required value="{{ request.form.get('accessable', '') }}">
+                <input type="radio" id="non-viable" name="accessable" value="No"  value="{{ request.form.get('accessable', '') }}" required>
                 <br>
                 <br>
             </div>
