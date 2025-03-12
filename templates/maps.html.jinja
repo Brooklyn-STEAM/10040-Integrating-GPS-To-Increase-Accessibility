@@ -25,19 +25,27 @@ function myMap() {
   };
   var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
+  var markers = []; // Store markers for routing
+  var directionsService = new google.maps.DirectionsService();
+  var directionsRenderer = new google.maps.DirectionsRenderer();
+  directionsRenderer.setMap(map); // Attach renderer to the map
+
   {% for coord in coords %}
     (function() {
       var pin = [{{ coord["latitude"] }}, {{ coord["longitude"] }}];
       var marker = new google.maps.Marker({
         position: new google.maps.LatLng(pin[0], pin[1]),
         map: map,
-        title: 'PIN'
+        title: "PIN"
       });
+
+      markers.push(marker); // Store markers for routing
 
       var infoWindowContent = `
         <div>
           <h3>{{ coord["name"] }}</h3>
           <p>Address: {{ coord["address"] }}</p>
+          <img src="{{ coord['image'] }}" alt="{{ coord['name'] }}" style="width:200px;height:auto;">
         </div>
       `;
 
@@ -45,11 +53,10 @@ function myMap() {
         content: infoWindowContent
       });
 
-      // Add a click event listener to open the info window when the marker is clicked
       marker.addListener('click', function() {
         infoWindow.open(map, marker);
       });
-    })(); // Immediately Invoked Function Expression (IIFE) to create a new scope for each iteration
+    })();
   {% endfor %}
 }
 
