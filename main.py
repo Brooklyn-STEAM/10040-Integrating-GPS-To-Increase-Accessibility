@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, flash, abort
 import pymysql
 from dynaconf import Dynaconf
 import flask_login
+from flask_socketio import SocketIO, send
 
 app = Flask(__name__)
 
@@ -9,7 +10,19 @@ conf = Dynaconf(
     settings_file = ["settings.toml"]
 )
 
+socketio = SocketIO(app, cors_allowed_origins="*")
  
+@socketio.on('message')
+def handle_message(message):
+    print("Received message: " + message)
+    if message != "User connected!":
+        send(message, broadcast=True)
+
+if __name__ == "__main__":
+    socketio.run(app, host="localhost")
+
+
+
 app.secret_key = conf.secret_key
 
 login_manager = flask_login.LoginManager()
@@ -257,3 +270,7 @@ def review(caretaker_id):
                     """)
     
     return redirect(f"/hiree_profile/{caretaker_id}")
+
+@app.route("/messages")
+def messages():
+    return render_template("message.html.jinja")
