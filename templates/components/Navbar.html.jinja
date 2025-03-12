@@ -27,10 +27,10 @@
           <a class="nav-link" href="/updates">Updates</a>
         </li>
       </ul>
-
+      
        {%if current_user.is_authenticated %}
              <div class="flex-grow-1 text-end">
-             <span style = "color: rgb(56, 4, 111);" class="n-center"> Hello, {{current_user.username }}</span>
+             <span style = "color: rgb(56, 4, 111);" class="s-center"> Hello, {{current_user.username }}</span>
              <a href = "/sign_out" class = "btn btn-outline-dark">Log Out</a>
              </div>
         {%else%}
