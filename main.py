@@ -4,6 +4,7 @@ from dynaconf import Dynaconf
 import flask_login
 from flask_socketio import SocketIO, send
 
+
 app = Flask(__name__)
 
 conf = Dynaconf(
@@ -169,20 +170,106 @@ def sign_in_page():
         return render_template("sign_in.html.jinja")
 
 
+
+
+
+
+
 @app.route('/sign_out')
 def sign_out():
     flask_login.logout_user()
     return redirect('/')
 
 
+
+
+
+
+
 @app.route("/maps")
 def maps():
-    return render_template("maps.html.jinja")
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    cursor.execute(f"SELECT * FROM `Places`")
+
+    results = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return render_template("maps.html.jinja", coords = results)
+
+
+
+
 
 
 @app.route("/updates")
+@flask_login.login_required
 def updates():
-    return render_template("updates.html.jinja")
+
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    cursor.execute(f"""SELECT
+                        `user_id`,
+                        `places_id`,
+                        `written_update`,
+                        `accessable`,
+                        `Updates`.`timestamp`,
+                        `Places`.`name`,
+                        `User`.`username`
+                    FROM `Updates`
+                    JOIN `User` ON `user_id` = `User`.`id`
+                    JOIN `Places` ON `places_id` = `Places`.`id`
+                    ORDER BY `timestamp` DESC LIMIT 4;""")
+    
+    results = cursor.fetchall()
+
+    if results is None:
+        flash("Please make sure all feilds are filled out in your responce")
+
+    cursor.execute(f"SELECT * FROM `Places` ORDER BY `name`")
+
+    results2 = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+
+    return render_template("updates.html.jinja", updates = results, locations = results2 )
+
+
+
+
+
+
+
+@app.route("/updates/update", methods = ["POST"])
+def update():
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    user_id = flask_login.current_user.id
+
+    written_update = request.form["written_update"]
+
+    places_id = request.form["place"]
+
+    accessable = 1 if request.form.get("accessable") == "Yes" else 0
+
+    cursor.execute(f"""INSERT INTO `Updates`
+                        (`user_id`, `places_id`, `written_update`, `accessable`)
+                        VALUES
+                        ("{user_id}", "{places_id}", "{written_update}", "{accessable}");""")
+
+    return redirect("/updates")
+
+
+
+
+
 
 
 @app.route("/hiring")
@@ -200,6 +287,12 @@ def hiring():
     conn.close()
 
     return render_template("hiring.html.jinja", caretakers = results)
+
+
+
+
+
+
     
 @app.route("/hiree_profile/<caretaker_id>")
 def hiree_profile(caretaker_id):
@@ -226,7 +319,8 @@ def hiree_profile(caretaker_id):
                             `username`
                         FROM `Reviews`
                         JOIN `User` ON `reviewer_id` = `User`.`id`
-                        WHERE `caretaker_id` = {caretaker_id};""")
+                        WHERE `caretaker_id` = {caretaker_id}
+                        ORDER BY `timestamp` DESC;""")
     
         results = cursor.fetchall()
 
@@ -250,7 +344,13 @@ def hiree_profile(caretaker_id):
         return render_template("hiree_profile.html.jinja", caretaker = result, reviews = results, average = average)
     
     
+
+
+
+
+
 @app.route("/hiree_profile/<caretaker_id>/review", methods = ["POST"])
+@flask_login.login_required
 def review(caretaker_id):
     conn = connect_db()
     cursor = conn.cursor()
@@ -271,6 +371,20 @@ def review(caretaker_id):
     
     return redirect(f"/hiree_profile/{caretaker_id}")
 
+
 @app.route("/messages")
 def messages():
     return render_template("message.html.jinja")
+
+
+
+
+
+
+
+
+@app.route("/listing")
+@flask_login.login_required
+def listing():
+    return render_template("listing.html.jinja")
+
