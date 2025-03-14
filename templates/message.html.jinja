@@ -14,7 +14,8 @@
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
                 $(document).ready(function() {
-                var socket = io.connect("https://db.steamcenter.tech/index.php?route=/database/structure&db=hand_in_hand")
+                var socket = io.connect("http://127.0.0.1:5000")
+                
                 socket.on('connect',function(){
                         socket.send("User connected!");
                 });
@@ -24,7 +25,7 @@
                 });
 
                 $('#sendBtn').on('click', function () {
-                        socket.send($('{{from_user}}').val()+ ': ' + $('#message').val());
+                        socket.send($('#username').val()+ ': ' + $('#message').val());
                         $('#message').val('');
                         console.log('#message')
                 });
@@ -34,7 +35,7 @@
 <div id="messages">
 
 </div>
-
+<input type="text" id="username" placeholder="Username">
 <input type="text" id="message" placeholder="Message">
 <button id="sendBtn">Send</button>
 <script> 
