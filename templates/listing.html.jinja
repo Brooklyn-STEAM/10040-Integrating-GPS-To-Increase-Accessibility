@@ -12,6 +12,8 @@
 </head>
 
 <body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js" integrity="sha512-8BHxHDLsOHx+flIrQ0DrZcea7MkHqRU5GbTHmbdzMRnAaoCIkZ97PqZcXJkKZckMMhqfoeaJE+DNUVuyoQsO3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {%include "components/navbar.html.jinja"%}
     <br>
     <br>
@@ -25,14 +27,36 @@
                 <div class="small-font">Safely message in the Hand in Hand chat!</div>
             </div>
                 <br>
+                <div>
+                
+<script type="text/javascript">
+                $(document).ready(function() {
+                var socket = io.connect("http://127.0.0.1:5000")
+                
+                socket.on('connect',function(){
+                        socket.send("User connected!");
+                });
+
+                socket.on('message',function(data){
+                        $('#messages').append($('<p>').text(data));
+                });
+
+                $('#sendBtn').on('click', function () {
+                        socket.send($('#username').val()+ ': ' + $('#message').val());
+                        $('#message').val('');
+                        console.log('#message')
+                });
+        })
+</script>
+                </div>
                 <div class="form-floating center">
-                    <textarea class="form-control m-textarea " placeholder="Leave a message here" id="floatingTextarea"></textarea>
-                    <label for="messages" >Message here</label>
-                        <div class="d-grid justify-content-end">
-                            <button type="submit" class="btn h-button-color mt-3 " action="sendmessage">Send</button>
-                        </div>
+                
+                <input type="text" id="username" placeholder="Username">
+                <input type="text" id="message" placeholder="Message">
+                <button id="sendBtn">Send</button>
                 </div>
                 <br>
+        
   
     
     
@@ -47,6 +71,32 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+<script src="https://code.responsivevoice.org/responsivevoice.js?key=6AqfGK6s"></script>  <!-- replace with KEY-->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script> 
+function getSelectionText() {
+    var text = "";
+    if (window.getSelection) {
+        text = window.getSelection().toString();
+    // for Internet Explorer 8 and below. For Blogger, you should use &amp;&amp; instead of &&.
+    } else if (document.selection && document.selection.type != "Control") { 
+        text = document.selection.createRange().text;
+    }
+    return text;
+}
+$(document).ready(function (){ // when the document has completed loading
+   $(document).mouseup(function (e){ // attach the mouseup event for all div and pre tags
+      setTimeout(function() { // When clicking on a highlighted area, the value stays highlighted until after the mouseup event, and would therefore stil be captured by getSelection. This micro-timeout solves the issue. 
+         responsiveVoice.cancel(); // stop anything currently being spoken
+         responsiveVoice.speak(getSelectionText()); //speak the text as returned by getSelectionText
+      }, 1);
+   });
+});
+</script>
+{# <script src="https://maps.googleapis.com/maps/api/js?AIzaSyB5gZ5e_XhZS42P61I0hWTvLSNZ9znLNg0&callback=myMap"></script> #}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+        
 
 
 
