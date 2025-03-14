@@ -19,7 +19,7 @@ def handle_message(message):
         send(message, broadcast=True)
 
 if __name__ == "__main__":
-    socketio.run(app, host="localhost")
+    socketio.run(app, host="Messages")
 
 
 
