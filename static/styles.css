@@ -141,3 +141,19 @@ h1{
 .btn:active{
   transform: scale(0.9);
 }
+
+.messages{
+  background-color: white;
+  height: 100%;
+  display: block;
+}
+
+.m-textarea  {
+  box-sizing: border-box;
+  width: 100%;
+  border-color: rgb(195, 168, 232);
+}
+
+.m-textarea:active{
+  border-color: rgb(117, 75, 217);
+}
