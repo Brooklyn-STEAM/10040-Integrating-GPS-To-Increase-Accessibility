@@ -1,11 +1,11 @@
 Nav {
     color: rgb(69,9,147);
     text-align: top;
-    position: sticky
+    position: sticky;
   }
   
 body {
-    background-color: rgb(237, 232, 253) ;
+    background-color: rgb(216, 206, 250) ;
 
   }
 
@@ -31,6 +31,9 @@ h1{
   color:white;
   background-color: rgb(135, 101, 214) ;
 }
+
+
+
 
 .h-card-head-color{
   background-color: rgb(157, 119, 211);
@@ -90,25 +93,6 @@ h1{
 }
 
 
-
-
-
-.u-button {
-  background-color: rgb(255, 215, 160);
-  border: none;
-  color: rgb(241, 141, 94);
-  padding: 15px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 30px;
-  margin: 4px 2px;
-  border-radius:50%;
-  height: 75px;
-  width: 75px;
-  margin: 20px 60px 20px 0px;
-}
-
 .u-textarea  {
   box-sizing: border-box;
   width: 100%;
@@ -127,32 +111,6 @@ h1{
 
 
 
-
-.h-button {
-  background-color: rgb(195, 168, 232);
-  border: none;
-  color:rgb(106, 66, 239);
-  padding: 15px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 30px;
-  margin: 4px 2px;
-  border-radius:50%;
-  height: 75px;
-  width: 75px;
-  margin: 20px 60px 20px 0px;
-}
-
-.h-textarea  {
-  box-sizing: border-box;
-  width: 100%;
-  background-color: rgb(195, 168, 232);
-  border-color: rgb(157, 119, 211);
-  resize:none; 
-  
-}
-
 .add-hiree{
   background-color: rgb(195, 168, 232);
   border-color: rgb(157, 119, 211);
@@ -160,6 +118,7 @@ h1{
  .add-hiree:hover{
   background-color: rgb(157, 119, 211);
  }
+
 
  .center {
   margin: auto;
@@ -175,3 +134,10 @@ h1{
   padding: 10px;
 }
 
+.update-b{
+  width: 75%;
+}
+
+.btn:active{
+  transform: scale(0.9);
+}
