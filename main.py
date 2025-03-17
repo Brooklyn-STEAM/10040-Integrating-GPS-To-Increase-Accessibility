@@ -378,13 +378,11 @@ def messages():
 
 
 
-
-
-
-
-
 @app.route("/listing")
 @flask_login.login_required
 def listing():
     return render_template("listing.html.jinja")
 
+@app.route("/faqs")
+def faq():
+    return render_template("faqs.html.jinja")
