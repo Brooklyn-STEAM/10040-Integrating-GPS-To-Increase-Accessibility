@@ -157,3 +157,8 @@ h1{
 .m-textarea:active{
   border-color: rgb(117, 75, 217);
 }
+
+.purple-text{
+  text-align: center;
+  color: rgb(127, 61, 219);
+}
