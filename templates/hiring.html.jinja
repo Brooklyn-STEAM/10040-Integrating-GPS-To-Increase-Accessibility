@@ -26,9 +26,13 @@
             <div class="card-body h-bg-card-color">
                 <h5 class="card-title h-card-text-color-sd">{{caretaker["username"]}}</h5>
                 <p class="card-text h-card-text-color-sd">{{caretaker["email"]}}</p>
-                <a href="http://127.0.0.1:5000/hiree_profile/{{caretaker['id']}}" class="btn h-button-color">View Profile</a>
+                <div class="d-grid gap-2 d-md-block">
+                    <a href="http://127.0.0.1:5000/hiree_profile/{{caretaker['id']}}" class="btn h-button-color">View Profile</a>
+                     <a href="/listing" class="btn h-button-color">Message</a>
+                </div>
             </div>
         </div>
+        
     {% endfor%}
 
     
