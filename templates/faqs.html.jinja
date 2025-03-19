@@ -47,19 +47,42 @@
         <footer>
             <h1>Additonal Questions?</h1>
             <h2 class="purple-text">Contact Us!</h2>
-        
-
+            <br>
             <div class="container text-center">
                 <div class="row justify-content-md-center">
                     <div class="col col-lg-2"></div>
                         <div class="col-md-auto">
-                            <input type="text" id="username" placeholder="Username">
-                            <input type="text" id="message" placeholder="Message">
-                            <button id="sendBtn" class="btn h-button-color">Send</button>
+                            <a href="https://github.com/Brooklyn-STEAM/10040-Integrating-GPS-To-Increase-Accessibility"  target="_blank">
+                            <img src="/static/icons/github-mark.png" alt="Github Logo" width="50" height="50" class="m-2"></a>
+                            </a>
+                            <a href="mailto:tordonez@brooklynsteamcenter.org" method="post">
+                            <img src="/static/icons/email_icon.png" alt="Email Logo" width="50" height="50" class="m-2"></a>
+                            </a>
                         </div>
                     <div class="col col-lg-2"></div>
                 </div>
             </div>
+            <br>
+        
+            <form action="mailto:tordonez@brooklynsteamcenter.org" method="post">
+                <div class="container text-center">
+                    <div class="row justify-content-md-center gap-2">
+                        <div class="col col-lg-2"></div>
+                            <div class="col-md-auto">
+                                <input type="text" id="username" placeholder="Username" class="rounded p-1">
+                            </div>
+                            <div class="col-md-auto">
+                                <input type="text" id="question" placeholder="Question" class="rounded p-1">
+                            </div>
+                            <div class="col-md-auto">
+                                <input type="submit" value="Submit" class="btn h-button-color align-middle">
+                                <input name="send-to" value="tordonez@brooklynsteamcenter.org" hidden>
+                            </div>
+                        <div class="col col-lg-2"></div>
+                    </div>
+                </div>
+            </form>
+                <br>
 
 
 
