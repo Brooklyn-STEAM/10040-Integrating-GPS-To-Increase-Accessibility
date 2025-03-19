@@ -244,8 +244,6 @@ def updates():
 
 
 
-
-
 @app.route("/updates/update", methods = ["POST"])
 def update():
     conn = connect_db()
@@ -265,7 +263,6 @@ def update():
                         ("{user_id}", "{places_id}", "{written_update}", "{accessable}");""")
 
     return redirect("/updates")
-
 
 
 
@@ -304,9 +301,15 @@ def hiree_profile(caretaker_id):
 
         cursor = conn.cursor()
 
+        from_user = flask_login.current_user.id
+
         cursor.execute(f"SELECT * FROM `User` WHERE `id` = {caretaker_id}")
 
         result = cursor.fetchone()
+
+        cursor.execute(f"SELECT * FROM `User` WHERE `id` = {from_user}")
+
+        result3 = cursor.fetchone()
         
         if result is None:
             abort (404)
@@ -341,50 +344,43 @@ def hiree_profile(caretaker_id):
         cursor.close()
         conn.close()
 
-        return render_template("hiree_profile.html.jinja", caretaker = result, reviews = results, average = average)
+        return render_template("hiree_profile.html.jinja", caretaker = result, reviews = results, average = average, sender = result3)
     
     
 
-
-
-
-
-@app.route("/hiree_profile/<caretaker_id>/review", methods = ["POST"])
+@app.route("/hiree_profile/<caretaker_id>/messages", methods = ["POST"])
 @flask_login.login_required
-def review(caretaker_id):
+def messaging(caretaker_id):
     conn = connect_db()
     cursor = conn.cursor()
 
-    reviewer_id = flask_login.current_user.id
+    written_message = request.form["written_message"]
 
-    written_review = request.form["written_review"]
-    rating = request.form["rating"]
+    from_user = flask_login.current_user.id
 
-    cursor.execute(f"""INSERT INTO `Reviews`
-                   (`caretaker_id`, `reviewer_id`, `written_review`, `rating`)
-                   VALUES
-                   ("{caretaker_id}", "{reviewer_id}", "{written_review}", "{rating}")
-                   ON DUPLICATE KEY UPDATE
-                   `written_review` = "{written_review}",
-                   `rating` = "{rating}";
-                    """)
-    
+    to_user = caretaker_id
+
+    cursor.execute(f"""INSERT INTO `Messages`
+                    (`from_user`, `to_user`, `written_message`)
+                    VALUES
+                    ("{from_user}", "{to_user}", "{written_message}");""")
+
     return redirect(f"/hiree_profile/{caretaker_id}")
 
 
-@app.route("/messages")
-def messages():
+
+@app.route("/message")
+@flask_login.login_required
+def message():
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    cursor.execute(f"")
+
     return render_template("message.html.jinja")
 
 
 
 
 
-
-
-
-@app.route("/listing")
-@flask_login.login_required
-def listing():
-    return render_template("listing.html.jinja")
 
