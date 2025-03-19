@@ -162,3 +162,7 @@ h1{
   text-align: center;
   color: rgb(127, 61, 219);
 }
+
+.git-button{
+  border:none;
+}
