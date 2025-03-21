@@ -288,8 +288,6 @@ def hiring():
 
 
 
-
-
     
 @app.route("/hiree_profile/<caretaker_id>")
 def hiree_profile(caretaker_id):
@@ -301,15 +299,9 @@ def hiree_profile(caretaker_id):
 
         cursor = conn.cursor()
 
-        from_user = flask_login.current_user.id
-
         cursor.execute(f"SELECT * FROM `User` WHERE `id` = {caretaker_id}")
 
         result = cursor.fetchone()
-
-        cursor.execute(f"SELECT * FROM `User` WHERE `id` = {from_user}")
-
-        result3 = cursor.fetchone()
         
         if result is None:
             abort (404)
@@ -344,28 +336,8 @@ def hiree_profile(caretaker_id):
         cursor.close()
         conn.close()
 
-        return render_template("hiree_profile.html.jinja", caretaker = result, reviews = results, average = average, sender = result3)
+        return render_template("hiree_profile.html.jinja", caretaker = result, reviews = results, average = average)
     
-    
-
-@app.route("/hiree_profile/<caretaker_id>/messages", methods = ["POST"])
-@flask_login.login_required
-def messaging(caretaker_id):
-    conn = connect_db()
-    cursor = conn.cursor()
-
-    written_message = request.form["written_message"]
-
-    from_user = flask_login.current_user.id
-
-    to_user = caretaker_id
-
-    cursor.execute(f"""INSERT INTO `Messages`
-                    (`from_user`, `to_user`, `written_message`)
-                    VALUES
-                    ("{from_user}", "{to_user}", "{written_message}");""")
-
-    return redirect(f"/hiree_profile/{caretaker_id}")
 
 
 
@@ -373,14 +345,57 @@ def messaging(caretaker_id):
 @flask_login.login_required
 def message():
     conn = connect_db()
+
     cursor = conn.cursor()
 
-    cursor.execute(f"")
+    cursor.execute(f"SELECT * FROM `User` WHERE `role` = 1;")
 
-    return render_template("message.html.jinja")
+    results = cursor.fetchall()
+
+    return render_template("message.html.jinja", caretakers = results)
 
 
 
+@app.route("/send", methods = ["POST"])
+@flask_login.login_required
+def send_message():
+    conn = connect_db()
+
+    cursor = conn.cursor()
+
+    from_user = flask_login.current_user.id
+
+    written_message = request.form["written_message"]
+    to_user = request.form["to_user"]
+
+    cursor.execute(f"""INSERT INTO `Messages`
+                   (`from_user`, `to_user`, `written_message`)
+                    VALUES 
+                   ("{from_user}", "{to_user}", "{written_message}");""")
+    
+    return redirect(f"/message/{to_user}")
+
+
+@app.route("/message/<user_id>")
+@flask_login.login_required
+def message_user(user_id):
+    conn = connect_db()
+
+    cursor = conn.cursor()
+
+    from_user = flask_login.current_user.id
+
+    cursor.execute(f"""SELECT * FROM `Messages` 
+                   WHERE `to_user` = {user_id} 
+                   AND `from_user` = {from_user};""")
+    
+    results = cursor.fetchall()
+
+    return render_template("messaging.html.jinja", messagers = results)
+
+
+
+ 
 
 
 
