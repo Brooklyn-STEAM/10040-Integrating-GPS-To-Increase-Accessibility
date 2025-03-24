@@ -244,8 +244,6 @@ def updates():
 
 
 
-
-
 @app.route("/updates/update", methods = ["POST"])
 def update():
     conn = connect_db()
@@ -271,7 +269,6 @@ def update():
 
 
 
-
 @app.route("/hiring")
 def hiring():
 
@@ -287,8 +284,6 @@ def hiring():
     conn.close()
 
     return render_template("hiring.html.jinja", caretakers = results)
-
-
 
 
 
@@ -343,45 +338,63 @@ def hiree_profile(caretaker_id):
 
         return render_template("hiree_profile.html.jinja", caretaker = result, reviews = results, average = average)
     
-    
 
 
 
-
-
-@app.route("/hiree_profile/<caretaker_id>/review", methods = ["POST"])
+@app.route("/message")
 @flask_login.login_required
-def review(caretaker_id):
+def message():
     conn = connect_db()
+
     cursor = conn.cursor()
 
-    reviewer_id = flask_login.current_user.id
+    cursor.execute(f"SELECT * FROM `User` WHERE `role` = 1;")
 
-    written_review = request.form["written_review"]
-    rating = request.form["rating"]
+    results = cursor.fetchall()
 
-    cursor.execute(f"""INSERT INTO `Reviews`
-                   (`caretaker_id`, `reviewer_id`, `written_review`, `rating`)
-                   VALUES
-                   ("{caretaker_id}", "{reviewer_id}", "{written_review}", "{rating}")
-                   ON DUPLICATE KEY UPDATE
-                   `written_review` = "{written_review}",
-                   `rating` = "{rating}";
-                    """)
-    
-    return redirect(f"/hiree_profile/{caretaker_id}")
-
-
-@app.route("/messages")
-def messages():
-    return render_template("message.html.jinja")
+    return render_template("message.html.jinja", caretakers = results)
 
 
 
-@app.route("/listing")
+@app.route("/send", methods = ["POST"])
 @flask_login.login_required
-def listing():
-    return render_template("listing.html.jinja")
+def send_message():
+    conn = connect_db()
+
+    cursor = conn.cursor()
+
+    from_user = flask_login.current_user.id
+
+    written_message = request.form["written_message"]
+    to_user = request.form["to_user"]
+
+    cursor.execute(f"""INSERT INTO `Messages`
+                   (`from_user`, `to_user`, `written_message`)
+                    VALUES 
+                   ("{from_user}", "{to_user}", "{written_message}");""")
+    
+    return redirect(f"/message/{to_user}")
+
+
+@app.route("/message/<user_id>")
+@flask_login.login_required
+def message_user(user_id):
+    conn = connect_db()
+
+    cursor = conn.cursor()
+
+    from_user = flask_login.current_user.id
+
+    cursor.execute(f"""SELECT * FROM `Messages` 
+                   WHERE `to_user` = {user_id} 
+                   AND `from_user` = {from_user};""")
+    
+    results = cursor.fetchall()
+
+
+    return render_template("messaging.html.jinja", messagers = results)
+
+
 
 @app.route("/faqs")
 def faq():
