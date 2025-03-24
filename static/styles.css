@@ -96,17 +96,16 @@ h1{
 .u-textarea  {
   box-sizing: border-box;
   width: 100%;
-  background-color: rgb(255, 215, 160);
-  border-color:rgb(241, 141, 94);
+  background-color: rgb(195, 168, 232);
   resize:none; 
 }
 
 .add-update{
-  background-color: rgb(255, 215, 160);
-  border-color:rgb(241, 141, 94);
+  background-color: rgb(243, 151, 91)
  }
  .add-update:hover{
-  background-color: rgb(241, 141, 94)
+  background-color: rgb(255, 162, 100);
+  color:rgb(255, 255, 255)
  }
 
 
@@ -165,4 +164,12 @@ h1{
 
 .git-button{
   border:none;
+}
+
+.o-text{
+  color:rgb(247, 219, 208)
+}
+
+.nav-button{
+  background-color:rgb(21, 126, 212);
 }
