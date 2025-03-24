@@ -10,7 +10,7 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<body style="background-color:rgb(89, 52, 140)">
+<body style="background-color:rgb(103, 65, 157)">
 {% include "components/navbar.html.jinja"%}
   <div class="container mt-2">
     {%for message in get_flashed_messages() %}
@@ -22,12 +22,12 @@
 
       <div class="container">
  
-          <h2 class = "text-color text-center p-3">Sign In</h2>
-            <h4 class="card-title text-color text-left ml-2 mt-3 s-center">Username:</h4>
+          <h1 class = "text-color  text-center p-3">Sign In</h1>
+            <h4 class="card-title  text-color text-left ml-2 mt-3 s-center">Username:</h4>
             <input type="text" class="form-control p-2 s-center" name="username" placeholder="NeedAhand_1" required>
             <br>
 
-            <h4 class="card-title text-color text-left s-center">Password:</h4>
+            <h4 class="card-title text-color h-card text-left s-center">Password:</h4>
             <input type="password" class="form-control s-center" name="password" placeholder="Password" required>
             <br>
 
@@ -38,7 +38,7 @@
             <br>
             <br>
             <br>
-            <p class="text-color text-center">Dont Have An Account?</p>
+            <p class="h-card-text-color-py text-center">Dont Have An Account?</p>
             <div class="d-grid col-4 mx-auto s-center">
               <a class="btn h-button-color btn-md s-center" type="submit" value="Sign Up" href="/sign_up">Sign Up!</a>
             </div>
