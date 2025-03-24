@@ -11,13 +11,13 @@
 <body>
   {%include "components/navbar.html.jinja"%}
   <br>
-  <div class="container text-center ">
+  <div class=" row container text-center mx-auto p-2 ">
     <h1>Updates</h1>
-      <div class="row">
-        <div class="col-sm-2"></div>
-          <div class="col-sm-3">
-          
-            <form method = "post" action="/updates/update">
+      <div>
+      <div class="col col-lg-2">
+    </div>
+    <div class="col-md-auto">
+       <form method = "post" action="/updates/update">
               <label for = "place" class="text-color-2 fs-5 pt-4">Review A Place Recently Visited:</label>
               <br>
                 
@@ -30,12 +30,15 @@
                   </select>
                   <br>
                   <br>
+              
                 
-                
-          </div>
-                      <div class="col-sm-2"></div>
-                        <div class="col-sm-3">
-                          <div class="col-sm-2"></div>
+    </div>
+    <div class="col col-lg-2 mx-auto p-0">  
+      </div> 
+      <div class="row">   
+                      <div class="col-sm-4"></div>
+                        <div class="col-sm-4">
+                          <div class="col-sm-3"></div>
                             <label class="card-title text-color-2 fs-5 pt-4" for="accessable" name="role">Was this location accessable?</label>
                               <br>
                               <label for="student" class="text-color-2 fs-5">Yes</label>
@@ -48,8 +51,8 @@
                         </div>
       </div>
   </div>
-        
-          <div class="s-center">
+        <div class="col-3"></div>
+          <div class="w=100 col-6">
             <textarea placeholder="Write about the change of accesibility of a place here:" rows="7" cols="100" 
             name="written_update" value = '{{request.form.get("written_update", "")}}' maxlength = "1500" class="u-textarea" required></textarea>
           </div>
