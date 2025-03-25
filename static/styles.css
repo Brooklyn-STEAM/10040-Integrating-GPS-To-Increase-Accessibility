@@ -173,3 +173,10 @@ h1{
 .nav-button{
   background-color:rgb(21, 126, 212);
 }
+
+.u-center{
+  margin: auto;
+  width: 65%;
+  border: 3px;
+  padding: 10px;
+}
