@@ -14,21 +14,21 @@
     {%include "components/navbar.html.jinja"%}
 
 <div class = "container">
-    <div class = "row">
-    <div class = "col-3 col-6 col-3">
+    <div class = "row container text-center mx-auto p-2">
+    <div class = "col">
     <form method="post" action="/send">
         <br>
 
-        <select size="6" name="to_user" id="caretaker" required class="h-card-text-color-sd">
+        <select size="6" name="to_user" id="caretaker" required class="h-bg-card-color w-25 ">
 
             {%for caretaker in caretakers%}
             <option value="{{caretaker['id']}}">{{caretaker["username"]}}</option>
             {% endfor%}
         </select>
         <br>
-        <label for="user_review" class="form-label h-card-text-color-sd"></label>
-        <textarea placeholder="Message a fellow caretaker" name="written_message" class="form-control" id="customer_review" rows="3" col = "20" maxlength="500" required></textarea>
-        <button type="submit" class="btn h-button-color mt-3 w-100">Post</button>
+        <label for="user_review" class="form-label h-bg-card-color"></label>
+        <textarea placeholder="Message a fellow caretaker" name="written_message" class="form-control h-bg-card-color" id="customer_review" rows="3" col = "20" maxlength="500" required></textarea>
+        <button type="submit" class="btn h-button-color mt-3 w-100">Send</button>
     </form>
     </div>
     </div>
