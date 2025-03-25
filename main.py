@@ -383,16 +383,20 @@ def message_user(user_id):
 
     cursor = conn.cursor()
 
-    from_user = flask_login.current_user.id
+    current_user = flask_login.current_user.id
 
     cursor.execute(f"""SELECT * FROM `Messages` 
-                   WHERE `to_user` = {user_id} 
-                   AND `from_user` = {from_user};""")
+                   WHERE (`to_user` = {user_id} 
+                   AND `from_user` = {current_user}) OR
+                   (`to_user` = {current_user}
+                   AND `from_user` = {user_id})
+                   ORDER BY `timestamp`;""")
     
     results = cursor.fetchall()
 
 
-    return render_template("messaging.html.jinja", messagers = results)
+    return render_template("messaging.html.jinja", messages = results)
+
 
 
 
