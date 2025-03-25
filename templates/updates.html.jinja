@@ -10,69 +10,76 @@
 </head>
 <body>
   {%include "components/navbar.html.jinja"%}
-        <br>
-        <div class="container text-center">
-         <h1 class = "u-card-text-color-py">Updates</h1>
-          <div class="row">
-          <div class="col-sm-2"></div>
-            <div class="col-sm-3">
-              <form method = "post" action="/updates/update" >
-                <label for = "place" class="u-card-text-color-py fs-5 text-center pt-4">Review A Place Recently Visited:</label>
+  <br>
+  <div class="container text-center mx-auto p-2 ">
+    <h1>Updates</h1>
+      <div class="col-md-auto">
+        <form method = "post" action="/updates/update">
+                <label for = "place" class="text-color-2 fs-5 pt-4">Review A Place Recently Visited:</label>
                 <br>
+                  
 
-                  <select size = "6" name = "place" id = "place" required class="u-card-text-color-py">
+                    <select size = "6" name = "place" id = "place" required class="h-bg-card-color">
 
-                  {%for location in locations%}
-                  <option  value = "{{location['id']}}">{{location["name"]}}</option>
-                  {% endfor%}
-                  </select>
+                      {%for location in locations%}
+                        <option  value = "{{location['id']}}">{{location["name"]}}</option>
+                      {% endfor%}
+                    </select>
+                    <br>
+                    <br>
+              
+                
+      </div>
+        <div class="row">   
+          <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+              <label class="card-title text-color-2 fs-5 pt-1" for="accessable" name="role">Was this location accessable?</label>
                 <br>
-                <br>
+                  <label for="student" class="text-color-2 fs-5">Yes</label>
+                    <input type="radio" id="viable" name="accessable" value="Yes" value="{{ request.form.get('accessable', '') }}" required>
+                      <label for="teacher" class="text-color-2 fs-5">No</label>
+                        <input type="radio" id="non-viable" name="accessable" value="No"  value="{{ request.form.get('accessable', '') }}" required>
+                          <br>
+                          <br> 
             </div>
-            <div class="col-sm-2"></div>
-            <div class="col-sm-3">
-            <div class="col-sm-2"></div>
-              <label class="card-title u-card-text-color-py fs-5 pt-4" for="accessable" name="role">Was this location accessable?</label>
-                <br>
-                <label for="student" class="u-card-text-color-py fs-5">Yes</label>
-                <input type="radio" id="viable" name="accessable" value="Yes" value="{{ request.form.get('accessable', '') }}" required>
-
-                <label for="teacher" class="u-card-text-color-py fs-5">No</label>
-                <input type="radio" id="non-viable" name="accessable" value="No"  value="{{ request.form.get('accessable', '') }}" required>
-                <br>
-                <br>
-            </div>
-          </div>
+          <div class="col-sm-3"></div>
         </div>
-          <div class="s-center">
-            <textarea placeholder="Write any changes on the accesibility of a place here:" rows="7" cols="100" 
-            name="written_update" value = '{{request.form.get("written_update", "")}}' maxlength = "1500" class="u-textarea" required></textarea>
-          </div>
+        <div class="row">
+          <div class="col-2"></div>
+            <div class="col-md-auto">
+  
+                <textarea placeholder="Write about the change of accesibility of a place here:" rows="7" cols="100" 
+                name="written_update" value = '{{request.form.get("written_update", "")}}' maxlength = "1500" class="u-textarea" required></textarea>
+            
+            </div>
+          <div class="col-2"></div>
+        </div>
 
-          <div class="update-b d-grid justify-content-end">
-            <button type="submit" class="btn btn-light mt-3 add-update " action="postupdate">Add Update </button>
-          </div>
-      </form>
-    </div>
+            <div class="s-center">
+              <button type="submit" class="btn btn-light mt-3 add-hiree " action="postupdate">Add Update </button>
+            </div>
+            <br>
+        </form>
+  </div>
 
 
-      <br>
-      <br>
      {%for update in updates%}
-        <div class="card s-center">
-          <div class="card-body u-bg-card-color">
+     
+        <div class="card u-center r-bg-card-color container-sm">
+          <div class="card-body h-bg-card-color">
           {%if update["accessable"] == 0 %}
-            <h4 class="u-card-text-color-py">{{update["name"]}} ~ Inaccessable</h4>
+            <h4 class="text-color-2">{{update["name"]}} ~ Inaccessable</h4>
           {%endif%}
           {%if update["accessable"] == 1 %}
-            <h4 class="u-card-text-color-py">{{update["name"]}} ~ Accessable</h4>
+            <h4 class="text-color-2">{{update["name"]}} ~ Accessable</h4>
           {%endif%}
             <br>
-            <p class="u-card-text-color-sd">{{update["username"]}}</p>
-            <p class="u-card-text-color-sd">{{update["written_update"]}}</p>
-            <p class="u-card-text-color-sd">{{update["timestamp"].strftime("%Y-%d-%m")}}</p>
+            <p class="text-color-2">{{update["username"]}}</p>
+            <p class="text-color-2">{{update["written_update"]}}</p>
+            <p class="text-color-2">{{update["timestamp"].strftime("%Y-%d-%m")}}</p>
           </div>
         </div>
+      
         {%endfor%}
 
 
