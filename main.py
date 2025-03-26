@@ -348,11 +348,11 @@ def message():
 
     cursor = conn.cursor()
 
-    cursor.execute(f"SELECT * FROM `User` WHERE `role` = 1;")
+    cursor.execute(f"SELECT * FROM `User`;")
 
     results = cursor.fetchall()
 
-    return render_template("message.html.jinja", caretakers = results)
+    return render_template("message.html.jinja", users = results)
 
 
 
@@ -403,3 +403,19 @@ def message_user(user_id):
 @app.route("/faqs")
 def faq():
     return render_template("faqs.html.jinja")
+
+
+@app.route("/user_profile/<user_id>")
+@flask_login.login_required
+def user_profile(user_id):
+    conn = connect_db()
+
+    cursor = conn.cursor()
+
+    user_id = flask_login.current_user.id
+
+    cursor.execute(f"SELECT * FROM `User` WHERE `id` = {user_id}")
+
+    result = cursor.fetchone()
+
+    return render_template("user_profile.html.jinja", current_user = result)
