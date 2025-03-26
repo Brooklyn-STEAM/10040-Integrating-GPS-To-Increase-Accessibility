@@ -19,10 +19,10 @@
     <form method="post" action="/send">
         <br>
 
-        <select size="6" name="to_user" id="caretaker" required class="h-bg-card-color w-25 ">
+        <select size="6" name="to_user" id="user" required class="h-bg-card-color w-25 ">
 
-            {%for caretaker in caretakers%}
-            <option value="{{caretaker['id']}}">{{caretaker["username"]}}</option>
+            {%for user in users%}
+            <option value="{{user['id']}}">{{user["username"]}}</option>
             {% endfor%}
         </select>
         <br>
