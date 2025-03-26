@@ -405,6 +405,19 @@ def faq():
     return render_template("faqs.html.jinja")
 
 
+@app.route("/profile")
+def profile():
+    return render_template("profile.html.jinja")
+
+@app.route("/change_username")
+def name_change():
+    return render_template("change_username.html.jinja")
+
+@app.route("/change_password")
+def pass_change():
+    return render_template("change_password.html.jinja")
+
+
 @app.route("/user_profile/<user_id>")
 @flask_login.login_required
 def user_profile(user_id):
