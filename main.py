@@ -348,11 +348,11 @@ def message():
 
     cursor = conn.cursor()
 
-    cursor.execute(f"SELECT * FROM `User` WHERE `role` = 1;")
+    cursor.execute(f"SELECT * FROM `User`;")
 
     results = cursor.fetchall()
 
-    return render_template("message.html.jinja", caretakers = results)
+    return render_template("message.html.jinja", users = results)
 
 
 
@@ -383,22 +383,27 @@ def message_user(user_id):
 
     cursor = conn.cursor()
 
-    from_user = flask_login.current_user.id
+    current_user = flask_login.current_user.id
 
     cursor.execute(f"""SELECT * FROM `Messages` 
-                   WHERE `to_user` = {user_id} 
-                   AND `from_user` = {from_user};""")
+                   WHERE (`to_user` = {user_id} 
+                   AND `from_user` = {current_user}) OR
+                   (`to_user` = {current_user}
+                   AND `from_user` = {user_id})
+                   ORDER BY `timestamp`;""")
     
     results = cursor.fetchall()
 
 
-    return render_template("messaging.html.jinja", messagers = results)
+    return render_template("messaging.html.jinja", messages = results)
+
 
 
 
 @app.route("/faqs")
 def faq():
     return render_template("faqs.html.jinja")
+
 
 @app.route("/profile")
 def profile():
@@ -411,3 +416,19 @@ def name_change():
 @app.route("/change_password")
 def pass_change():
     return render_template("change_password.html.jinja")
+
+
+@app.route("/user_profile/<user_id>")
+@flask_login.login_required
+def user_profile(user_id):
+    conn = connect_db()
+
+    cursor = conn.cursor()
+
+    user_id = flask_login.current_user.id
+
+    cursor.execute(f"SELECT * FROM `User` WHERE `id` = {user_id}")
+
+    result = cursor.fetchone()
+
+    return render_template("user_profile.html.jinja", current_user = result)

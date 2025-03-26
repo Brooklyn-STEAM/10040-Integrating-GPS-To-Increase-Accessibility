@@ -20,28 +20,28 @@
     {% endfor %}
     <form action="/sign_in" method="post" class="p-3">
 
-      <div class="container">
+      <div class="container rounded " style="background-color: rgb(181, 153, 221); color: rgb(127, 61, 219);">
  
-          <h1 class = "text-color  text-center p-3">Sign In</h1>
-            <h4 class="card-title  text-color text-left ml-2 mt-3 s-center">Username:</h4>
+
+          <h1 class = "text-center p-3">Sign In</h1>
+            <h4 class="card-title text-left ml-2 mt-3 s-center">Username:</h4>
             <input type="text" class="form-control p-2 s-center" name="username" placeholder="NeedAhand_1" required>
             <br>
 
-            <h4 class="card-title text-color h-card text-left s-center">Password:</h4>
+            <h4 class="card-title text-left s-center">Password:</h4>
             <input type="password" class="form-control s-center" name="password" placeholder="Password" required>
             <br>
 
-            <div class="d-grid col-4 mx-auto s-center">
-              <input class="btn h-button-color btn-md s-center" type="submit" value="Sign In">
+            <div class="d-grid col-4 mx-auto u-center">
+              <input class="btn h-button-color btn-md u-center" type="submit" value="Sign In">
             </div>
             <input name="send-to" value="" hidden>
             <br>
             <br>
             <br>
-            <p class="h-card-text-color-py text-center">Dont Have An Account?</p>
-            <div class="d-grid col-4 mx-auto s-center">
-              <a class="btn h-button-color btn-md s-center" type="submit" value="Sign Up" href="/sign_up">Sign Up!</a>
+
             </div>
+            <br>
 
       </div>
     </form>

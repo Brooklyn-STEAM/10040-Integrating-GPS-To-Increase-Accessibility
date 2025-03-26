@@ -21,84 +21,93 @@
     </div>
     {% endfor %}
 
-    <form action="/sign_up" method="post">
+    <form action="/sign_up" method="post" class="p-3">
 
-      <div class="container s-center">
-          <h2 class = "text-color text-center">Sign Up</h2>
-            <h4 class="card-title text-color text-left ml-2 mt-4">First Name:</h4>
+      <div class="container rounded" style="background-color: rgb(181, 153, 221); color: rgb(127, 61, 219);">
+          <h1 class = "text-center p-3">Sign Up</h1>
+        <div class="p-2 s-center">
+            <h4 class="card-title  text-left ml-2 mt-4">First Name:</h4>
             <input type="text" class="form-control " placeholder="John" name="first_name" required
               value="{{ request.form.get('first_name', '') }}">
             <br>
-
-            <h4 class="card-title text-color text-left ml-2">Last Name:</h4>
+        </div>
+        <div class="p-2 s-center">
+            <h4 class="card-title text-left ml-2">Last Name:</h4>
             <input type="text" class="form-control " placeholder="Doe" name="last_name" required
               value="{{ request.form.get('last_name', '') }}">
             <br>
-
-            <h4 class="card-title text-color text-left ml-2">Email:</h4>
+        </div>
+          <div class="p-2 s-center">
+            <h4 class="card-title  text-left ml-2">Email:</h4>
             <input type="email" class="form-control" id="exampleFormControlInput1" name="email"
               placeholder="email@handinhand.com" required value="{{ request.form.get('email', '') }}">
             <br>
-
-            <h4 class="card-title text-color text-left ml-2">Address:</h4>
+          </div>
+          <div class="p-2 s-center">
+            <h4 class="card-title  text-left ml-2">Address:</h4>
             <input type="text" class="form-control " placeholder="1234 Helper Ave." name="address" required
               value="{{ request.form.get('address', '') }}">
             <br>
-
-            <h4 class="card-title text-color text-left ml-2">Age:</h4>
+            </div>
+          <div class="p-2 s-center">
+            <h4 class="card-title  text-left ml-2">Age:</h4>
             <input type="number" class="form-control " min="1" value="1" name="age" required
               value="{{ request.form.get('age', '') }}">
             <br>
-
-            <h4 class="card-title text-color text-left ml-2">Username:</h4>
+            </div>
+          <div class="p-2 s-center">
+            <h4 class="card-title  text-left ml-2">Username:</h4>
             <input type="text" class="form-control " placeholder="L3ND_4_H4ND" name="user_name" required
               value="{{ request.form.get('user_name', '') }}">
             <br>
-
-            <h4 class="card-title text-color text-left ml-2">Phone Number:</h4>
+            </div>
+          <div class="p-2 s-center">
+            <h4 class="card-title  text-left ml-2">Phone Number:</h4>
             <input type="text" class="form-control " placeholder="XXX-XXX-XXXX" name="phone_number" required
               value="{{ request.form.get('phone_number', '') }}">
             <br>
-
-            <h4 class="card-title text-color text-left ml-2">Password:</h4>
+            </div>
+          <div class="p-2 s-center">
+            <h4 class="card-title  text-left ml-2">Password:</h4>
             <input type="password" class="form-control" placeholder="Password123%" name="password" required>
             <br>
-
-            <h4 class="card-title text-color text-left ml-2">Comfirm Password:</h4>
+            </div>
+          <div class="p-2 s-center">
+            <h4 class="card-title  text-left ml-2">Comfirm Password:</h4>
             <input type="password" class="form-control" placeholder="Password123%" name="verify_password" required>
             <br>
-
-            <label class="card-title text-color text-left ml-2" for="role" name="role">Are You A Caretaker?</label>
+            </div>
+          <div class="p-2 s-center">
+            <label class="card-title p-1 text-left ml-2" for="role" name="role">Are You A Caretaker?</label>
             <br>
-
-            <label for="student" class="text-color">Yes</label>
+            <label for="student"class="p-1">Yes</label>
             <input type="radio" id="Caretaker" name="role" value="Yes" required
               value="{{ request.form.get('roll', '') }}">
-
-            <label for="teacher" class="text-color">No</label>
+            <label for="teacher" class="p-1">No</label>
             <input type="radio" id="teacher" name="role" value="No" required value="{{ request.form.get('roll', '') }}">
             <br>
+          </div>
             <br>
-
-            <label class="card-title text-color text-left ml-2" for="with_parent" name="with_parent">Is A
+          <div class="p-2 s-center">
+            <label class="card-title p-1  text-left ml-2" for="with_parent" name="with_parent">Is A
               Parent/Gaurdian With You?</label>
             <br>
-
-            <label for="student" class="text-color">Yes</label>
+            <label for="student" class="p-1">Yes</label>
             <input type="radio" id="Caretaker" name="with_parent" value="Yes" required
               value="{{ request.form.get('with_parent', '') }}">
-
-            <label for="teacher" class="text-color">No</label>
+            <label for="teacher" class="p-1">No</label>
             <input type="radio" id="Non-caretaker" name="with_parent" value="No" required
               value="{{ request.form.get('with_parent', '') }}">
+          </div>
 
-      </div>
+      
       <br>
-
-      <div class="d-grid gap-2 col-4 mx-auto">
-        <input class="btn h-button-color btn-md s-center" type="submit" value="Sign Up">
-      </div>
       <br>
+        <div class="d-grid gap-2 col-4 mx-auto">
+          <input class="btn h-button-color btn-md u-center" type="submit" value="Sign Up">
+        </div>
+        <br>
+      </div>
 
       <br>
       <input name="send-to" value="" hidden>
