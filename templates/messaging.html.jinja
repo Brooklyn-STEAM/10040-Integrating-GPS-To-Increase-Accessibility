@@ -26,30 +26,37 @@
         <input name="to_user" value="{{request.view_args['user_id']}}" hidden>
         <br>
         <br>
-        <div class="container">
+        <div class="container rounded" style="background-color:white">
+            <br>
+            <h5 class="text-center "> User's Name </h5>
             <div class="row">
                 <div class="col-3"></div>
-                <div class="col-6">
-                    {%for message in messages%}
-                    {%if message.from_user == current_user.id%}
-                    <blockquote class="blockquote">
-                        <p class = "m-l" style="color: rgb(14, 86, 195);">{{message["written_message"]}}</p>
-                    </blockquote>
-                    {%else%}
-                    <blockquote class="blockquote">
-                        <p style="color: rgb(255, 255, 255);">{{message["written_message"]}}</p>
-                    </blockquote>
-                    {%endif%}
-                    {%endfor%}
+                <div class="col-sm-6">
+                    <div class="m-scroll mx-auto d-grid">
+                        <img src="/static/logos/transparent_logo.png" class="img-fluid mx-auto d-block" alt="Hand In Hand Logo" height="250px" width="250px">
+                        <div class="small-font text-center">Safely message in the Hand in Hand chat!
+                        </div>
+                        <br>
+                        {%for message in messages%}
+                        {%if message.from_user == current_user.id%}
+                                <p class = "ml-2 text-break rounded" style="color: rgb(20, 26, 131); background-color:rgb(155, 219, 246)">{{message["written_message"]}}</p>
+                        {%else%}
+                            <p class="text-break" style="color: rgb(91, 39, 1);background-color:rgb(255, 178, 124)">{{message["written_message"]}}</p>
+                        {%endif%}
+                        {%endfor%}
+                    </div>
 
                     
                     <label for="user_review" class="form-label h-card-text-color-sd"></label>
                     <textarea placeholder="Send Your Messsage Here..." name="written_message" class="form-control"
-                        id="customer_review" rows="3" col="20" maxlength="500" required></textarea>
+                        id="customer_review" rows="3" col="20" maxlength="150" required></textarea>
                     <button type="submit" class="btn h-button-color mt-3 w-100">Post</button>
                 </div>
                 <div class="col-3"></div>
+            
             </div>
+            <br>
+            <br>
         </div>
     </form>
 
