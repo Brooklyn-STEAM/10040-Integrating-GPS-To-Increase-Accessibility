@@ -184,3 +184,11 @@ h4{
   border: 3px;
   padding: 10px;
 }
+
+.m-scroll{
+  padding: 5px;
+  width: auto;
+  height: 500px;
+  overflow-x:auto;
+  overflow-y: auto;
+}
