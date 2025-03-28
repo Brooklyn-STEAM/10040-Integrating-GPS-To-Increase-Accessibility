@@ -405,18 +405,6 @@ def faq():
     return render_template("faqs.html.jinja")
 
 
-@app.route("/profile")
-def profile():
-    return render_template("profile.html.jinja")
-
-@app.route("/change_username")
-def name_change():
-    return render_template("change_username.html.jinja")
-
-@app.route("/change_password")
-def pass_change():
-    return render_template("change_password.html.jinja")
-
 
 @app.route("/user_profile/<user_id>")
 @flask_login.login_required
@@ -432,3 +420,55 @@ def user_profile(user_id):
     result = cursor.fetchone()
 
     return render_template("user_profile.html.jinja", current_user = result)
+
+
+
+@app.route("/profile/<user_id>")
+@flask_login.login_required
+def profile(user_id):
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    user_id = flask_login.current_user.id
+
+    cursor.execute(f"SELECT * FROM `User` WHERE `id` = {user_id}")
+
+    result = cursor.fetchone()
+
+    return render_template("profile.html.jinja", current_user = result)
+
+
+
+@app.route("/update_profile", methods = ["POST"])
+@flask_login.login_required
+def update_profile():
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    first_name = request.form["first_name"]
+    last_name = request.form["last_name"]
+
+    email = request.form["email"]
+    address = request.form["address"]
+
+    username = request.form["username"]
+    password = request.form["password"]
+    age = request.form["age"]
+
+    phone_number = request.form["phone_number"]
+
+    user_id = flask_login.current_user.id
+
+    if password != request.form["confirm_password"]:
+        flash("Your username/password is incorrect")
+    else:
+        cursor.execute(f"""UPDATE `User` SET `first_name` = '{first_name}' WHERE `id` = {user_id}""")
+        cursor.execute(f"""UPDATE `User` SET `last_name` = '{last_name}' WHERE `id` = {user_id}""")
+        cursor.execute(f"""UPDATE `User` SET `email` = '{email}' WHERE `id` = {user_id}""")
+        cursor.execute(f"""UPDATE `User` SET `address` = '{address}' WHERE `id` = {user_id}""")
+        cursor.execute(f"""UPDATE `User` SET `username` = '{username}' WHERE `id` = {user_id}""")
+        cursor.execute(f"""UPDATE `User` SET `password` = '{password}' WHERE `id` = {user_id}""")
+        cursor.execute(f"""UPDATE `User` SET `age` = '{age}' WHERE `id` = {user_id}""")
+        cursor.execute(f"""UPDATE `User` SET `phone_number` = '{phone_number}' WHERE `id` = {user_id}""")
+
+        return redirect(f"/user_profile/{user_id}")
