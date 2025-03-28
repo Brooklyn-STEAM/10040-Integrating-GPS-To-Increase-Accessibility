@@ -36,6 +36,25 @@
         <br>
     </div>
 </div>
+    <div class="row p-3"></div>
+    <div class = "container u-center text-center mx-auto rounded messages">
+    <br>
+        {%for user in users%}
+        <div class="card center mx-auto">
+            <h5 class="card-header h-card-head-color h-card-text-color-py"></h5>
+            <div class="card-body h-bg-card-color">
+                <h5 class="card-title h-card-text-color-sd">{{user["username"]}}</h5>
+                <div class="d-grid d-md-block">
+                     <a href="" class="btn r-button-color">Message</a>
+                </div>
+            </div>
+        </div>
+        {% endfor%}
+    </div>
+
+
+
+
 </body>
 
 </html>
