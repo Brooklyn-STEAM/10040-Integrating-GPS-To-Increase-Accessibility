@@ -14,9 +14,9 @@
 <body>
   {%include "components/navbar.html.jinja"%}
   <br>
+  <div class="container center mx-auto rounded messages">
   <h1 class="mt-2 fw-bold text-color-2">{{current_user["first_name"]}} {{current_user["last_name"]}}</h1>
   <br>
-  <div class="container center">
     <div class="row">
       <div class="col-sm-6">
         <h4 class="text-color-2  fw-bold"> Contact Info:</h4>
@@ -26,6 +26,18 @@
         <h4 class="text-color-2 ">Email: {{current_user["email"]}}</h4>
 
         <h4 class="text-color-2 ">Age: {{current_user["age"]}}</h4>
+      </div>
+
+      <div class="col-sm-6">
+        <h4 class="text-color-2  fw-bold"> About</h4>
+
+        <h4 class="text-color-2 ">Disability: {{current_user["phone_number"]}}</h4>
+      </div>
+      <div class="col-lg-6">
+          <a class="btn h-button-color btn-md s-center p-3"  href="/change_username">Change Username</a>
+      </div>
+      <div class="col-lg-6">
+      <a class="btn h-button-color btn-md s-center p-3"  href="/change_password">Change Password</a>
       </div>
      
     </div>
