@@ -29,7 +29,8 @@
             <br>
 
             <h4 class="card-title text-left s-center">Password:</h4>
-            <input type="password" class="form-control s-center" name="password" placeholder="Password" required>
+            <input type="password" class="form-control s-center" name="password" placeholder="Password" id = "passwrd" required>
+             <input type="checkbox" onclick="myFunction()">Show Password
             <br>
 
             <div class="d-grid col-4 mx-auto u-center">
@@ -46,6 +47,17 @@
       </div>
     </form>
   </div>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
 
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=6AqfGK6s"></script>  <!-- replace with KEY-->
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
