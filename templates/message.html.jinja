@@ -14,13 +14,13 @@
 <body>
     {%include "components/navbar.html.jinja"%}
     <br>
-    <div class = "container s-center text-center mx-auto rounded messages">
+    <div class = "container u-center text-center mx-auto rounded messages">
         <div class = "col-md-auto">
             <form method="post" action="/send">
                 <label for = "user" class="text-color-2 fs-5 pt-3 pb-2">Send a Message:</label>
                 <br>
             
-                    <select size="5" name="user" id="user" required class="h-bg-card-color u-center">
+                    <select size="5" name="user" id="user" required class="h-bg-card-color center">
 
                         {%for user in users%}
                         <option value="{{user['id']}}">{{user["username"]}}</option>
@@ -28,8 +28,8 @@
                     </select>
                     <br>
                     <label for="user_review" class="form-label h-bg-card-color"></label>
-                    <textarea placeholder="Message a fellow caretaker" name="written_message" class="form-control h-bg-card-color u-center" id="customer_review" rows="3" col = "20" maxlength="500" required></textarea>
-                    <button type="submit" class="btn h-button-color mt-3 u-center">Send</button>
+                    <textarea placeholder="Message a fellow caretaker" name="written_message" class="form-control h-bg-card-color center" id="customer_review" rows="3" col = "20" maxlength="500" required></textarea>
+                    <button type="submit" class="btn h-button-color mt-3 s-center">Send</button>
             </form>
         </div>
         <br>
