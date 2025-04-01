@@ -356,6 +356,7 @@ def message():
 
 
 
+
 @app.route("/send", methods = ["POST"])
 @flask_login.login_required
 def send_message():
@@ -374,6 +375,8 @@ def send_message():
                    ("{from_user}", "{to_user}", "{written_message}");""")
     
     return redirect(f"/message/{to_user}")
+
+
 
 
 @app.route("/message/<user_id>")
@@ -406,6 +409,7 @@ def faq():
 
 
 
+
 @app.route("/user_profile/<user_id>")
 @flask_login.login_required
 def user_profile(user_id):
@@ -423,6 +427,8 @@ def user_profile(user_id):
 
 
 
+
+
 @app.route("/profile/<user_id>")
 @flask_login.login_required
 def profile(user_id):
@@ -436,6 +442,8 @@ def profile(user_id):
     result = cursor.fetchone()
 
     return render_template("profile.html.jinja", current_user = result)
+
+
 
 
 
@@ -472,3 +480,20 @@ def update_profile():
         cursor.execute(f"""UPDATE `User` SET `phone_number` = '{phone_number}' WHERE `id` = {user_id}""")
 
         return redirect(f"/user_profile/{user_id}")
+    
+
+
+
+@app.route("/logs/<user_id>")
+@flask_login.login_required
+def logs(user_id):
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    user_id = flask_login.current_user.id
+
+    cursor.execute(f"""SELECT * FROM `Messages` WHERE `to_user` = {user_id}""")
+
+    results = cursor.fetchall()
+
+    return render_template("logs.html.jinja", logs = results)

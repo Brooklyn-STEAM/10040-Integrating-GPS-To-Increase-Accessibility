@@ -56,11 +56,13 @@
                         <div class="mb-3">
                             <label for="age" class="form-label">Passowrd</label>
                             <input type="password" class="form-control" id="password" name="password" value="{{ current_user['password'] }}">
+                            <input type="checkbox" onclick="myFunction()">Show Password
                         </div>
 
                         <div class="mb-3">
                             <label for="age" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="confrim_password" name="confirm_password" value="{{ current_user['password'] }}">
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" value="{{ current_user['password'] }}">
+                            <input type="checkbox" onclick="myFunction2()">Show Password
                         </div>
 
                         <div class="mb-3">
@@ -95,6 +97,26 @@
         </div>
     </div>
 </div>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+
+function myFunction2() {
+  var x = document.getElementById("confirm_password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
 
 
 </body>
