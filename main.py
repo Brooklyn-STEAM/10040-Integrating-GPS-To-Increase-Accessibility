@@ -140,6 +140,8 @@ def sign_up_page():
         return render_template("sign_up.html.jinja")
 
 
+
+
 @app.route("/sign_in", methods =["POST", "GET"])
 def sign_in_page():
     if flask_login.current_user.is_authenticated:
@@ -172,16 +174,10 @@ def sign_in_page():
 
 
 
-
-
-
 @app.route('/sign_out')
 def sign_out():
     flask_login.logout_user()
     return redirect('/')
-
-
-
 
 
 
@@ -492,8 +488,8 @@ def logs(user_id):
 
     user_id = flask_login.current_user.id
 
-    cursor.execute(f"""SELECT * FROM `Messages` WHERE `to_user` = {user_id}""")
+    cursor.execute(f"SELECT * FROM `User`")
 
     results = cursor.fetchall()
 
-    return render_template("logs.html.jinja", logs = results)
+    return render_template("logs.html.jinja", users = results, user_id = user_id)
