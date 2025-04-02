@@ -40,7 +40,7 @@
 
       {% if current_user.is_authenticated %}
         <div class="flex-grow-1 text-end">
-          <a href="/user_profile/{{ current_user.id }}">
+          <a href="/user_profile/{{ current_user.id }}" style="text-decoration:none">
             <span class="align-middle m-3 r-card-text-color-sd">Hello, {{ current_user.username }}</span>
           </a>
           <a href="/sign_out" class="btn r-button-color">Log Out</a>
