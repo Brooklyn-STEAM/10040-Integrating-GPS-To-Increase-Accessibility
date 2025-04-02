@@ -43,11 +43,19 @@ function myMap() {
       markers.push(marker); // Store markers for routing
 
       var infoWindowContent = `
-        <div>
+        <div class="text-center">
           <h3>{{ coord["name"] }}</h3>
           <p>Address: {{ coord["address"] }}</p>
-          <img src="{{ coord['image'] }}" alt="{{ coord['name'] }}" style="width:200px;height:auto;">
         </div>
+          <div class="text-center">
+            <img src="{{ coord['image'] }}" alt="{{ coord['name'] }}" style="width:200px;height:auto; class="rounded mx-auto d-block">
+            <br>
+            <br>
+            <div class="center">
+              <a href="/updates" class="btn add-update">Update</a>
+            </div>
+          </div>
+
       `;
 
       var infoWindow = new google.maps.InfoWindow({
