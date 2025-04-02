@@ -28,7 +28,7 @@
                     </select>
                     <br>
                     <label for="user_review" class="form-label h-bg-card-color"></label>
-                    <textarea placeholder="Message a fellow caretaker" name="written_message" class="form-control h-bg-card-color u-center" id="customer_review" rows="3" col = "20" maxlength="500" required></textarea>
+                    <textarea placeholder="Message a fellow user" name="written_message" class="form-control h-bg-card-color u-center" id="customer_review" rows="3" col = "20" maxlength="500" required></textarea>
                     <button type="submit" class="btn h-button-color mt-3 u-center">Send</button>
             </form>
         </div>
@@ -38,18 +38,16 @@
     <div class="row p-3"></div>
     <div class = "container u-center text-center mx-auto rounded messages">
     <br>
-    <h3 class="text-color-2">Messages</h3>
-        {%for user in users%}
+    <h3 class="text-color-2"></h3>
         <div class="card center mx-auto text-center">
-            <h5 class="card-header h-card-head-color h-card-text-color-py">User's Name</h5>
+            <h5 class="card-header h-card-head-color h-card-text-color-py">Past Messages</h5>
             <div class="card-body h-bg-card-color">
-                <h5 class="card-title h-card-text-color-sd">{{user["username"]}}</h5>
+                <h5 class="card-title h-card-text-color-sd"></h5>
                 <div class="d-grid d-md-block">
-                     <a href="" class="btn r-button-color col align-self-end ">Message</a>
+                     <a href="/logs/{{current_user.id}}" class="btn r-button-color col align-self-end ">View Logs</a>
                 </div>
             </div>
         </div>
-        {% endfor%}
     </div>
 
 
