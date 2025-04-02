@@ -11,13 +11,12 @@
 <body>
   {%include "components/navbar.html.jinja"%}
   <br>
-  <div class="container text-center mx-auto p-2 ">
+  <div class="container text-center mx-auto p-2">
       <div class="col-md-auto">
         <form method = "post" action="/updates/update">
                 <label for = "place" class="text-color-2 fs-5 pt-4">Review A Place Recently Visited:</label>
                 <br>
                   
-
                     <select size = "6" name = "place" id = "place" required class="h-bg-card-color">
 
                       {%for location in locations%}
