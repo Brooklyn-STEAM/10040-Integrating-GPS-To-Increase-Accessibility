@@ -393,9 +393,7 @@ def message_user(user_id):
     
     results = cursor.fetchall()
 
-
     return render_template("messaging.html.jinja", messages = results)
-
 
 
 
