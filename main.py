@@ -283,7 +283,7 @@ def hiring():
     cursor.close()
     conn.close()
 
-    return render_template("hiring.html.jinja", caretakers = results)
+    return render_template("hiring.html.jinja", caretakers = results,)
 
 
 
@@ -397,9 +397,7 @@ def message_user(user_id):
     
     results = cursor.fetchall()
 
-
     return render_template("messaging.html.jinja", messages = results)
-
 
 
 
