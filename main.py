@@ -283,7 +283,7 @@ def hiring():
     cursor.close()
     conn.close()
 
-    return render_template("hiring.html.jinja", caretakers = results,)
+    return render_template("hiring.html.jinja", caretakers = results)
 
 
 
