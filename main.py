@@ -417,6 +417,7 @@ def user_profile(user_id):
 
     result = cursor.fetchone()
 
+
     return render_template("user_profile.html.jinja", current_user = result)
 
 
