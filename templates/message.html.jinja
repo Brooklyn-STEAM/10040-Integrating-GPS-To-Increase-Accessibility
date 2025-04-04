@@ -20,7 +20,7 @@
                 <label for = "user" class="text-color-2 fs-5 pt-3 pb-2">Send a Message:</label>
                 <br>
             
-                    <select size="5" name="user" id="user" required class="h-bg-card-color center">
+                    <select size="5" name="to_user" id="user" required class="h-bg-card-color center">
 
                         {%for user in users%}
                         <option value="{{user['id']}}">{{user["username"]}}</option>
