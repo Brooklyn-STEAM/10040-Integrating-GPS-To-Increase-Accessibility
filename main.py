@@ -492,3 +492,11 @@ def logs(user_id):
     results = cursor.fetchall()
 
     return render_template("logs.html.jinja", users = results, user_id = user_id)
+
+@app.route('/updates2')
+def update2():
+    return render_template('/updates2.0.html.jinja')
+
+@app.route('/place')
+def place():
+    return render_template('/places_page.html.jinja')
