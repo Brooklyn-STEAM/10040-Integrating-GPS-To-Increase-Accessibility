@@ -41,9 +41,10 @@
                         <br>
                         {%for message in messages%}
                         {%if message.from_user == current_user.id%}
-                                <p class = "ml-2 text-break rounded" style="color: rgb(20, 26, 131); background-color:rgb(155, 219, 246)">{{message["written_message"]}}</p>
+                                <p class="tiny-font text-end">You</p>
+                                <p class = "p-1 text-break rounded text-end" style="color: rgb(20, 26, 131); background-color:rgb(155, 219, 246)">{{message["written_message"]}}</p>
                         {%else%}
-                            <p class="text-break rounded" style="color: rgb(91, 39, 1);background-color:rgb(255, 178, 124)">{{message["written_message"]}}</p>
+                            <p class=" p-1 text-break rounded text-start" style="color: rgb(91, 39, 1);background-color:rgb(255, 178, 124)">{{message["written_message"]}}</p>
                         {%endif%}
                         {%endfor%}
                     </div>
@@ -63,6 +64,8 @@
             <br>
         </div>
     </form>
+
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

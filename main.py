@@ -531,3 +531,4 @@ def solo_updates(places_id):
                         ("{user_id}", "{places_id}", "{written_update}", "{accessable}");""")
 
     return redirect(f"/updates/{places_id}")
+
