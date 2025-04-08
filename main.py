@@ -508,7 +508,6 @@ def solo_update(places_id):
                     JOIN `Places` ON `places_id` = `Places`.`id`
                     WHERE `places_id` = {places_id}
                     ORDER BY `timestamp` DESC LIMIT 4;""")
-    print(places_id)
     results_2 = cursor.fetchall()
 
     return render_template("solo_updates.html.jinja", place = results, updates = results_2)
