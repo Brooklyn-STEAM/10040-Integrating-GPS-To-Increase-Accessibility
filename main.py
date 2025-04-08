@@ -198,9 +198,6 @@ def maps():
 
 
 
-
-
-
 @app.route("/updates")
 @flask_login.login_required
 def updates():
@@ -239,7 +236,6 @@ def updates():
 
 
 
-
 @app.route("/updates/update", methods = ["POST"])
 def update():
     conn = connect_db()
@@ -259,9 +255,6 @@ def update():
                         ("{user_id}", "{places_id}", "{written_update}", "{accessable}");""")
 
     return redirect("/updates")
-
-
-
 
 
 
@@ -478,7 +471,6 @@ def update_profile():
     
 
 
-
 @app.route("/logs/<user_id>")
 @flask_login.login_required
 def logs(user_id):
@@ -493,10 +485,50 @@ def logs(user_id):
 
     return render_template("logs.html.jinja", users = results, user_id = user_id)
 
-@app.route('/updates2')
-def update2():
-    return render_template('/updates2.0.html.jinja')
 
-@app.route('/place')
-def place():
-    return render_template('/places_page.html.jinja')
+@app.route("/updates/<places_id>")
+@flask_login.login_required
+def solo_update(places_id):
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    cursor.execute(f"SELECT * FROM `Places` WHERE `id` = {places_id}")
+    results = cursor.fetchone()
+
+    cursor.execute(f"""SELECT
+                        `user_id`,
+                        `places_id`,
+                        `written_update`,
+                        `accessable`,
+                        `Updates`.`timestamp`,
+                        `Places`.`name`,
+                        `User`.`username`
+                    FROM `Updates`
+                    JOIN `User` ON `user_id` = `User`.`id`
+                    JOIN `Places` ON `places_id` = `Places`.`id`
+                    WHERE `places_id` = {places_id}
+                    ORDER BY `timestamp` DESC LIMIT 4;""")
+    results_2 = cursor.fetchall()
+
+    return render_template("solo_updates.html.jinja", place = results, updates = results_2)
+
+
+
+@app.route("/updates/<places_id>/update", methods=["POST"])
+def solo_updates(places_id):
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    user_id = flask_login.current_user.id
+    written_update = request.form["written_update"]
+
+    # Correct access to 'places_id'
+    accessable = 1 if request.form.get("accessable") == "Yes" else 0
+
+    cursor.execute(f"""INSERT INTO `Updates`
+                        (`user_id`, `places_id`, `written_update`, `accessable`)
+                        VALUES
+                        ("{user_id}", "{places_id}", "{written_update}", "{accessable}");""")
+
+    return redirect(f"/updates/{places_id}")
+
