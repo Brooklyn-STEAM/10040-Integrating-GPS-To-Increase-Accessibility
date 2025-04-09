@@ -198,6 +198,10 @@ def maps():
 
 
 
+
+
+
+
 @app.route("/updates")
 @flask_login.login_required
 def updates():
@@ -234,8 +238,6 @@ def updates():
     return render_template("updates.html.jinja", updates = results, locations = results2 )
 
 
-
-
 @app.route("/updates/update", methods = ["POST"])
 def update():
     conn = connect_db()
@@ -258,6 +260,10 @@ def update():
 
 
 
+
+
+
+
 @app.route("/hiring")
 def hiring():
 
@@ -275,9 +281,6 @@ def hiring():
     return render_template("hiring.html.jinja", caretakers = results)
 
 
-
-
-    
 @app.route("/hiree_profile/<caretaker_id>")
 def hiree_profile(caretaker_id):
     if not flask_login.current_user.is_authenticated:
@@ -330,6 +333,9 @@ def hiree_profile(caretaker_id):
 
 
 
+
+
+
 @app.route("/message")
 @flask_login.login_required
 def message():
@@ -342,8 +348,6 @@ def message():
     results = cursor.fetchall()
 
     return render_template("message.html.jinja", users = results)
-
-
 
 
 @app.route("/send", methods = ["POST"])
@@ -366,8 +370,6 @@ def send_message():
     return redirect(f"/message/{to_user}")
 
 
-
-
 @app.route("/message/<user_id>")
 @flask_login.login_required
 def message_user(user_id):
@@ -386,13 +388,24 @@ def message_user(user_id):
     
     results = cursor.fetchall()
 
-    return render_template("messaging.html.jinja", messages = results)
+    cursor.execute(f"SELECT * FROM `User` WHERE `id` = {user_id}")
+    result = cursor.fetchone()
+
+    return render_template("messaging.html.jinja", messages = results, user = result)
+
+
+
+
+
 
 
 
 @app.route("/faqs")
 def faq():
     return render_template("faqs.html.jinja")
+
+
+
 
 
 
@@ -414,9 +427,6 @@ def user_profile(user_id):
     return render_template("user_profile.html.jinja", current_user = result)
 
 
-
-
-
 @app.route("/profile/<user_id>")
 @flask_login.login_required
 def profile(user_id):
@@ -430,9 +440,6 @@ def profile(user_id):
     result = cursor.fetchone()
 
     return render_template("profile.html.jinja", current_user = result)
-
-
-
 
 
 @app.route("/update_profile", methods = ["POST"])
@@ -471,19 +478,61 @@ def update_profile():
     
 
 
+
+
+
+
 @app.route("/logs/<user_id>")
 @flask_login.login_required
 def logs(user_id):
     conn = connect_db()
     cursor = conn.cursor()
 
-    user_id = flask_login.current_user.id
+    user_id = flask_login.current_user.id  # Get logged-in user's ID
 
-    cursor.execute(f"SELECT * FROM `User`")
+    # SQL query to get chat sessions (for both 'from_user' and 'to_user')
+    query = """
+        SELECT 
+            u1.first_name AS sender_first_name, 
+            u1.last_name AS sender_last_name, 
+            u1.username AS sender_username,
+            u1.id AS sender_id,  -- Adding sender_id
+            u2.first_name AS receiver_first_name, 
+            u2.last_name AS receiver_last_name, 
+            u2.username AS receiver_username,
+            u2.id AS receiver_id,  -- Adding receiver_id
+            m.written_message, 
+            m.timestamp,
+            m.from_user,
+            m.to_user
+        FROM 
+            Messages m
+        JOIN 
+            User u1 ON m.from_user = u1.id
+        JOIN 
+            User u2 ON m.to_user = u2.id
+        WHERE 
+            m.from_user = %s OR m.to_user = %s
+        ORDER BY 
+            m.timestamp DESC
+    """
 
+    cursor.execute(query, (user_id, user_id))
     results = cursor.fetchall()
 
-    return render_template("logs.html.jinja", users = results, user_id = user_id)
+    # Prepare a dictionary to store the latest message per user (sender or receiver)
+    chat_sessions = {}
+
+    for row in results:
+        other_user_id = row['sender_id'] if row['from_user'] == user_id else row['receiver_id']
+        
+        if other_user_id not in chat_sessions:
+            chat_sessions[other_user_id] = row  # Store the latest message for the other user
+
+    return render_template("logs.html.jinja", chat_sessions=chat_sessions)
+
+
+
 
 
 @app.route("/updates/<places_id>")
