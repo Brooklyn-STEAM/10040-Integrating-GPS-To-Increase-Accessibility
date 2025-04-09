@@ -12,24 +12,29 @@
 </head>
 
 <body>
-    {%include "components/navbar.html.jinja"%}
-
-    {%for user in users%}
-    <div class="row p-3"></div>
-    <div class="container u-center text-center mx-auto rounded messages">
-        <br>
-        <h3 class="text-color-2"></h3>
-        <div class="card center mx-auto text-center">
-            <h5 class="card-header h-card-head-color h-card-text-color-py">{{user["first_name"]}} {{user["last_name"]}}</h5>
-            <div class="card-body h-bg-card-color">
-                <h5 class="card-title h-card-text-color-sd"></h5>
-                <div class="d-grid d-md-block">
+    {% include "components/navbar.html.jinja" %}
+    
+    <div class="container mt-4">
+        <h2>Chat History</h2>
+        {% for session in chat_sessions.values() %}
+        <div class="row p-3">
+            <div class="col-md-4">
+                <div class="card">
+                    <h5 class="card-header">{{ session['receiver_first_name'] }} {{ session['receiver_last_name'] }}</h5>
+                    <div class="card-body">
+                        <p><strong>Username:</strong> {{ session['receiver_username'] }}</p>
+                        <p><strong>Last Message:</strong> {{ session['written_message'] }}</p>
+                        <p><strong>Sent at:</strong> {{ session['timestamp'] }}</p>
+                        <a href="/message/{{ session['receiver_id'] }}" class="btn add-update o-text">Message</a>
+                    </div>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    </div>
-    {%endfor%}
+
+
+
 
 
 
