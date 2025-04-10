@@ -14,56 +14,54 @@
 <body>
     {%include "components/navbar.html.jinja"%}
     <br>
-    <div class="messages rounded center">
-        <h1 class="mt-2 fw-bold text-color-2">{{place["name"]}}</h1>
-        <img src="{{place['image']}}" alt="{{place['name']}}" style="width:350px;height:auto;"
-            class="rounded mx-auto d-block pb-2">
-    </div>
+    <div class="container text-center mx-auto p-2">
+        <div class="messages rounded center">
+            <h1 class="mt-2 fw-bold text-color-2">{{place["name"]}}</h1>
+            <img src="{{place['image']}}" alt="{{place['name']}}" style="width:342px;height:auto;"
+                class="rounded mx-auto d-block pb-2">
+        </div>
 
-    <br>
+        <br>
 
-    <div class="container center">
-        <div class="row">
-            <div class="col-sm-6">
-                    <form method="POST" action="/updates/{{place['id']}}/update" class="center">
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <form method="POST" action="/updates/{{place['id']}}/update" class="text-center">
                 </div>
-                <div class="row">
-                    <div class="col-sm-4"></div>
-                    <div class="col-sm-4">
-                        <label class="card-title text-color-2 fs-5 pt-1" for="accessable" name="role">Was this location
-                            accessable?</label>
-                        <br>
-                        <label for="student" class="text-color-2 fs-5">Yes</label>
-                        <input type="radio" id="viable" name="accessable" value="Yes"
-                            value="{{ request.form.get('accessable', '') }}" required>
-                        <label for="teacher" class="text-color-2 fs-5">No</label>
-                        <input type="radio" id="non-viable" name="accessable" value="No"
-                            value="{{ request.form.get('accessable', '') }}" required>
-                        <br>
-                        <br>
+                    <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div class="text-center">
+                            <label class="card-title text-color-2 fs-5 pt-1 text-center" for="accessable" name="role">Was this location
+                                accessable?</label>
+                            <br>
+                            <label for="student" class="text-color-2 fs-5">Yes</label>
+                            <input type="radio" id="viable" name="accessable" value="Yes"
+                                value="{{ request.form.get('accessable', '') }}" required>
+                            <label for="teacher" class="text-color-2 fs-5">No</label>
+                            <input type="radio" id="non-viable" name="accessable" value="No"
+                                value="{{ request.form.get('accessable', '') }}" required>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="col-sm-4"></div>
                     </div>
-                    <div class="col-sm-3"></div>
-                </div>
-                <div class="row">
-                    <div class="col-2"></div>
-                    <div class="col-md-auto">
-
-                        <textarea placeholder="Write about the change of accesibility of a place here:" rows="7"
-                            cols="100" name="written_update" value='{{request.form.get("written_update", "")}}'
-                            maxlength="1500" class="u-textarea" required></textarea>
-
+                    <div class="row">
+                        <div class="center">
+                            <textarea placeholder="Write about the change of accesibility of a place here:" rows="7"
+                                cols="100" name="written_update" value='{{request.form.get("written_update", "")}}'
+                                maxlength="1500" class="u-textarea" required></textarea>
+                        </div>
                     </div>
-                    <div class="col-2"></div>
-                </div>
 
                 <div class="s-center">
-                    <button type="submit" class="btn btn-light mt-3 add-hiree" action="postupdate">Add Update </button>
+                <button type="submit" class="btn btn-light mt-3 add-hiree " action="postupdate">Add Update </button>
                 </div>
-                <br>
-                </form>
+                    <br>
+                    </form>
+                </div>
+
             </div>
 
-        </div>
     </div>
 
      {%for place in updates%}
