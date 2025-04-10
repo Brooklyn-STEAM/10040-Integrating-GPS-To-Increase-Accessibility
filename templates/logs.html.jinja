@@ -24,7 +24,7 @@
                     <div class="card-body">
                         <p><strong>Username:</strong> {{ session['receiver_username'] }}</p>
                         <p><strong>Last Message:</strong> {{ session['written_message'] }}</p>
-                        <p><strong>Sent at:</strong> {{ session['timestamp'] }}</p>
+                        <p><strong>Sent at:</strong> {{ session['timestamp'].strftime("%Y-%d-%m") }}</p>
                         <a href="/message/{{ session['receiver_id'] }}" class="btn add-update o-text">Message</a>
                     </div>
                 </div>
