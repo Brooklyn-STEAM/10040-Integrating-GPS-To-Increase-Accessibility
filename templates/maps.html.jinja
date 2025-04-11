@@ -75,10 +75,13 @@ if (navigator.geolocation) {
   {% for coord in coords %}
     (function() {
       var pin = [{{ coord["latitude"] }}, {{ coord["longitude"] }}];
+      var iconUrl = "http://maps.google.com/mapfiles/ms/icons/purple-dot.png"; // Example for red color marker
       var marker = new google.maps.Marker({
         position: new google.maps.LatLng(pin[0], pin[1]),
         map: map,
-        title: "PIN"
+        title: "PIN",
+        icon: iconUrl
+
       });
 
       markers.push(marker); // Store markers for routing
@@ -133,7 +136,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.open(map);
 }
 
-window.initMap = initMap;
+
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?AIzaSyB5gZ5e_XhZS42P61I0hWTvLSNZ9znLNg0&callback=myMap"></script>
