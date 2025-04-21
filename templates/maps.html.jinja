@@ -54,10 +54,12 @@ if (navigator.geolocation) {
       };
       map.setCenter(userLocation); // Center map on user's location
 
+      var iconurl = "http://maps.google.com/mapfiles/ms/icons/orange-dot.png";
       var userMarker = new google.maps.Marker({
         position: userLocation,
         map: map,
         title: "You are here",
+        icon: iconurl
       });
 
       var infoWindow = new google.maps.InfoWindow({
