@@ -14,7 +14,9 @@
   <div class="container text-center mx-auto p-2">
       <div class="col-md-auto">
         <form method = "post" action="/updates/update">
+              <h2>
                 <label for = "place" class="text-color-2 fs-5 pt-4 special-gothic-expanded-one-regular">Review A Place Recently Visited:</label>
+                </h2>
                 <br>
                   
                     <select size = "6" name = "place" id = "place" required class="h-bg-card-color">
@@ -66,10 +68,10 @@
         <div class="card u-center r-bg-card-color container-sm">
           <div class="card-body h-bg-card-color">
           {%if update["accessable"] == 0 %}
-            <h4 class="text-color-2">{{update["name"]}} ~ Inaccessable</h4>
+            <h4 class="text-color-2 playwrite-au-sa-uniquifier">{{update["name"]}} ~ Inaccessable</h4>
           {%endif%}
           {%if update["accessable"] == 1 %}
-            <h4 class="text-color-2">{{update["name"]}} ~ Accessable</h4>
+            <h4 class="text-color-2 playwrite-au-sa-uniquifier">{{update["name"]}} ~ Accessable</h4>
           {%endif%}
             <br>
             <p class="text-color-2">{{update["username"]}}</p>
