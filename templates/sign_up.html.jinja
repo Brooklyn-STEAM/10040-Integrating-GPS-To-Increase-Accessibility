@@ -74,31 +74,31 @@
             <br>
             </div>
           <div class="p-2 s-center">
-            <h4 class="card-title  text-left ml-2">Comfirm Password:</h4>
+            <h4 class="card-title  text-left ml-2">Confirm Password:</h4>
             <input type="password" class="form-control" placeholder="Password123%" name="verify_password" id = "confirm_password" required>
             <input type="checkbox" onclick="myFunction2()">Show Password
             <br>
             </div>
             <br>
           <div class="p-2 s-center">
-            <label class="card-title p-1 text-left ml-2" for="role" name="role">Are You A Caretaker?</label>
+            <label class="card-title p-1 text-left ml-2 fs-5" for="role" name="role">Are You A Caretaker?</label>
             <br>
-            <label for="student"class="p-1">Yes</label>
+            <label for="student"class="p-1 fs-5">Yes</label>
             <input type="radio" id="Caretaker" name="role" value="Yes" required
               value="{{ request.form.get('roll', '') }}">
-            <label for="teacher" class="p-1">No</label>
+            <label for="teacher" class="p-1 fs-5">No</label>
             <input type="radio" id="teacher" name="role" value="No" required value="{{ request.form.get('roll', '') }}">
             <br>
           </div>
             <br>
           <div class="p-2 s-center">
-            <label class="card-title p-1  text-left ml-2" for="with_parent" name="with_parent">Is A
+            <label class="card-title p-1 fs-5 text-left ml-2" for="with_parent" name="with_parent">Is A
               Parent/Gaurdian With You?</label>
             <br>
-            <label for="student" class="p-1">Yes</label>
+            <label for="student" class="p-1 fs-5">Yes</label>
             <input type="radio" id="Caretaker" name="with_parent" value="Yes" required
               value="{{ request.form.get('with_parent', '') }}">
-            <label for="teacher" class="p-1">No</label>
+            <label for="teacher" class="p-1 fs-5">No</label>
             <input type="radio" id="Non-caretaker" name="with_parent" value="No" required
               value="{{ request.form.get('with_parent', '') }}">
           </div>
