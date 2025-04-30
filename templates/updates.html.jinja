@@ -11,7 +11,7 @@
 <body>
   {%include "components/navbar.html.jinja"%}
   <br>
-  <div class="container text-center mx-auto p-2">
+  <div class="container text-center messages rounded u-center">
       <div class="col-md-auto">
         <form method = "post" action="/updates/update">
               <h2>
@@ -19,7 +19,7 @@
                 </h2>
                 <br>
                   
-                    <select size = "6" name = "place" id = "place" required class="h-bg-card-color">
+                    <select size = "6" name = "place" id = "place" required class="h-bg-card-color center rounded">
 
                       {%for location in locations%}
                         <option  value = "{{location['id']}}">{{location["name"]}}</option>
@@ -49,7 +49,7 @@
             <div class="center">
   
                 <textarea placeholder="Write about the change of accesibility of a place here:" rows="7" cols="100" 
-                name="written_update" value = '{{request.form.get("written_update", "")}}' maxlength = "1500" class="u-textarea" required></textarea>
+                name="written_update" value = '{{request.form.get("written_update", "")}}' maxlength = "1500" class="u-textarea rounded" required></textarea>
             
             </div>
   
@@ -62,7 +62,7 @@
         </form>
   </div>
 
-
+    <br>
      {%for update in updates%}
      
         <div class="card u-center r-bg-card-color container-sm">
