@@ -68,44 +68,48 @@ if (navigator.geolocation) {
   }
 
   {% for coord in coords %}
-    (function() {
-      var pin = [{{ coord["latitude"] }}, {{ coord["longitude"] }}];
-      var iconUrl = "http://maps.google.com/mapfiles/ms/icons/purple-dot.png"; // Example for red color marker
-      var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(pin[0], pin[1]),
-        map: map,
-        title: "PIN",
-        icon: iconUrl
+(function() {
+  var pin = [{{ coord["latitude"] }}, {{ coord["longitude"] }}];
 
-      });
+  var iconUrl = "";
+  {% if coord["accessable"] == 0%}
+    iconUrl = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+  {%else%}
+    iconUrl = "http://maps.google.com/mapfiles/ms/icons/purple-dot.png";
+  {% endif %}
 
-      markers.push(marker); // Store markers for routing
+  var marker = new google.maps.Marker({
+    position: new google.maps.LatLng(pin[0], pin[1]),
+    map: map,
+    title: "PIN",
+    icon: iconUrl
+  });
 
-      var infoWindowContent = `
-        <div class="text-center">
-          <h3 class = "special-gothic-expanded-one-regular">{{ coord["name"] }}</h3>
-          <p>Address: {{ coord["address"] }}</p>
-        </div>
-          <div class="text-center">
-            <img src="{{ coord['image'] }}" alt="{{ coord['name'] }}" style="width:200px;height:auto; class="rounded mx-auto d-block">
-            <br>
-            <br>
-            <div class="center">
-              <a href="/updates/{{coord['id']}}" class="btn add-update"> Add Update</a>
-            </div>
-          </div>
+  markers.push(marker); // Store markers for routing
 
-      `;
+  var infoWindowContent = `
+    <div class="text-center">
+      <h3 class="special-gothic-expanded-one-regular">{{ coord["name"] }}</h3>
+      <p>Address: {{ coord["address"] }}</p>
+    </div>
+    <div class="text-center">
+      <img src="{{ coord['image'] }}" alt="{{ coord['name'] }}" style="width:200px;height:auto;" class="rounded mx-auto d-block">
+      <br><br>
+      <div class="center">
+        <a href="/updates/{{ coord['id'] }}" class="btn add-update">Add Update</a>
+      </div>
+    </div>
+  `;
 
-      var infoWindow = new google.maps.InfoWindow({
-        content: infoWindowContent
-      });
+  var infoWindow = new google.maps.InfoWindow({
+    content: infoWindowContent
+  });
 
-      marker.addListener('click', function() {
-        infoWindow.open(map, marker);
-      });
-    })();
-  {% endfor %}
+  marker.addListener('click', function() {
+    infoWindow.open(map, marker);
+  });
+})();
+{% endfor %}
 }
 
 

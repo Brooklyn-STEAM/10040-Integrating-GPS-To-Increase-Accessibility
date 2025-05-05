@@ -187,15 +187,18 @@ def maps():
     conn = connect_db()
     cursor = conn.cursor()
 
-    cursor.execute(f"SELECT * FROM `Places`")
+    cursor.execute("""
+        SELECT Places.*, Updates.accessable
+        FROM Places
+        LEFT JOIN Updates ON Places.id = Updates.places_id
+        """)
 
     results = cursor.fetchall()
 
     cursor.close()
     conn.close()
 
-    return render_template("maps.html.jinja", coords = results)
-
+    return render_template("maps.html.jinja", coords=results)
 
 
 
