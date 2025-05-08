@@ -19,6 +19,7 @@
 </head>
 
 <body>
+
     {%include "components/navbar.html.jinja"%}
     <br>
     <div class="text-center">
@@ -35,6 +36,71 @@
         </h4>
     </div>
     <br>
+
+    <div class="container">
+        <div class="row row-cols-1 justify-content-center g-2">
+            <div class="card col p-3 h-bg-card-color" style="width: 18rem;">
+                <img src="/static/testimonials/testimonial1.jpg" class="card-img-top" alt="Photo of our testimonial">
+                <div class="card-body">
+                    <p class="card-text">"Hand In Hand was able to help me and my daughter, I was able to find an eligible Caretaker
+                    on the site and allow for my daughter to safely travel when I'm not around." - Carol V.</p>
+                </div>
+            </div>
+
+            <div class="card col p-3 h-bg-card-color" style="width: 18rem;">
+            <img src="/static/testimonials/testimonial2.jpg" class="card-img-top" alt="Photo of our testimonial">
+                <div class="card-body">
+                    <p class="card-text">"Hand In Hand was able to connect my father to a friendly and helpful Caretaker,
+                    he now goes out more and enjoys his retirement." - Susan M.
+                </div>
+            </div>
+
+            <div class="card col p-3 h-bg-card-color" style="width: 18rem;">
+            <img src="/static/testimonials/testimonial3.jpg" class="card-img-top" alt="Photo of our testimonial">
+                <div class="card-body">
+                    <p class="card-text">"The Hand In Hand website helped me when I had broken my leg, I was able to get places easier,
+                    thanks Hand In Hand!" - Megan H.</p>
+                </div>
+            </div>
+
+            <div class="card col p-3 h-bg-card-color" style="width: 18rem;">
+            <img src="/static/testimonials/testimonial4.jpg" class="card-img-top" alt="Photo of our testimonial">
+                <div class="card-body">
+                    <p class="card-text">"Thanks to Hand In Hand I was able to find my daughter a caretaker she is comfortable with and we
+                    grown found of, Hand In Hand helps parents like me be at more ease when trying to allow their kids more freedom in going out." - James L. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+
+
+
+  <script src="https://code.responsivevoice.org/responsivevoice.js?key=6AqfGK6s"></script>  <!-- replace with KEY-->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script> 
+function getSelectionText() {
+    var text = "";
+    if (window.getSelection) {
+        text = window.getSelection().toString();
+    // for Internet Explorer 8 and below. For Blogger, you should use &amp;&amp; instead of &&.
+    } else if (document.selection && document.selection.type != "Control") { 
+        text = document.selection.createRange().text;
+    }
+    return text;
+}
+$(document).ready(function (){ // when the document has completed loading
+   $(document).mouseup(function (e){ // attach the mouseup event for all div and pre tags
+      setTimeout(function() { // When clicking on a highlighted area, the value stays highlighted until after the mouseup event, and would therefore stil be captured by getSelection. This micro-timeout solves the issue. 
+         responsiveVoice.cancel(); // stop anything currently being spoken
+         responsiveVoice.speak(getSelectionText()); //speak the text as returned by getSelectionText
+      }, 1);
+   });
+});
+
+</script>
+
 
 
 
