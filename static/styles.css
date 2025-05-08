@@ -217,3 +217,24 @@ h4{
   --bs-tooltip-color: white;
 }
 
+
+#map-legend {
+  background: white;
+  padding: 10px;
+  margin: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  max-width: 200px;
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  z-index: 5;
+  border-radius: 8px;
+}
+#map-legend img {
+  vertical-align: middle;
+  width: 18px;
+  margin-right: 6px;
+}
+
