@@ -19,93 +19,92 @@
 <body>
   {%include "components/navbar.html.jinja"%}
   <br>
-  <div class="container text-center messages rounded u-center ">
-    <div class="col-md-auto">
-      <form method="post" action="/updates/update" class = "wow animate__fadeInDown">
-        <h2>
-          <label for="place" class="text-color-2 fs-5 pt-4 special-gothic-expanded-one-regular">Review A Place Recently
-            Visited:</label>
-        </h2>
-        <br>
 
-        <select size="6" name="place" id="place" required class="h-bg-card-color center rounded ">
+  <div class="container text-center messages rounded u-center">
+      <div class="col-md-auto">
+        <form method = "post" action="/updates/update" class = "wow animate__fadeInDown">
+              <h2>
+                <label for = "place" class=" text-color-2 fs-5 pt-4 special-gothic-expanded-one-regular">Review A Place Recently Visited:</label>
+                </h2>
+                <br>
+                  
+                    <select size = "6" name = "place" id = "place" required class="h-bg-card-color center rounded">
 
-          {%for location in locations%}
-          <option value="{{location['id']}}">{{location["name"]}}</option>
-          {% endfor%}
-        </select>
-        <br>
-        <br>
-
-
-    </div>
-    <div class="row">
-      <div class="col-sm-4"></div>
-      <div class="col-sm-4">
-        <label class="card-title text-color-2 fs-5 pt-1 wow animate__fadeInDown" for="accessable" name="role">Was this location
-          accessable?</label>
-        <br>
-        <label for="student" class="text-color-2 fs-5 wow animate__fadeInUp">Yes</label>
-        <input type="radio" id="viable" name="accessable" value="Yes" value="{{ request.form.get('accessable', '') }}"
-          required>
-        <label for="teacher" class="text-color-2 fs-5 wow animate__fadeInUp">No</label>
-        <input type="radio" id="non-viable" name="accessable" value="No"
-          value="{{ request.form.get('accessable', '') }}" required>
-        <br>
-        <br>
+                      {%for location in locations%}
+                        <option  value = "{{location['id']}}">{{location["name"]}}</option>
+                      {% endfor%}
+                    </select>
+                    <br>
+                    <br>
       </div>
-      <div class="col-sm-3"></div>
-    </div>
-    <div class="row">
+        <div class="row">   
+            <div>
+                <textarea placeholder="Write about the change of accessibility of a place here:" rows="3" cols="100" 
+                name="written_update" value = '{{request.form.get("written_update", "")}}' maxlength = "1500" class="form-control h-bg-card-color center" required></textarea>
+            </div>
+        </div>
+        <br>
+        <div class="row">
 
-      <div class="center">
+            
+  
+        </div>
 
-        <textarea placeholder="Write about the change of accesibility of a place here:" rows="7" cols="100"
-          name="written_update" value='{{request.form.get("written_update", "")}}' maxlength="1500"
-          class="u-textarea rounded wow animate__fadeInUp" required></textarea>
+            <div class="row">   
+              <div class="col-sm-4"></div>
+                <div class="text-center">
+                  <label class="card-title text-color-2 fs-5 pt-1" for="accessible  wow animate__fadeInDown" name="role">Was this location accessible?</label>
+                    <br>
+                      <label for="student" class="text-color-2 fs-5 wow animate__fadeInUp">Yes</label>
+                        <input type="radio" id="viable" name="accessable" value="Yes" value="{{ request.form.get('accessable', '') }}" required>
+                          <label for="teacher" class="text-color-2 fs-5 wow animate__fadeInUp">No</label>
+                            <input type="radio" id="non-viable" name="accessable" value="No"  value="{{ request.form.get('accessable', '') }}" required>
 
-      </div>
+                </div>
+            </div>
+          <div class="col-sm-4"></div>
 
-    </div>
+            <div class="p-2">
+              <button type="submit" class="btn h-button-color mt-3 s-center wow animate__fadeInUp" action="postupdate">Add Update </button>
+            </div>
+            <br>
+        </form>
+  </div>
 
     <div class="s-center">
       <button type="submit" class="btn btn-light mt-3 add-hiree " action="postupdate">Add Update </button>
     </div>
     <br>
-    </form>
-  </div>
 
-  <br>
-  {%for update in updates%}
-
-  <div class="card u-center r-bg-card-color container-sm wow animate__fadeInUpBig">
-    <div class="card-body h-bg-card-color">
-      {%if update["accessable"] == 0 %}
-      <h4 class="text-color-2 playwrite-au-sa-uniquifier">{{update["name"]}} ~ Inaccessable</h4>
-      {%endif%}
-      {%if update["accessable"] == 1 %}
-      <h4 class="text-color-2 playwrite-au-sa-uniquifier">{{update["name"]}} ~ Accessable</h4>
-      {%endif%}
-      <br>
-      <p class="text-color-2">{{update["username"]}}</p>
-      <p class="text-color-2">{{update["written_update"]}}</p>
-      <p class="text-color-2">{{update["timestamp"].strftime("%Y-%d-%m")}}</p>
-    </div>
-  </div>
-
-  {%endfor%}
+     {%for update in updates%}
+     
+        <div class="card u-center h-card-head-color container-sm wow animate__fadeInUpBig">
+          <div class="card-body h-bg-card-color">
+          {%if update["accessable"] == 0 %}
+            <h4 class="text-color-2 playwrite-au-sa-uniquifier">{{update["name"]}} ~ Inaccessible</h4>
+          {%endif%}
+          {%if update["accessable"] == 1 %}
+            <h4 class="text-color-2 playwrite-au-sa-uniquifier">{{update["name"]}} ~ Accessible</h4>
+          {%endif%}
+            <br>
+            <p class="text-color-2">{{update["username"]}}</p>
+            <p class="text-color-2">{{update["written_update"]}}</p>
+            <p class="text-color-2">{{update["timestamp"].strftime("%Y-%d-%m")}}</p>
+          </div>
+        </div>
+      
+        {%endfor%}
 
 
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+      <script src="https://code.responsivevoice.org/responsivevoice.js?key=6AqfGK6s"></script>  <!-- replace with KEY-->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script> 
+function getSelectionText() {
+    var text = "";
+    if (window.getSelection) {
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-  <script src="https://code.responsivevoice.org/responsivevoice.js?key=6AqfGK6s"></script> <!-- replace with KEY-->
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script>
-    function getSelectionText() {
-      var text = "";
-      if (window.getSelection) {
         text = window.getSelection().toString();
         // for Internet Explorer 8 and below. For Blogger, you should use &amp;&amp; instead of &&.
       } else if (document.selection && document.selection.type != "Control") {
