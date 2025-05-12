@@ -9,6 +9,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+     <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
 </head>
 
 <body>
@@ -28,37 +33,43 @@
         <br>
         <div class="container rounded col-8 messages">
             <br>
-       
-            <h5 class="text-center "> You Are Currently Talking To: {{user["first_name"]}} {{user["last_name"]}}</h5>
-        
+
+            <h5 class="text-center wow animate__bounceInDown"> You Are Currently Talking To: {{user["first_name"]}} {{user["last_name"]}}</h5>
+
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-sm-8">
                     <div class="m-scroll mx-auto d-grid">
-                        <img src="/static/logos/transparent_logo.png" class="img-fluid mx-auto d-block" alt="Hand In Hand Logo" height="250px" width="250px">
+                        <img src="/static/logos/transparent_logo.png" class="img-fluid mx-auto d-block"
+                            alt="Hand In Hand Logo" height="250px" width="250px">
                         <div class="small-font text-center">Safely message in the Hand in Hand chat!
                         </div>
                         <br>
                         {%for message in messages%}
                         {%if message.from_user == current_user.id%}
-                                <p class="tiny-font text-end">You</p>
-                                <p class = "p-1 text-break rounded text-end" style="color: rgb(20, 26, 131); background-color:rgb(155, 219, 246)">{{message["written_message"]}}</p>
+                        <p class="tiny-font text-end wow animate__fadeInUpBig">You</p>
+                        <p class="p-1 text-break rounded text-end wow animate__fadeInUpBig"
+                            style="color: rgb(20, 26, 131); background-color:rgb(155, 219, 246)">
+                            {{message["written_message"]}}</p>
                         {%else%}
-                            <p class=" p-1 text-break rounded text-start" style="color: rgb(91, 39, 1);background-color:rgb(255, 178, 124)">{{message["written_message"]}}</p>
+                        <p class=" p-1 text-break rounded text-start wow animate__fadeInUpBig"
+                            style="color: rgb(91, 39, 1);background-color:rgb(255, 178, 124)">
+                            {{message["written_message"]}}</p>
                         {%endif%}
                         {%endfor%}
                     </div>
 
-                    
+
                     <label for="user_review" class="form-label h-card-text-color-sd"></label>
-                    <textarea placeholder="Send Your Messsage Here..." name="written_message" class="form-control text-break "
-                        id="customer_review" rows="3" col="20" maxlength="300" style="resize:none" required></textarea>
-                        <button type="submit" class="btn h-button-color mt-3 w-100">Send
-                            <img src="/static/icons/send.png" alt="Send Arrow" width="20" height="20" class="mb-1">
-                        </button>
+                    <textarea placeholder="Send Your Messsage Here..." name="written_message"
+                        class="form-control text-break " id="customer_review" rows="3" col="20" maxlength="300"
+                        style="resize:none" required></textarea>
+                    <button type="submit" class="btn h-button-color mt-3 w-100">Send
+                        <img src="/static/icons/send.png" alt="Send Arrow" width="20" height="20" class="mb-1">
+                    </button>
                 </div>
                 <div class="col-2"></div>
-            
+
             </div>
             <br>
             <br>
@@ -101,10 +112,13 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
-
-
-
-
+    <script>
+        var wow = new WOW({
+            boxClass: 'wow',
+            animateClass: 'animate__animated'
+        })
+        wow.init();
+    </script>
 
 </body>
 
