@@ -17,7 +17,7 @@
 
 <body style="background-color:rgb(103, 65, 157)">
   {% include "components/navbar.html.jinja"%}
-  <div class="container mt-2">
+  <div class="container">
     {%for message in get_flashed_messages() %}
     <div class="alert alert-info" role="alert">
       {{message}}
@@ -27,29 +27,31 @@
 
       <div class="container rounded " style="background-color: rgb(181, 153, 221); color: rgb(127, 61, 219);">
 
-
-        <h1 class="text-center p-3">Sign In</h1>
-        <h4 class="card-title text-left ml-2 mt-3 s-center">Username:</h4>
-        <input type="text" class="form-control p-2 s-center" name="username" placeholder="NeedAhand_1" required>
-        <br>
-
-        <h4 class="card-title text-left s-center">Password:</h4>
-        <input type="password" class="form-control s-center" name="password" placeholder="Password" id="password"
-          required>
-        <div class="col s-center">
-          <input type="checkbox" class="mx-auto" onclick="myFunction()"> Show Password
+        <h1 class="text-center p-3 ">Sign In</h1>
+        <div class="p-2 u-center">
+          <h3 class="card-title fs-4 ml-2 mt-3">Username:</h3>
+          <input type="text" class="form-control p-2" name="username" placeholder="NeedAhand_1" required>
+          <br>
         </div>
-        <br>
+        <div class="p-2 u-center">
+          <h3 class="card-title fs-4">Password:</h3>
+          <input type="password" class="form-control" name="password" placeholder="Password" id="password"
+            required>
+          <div class="p-1">
+            <input type="checkbox" onclick="myFunction()"> Show Password
+          </div>
+          <br>
+        </div>
 
         <div class="d-grid col-4 mx-auto u-center">
-          <input class="btn h-button-color btn-md u-center" type="submit" value="Sign In">
+          <input class="btn h-button-color btn-md" type="submit" value="Sign In">
         </div>
         <input name="send-to" value="" hidden>
         <br>
         <br>
-        <h4 class="fs-5">Don't have an account yet?</h4>
+        <h4 class="fs-4">Don't have an account yet?</h4>
         <div class="d-grid col-4 mx-auto u-center">
-          <a href="/sign_up" class="btn h-button-color btn-md u-center"> Sign Up</a>
+          <a href="/sign_up" class="btn h-button-color btn-md"> Sign Up</a>
         </div>
         <br>
 
