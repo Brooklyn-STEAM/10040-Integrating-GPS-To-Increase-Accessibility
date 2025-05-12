@@ -43,6 +43,18 @@ function myMap() {
   var directionsRenderer = new google.maps.DirectionsRenderer();
   directionsRenderer.setMap(map); // Attach renderer to the map
 
+function addMarker(props) {
+  var Marker = new google.maps.Marker({
+    position: props.coords ,
+    map: map,
+  });
+};
+
+  google.maps.event.addListener(map, 'click',
+  function (event) {
+    console.log('hhh')
+    addMarker({coords:event.LatLng});
+  });
 
 
 if (navigator.geolocation) {
