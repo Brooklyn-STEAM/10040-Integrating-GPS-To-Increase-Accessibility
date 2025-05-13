@@ -32,77 +32,63 @@
   <div id="map-legend" class ="wow animate__fadeInBottomLeft">
     <h4 class="special-gothic-expanded-one-regular">Map Key</h4>
     <div><img src="http://maps.google.com/mapfiles/ms/icons/orange-dot.png"> You</div>
+    <div><img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png"> Your Pins</div>
     <div><img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png"> Accessible</div>
     <div><img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png"> Inaccessible</div>
   </div>
 
 
+<script>
+function myMap() {
+  var mapProp = {
+    center: new google.maps.LatLng(40.655982, -73.929978),
+    zoom: 10,
+  };
+  var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
-function addMarker(props) {
-  var Marker = new google.maps.Marker({
-    position: props.coords ,
-    map: map,
-  });
-};
+  var markers = [];
+  var directionsService = new google.maps.DirectionsService();
+  var directionsRenderer = new google.maps.DirectionsRenderer();
+  directionsRenderer.setMap(map);
 
-  google.maps.event.addListener(map, 'click',
-  function (event) {
-    console.log('hhh')
-    addMarker({coords:event.LatLng});
-  });
-
-
-    function myMap() {
-      var mapProp = {
-        center: new google.maps.LatLng(40.655982, -73.929978),
-        zoom: 10,
+  // User location
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      var userLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
       };
-      var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+      map.setCenter(userLocation);
+      var iconurl = "http://maps.google.com/mapfiles/ms/icons/orange-dot.png";
+      var userMarker = new google.maps.Marker({
+        position: userLocation,
+        map: map,
+        title: "You are here",
+        icon: iconurl
+      });
 
-      var markers = []; // Store markers for routing
-      var directionsService = new google.maps.DirectionsService();
-      var directionsRenderer = new google.maps.DirectionsRenderer();
-      directionsRenderer.setMap(map); // Attach renderer to the map
+      var infoWindow = new google.maps.InfoWindow({
+        content: "You are here",
+      });
 
+      userMarker.addListener("click", function () {
+        infoWindow.open(map, userMarker);
+      });
+    });
+  } else {
+    alert("Geolocation is not supported by this browser.");
+  }
 
-
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-          var userLocation = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-          map.setCenter(userLocation); // Center map on user's location
-
-          var iconurl = "http://maps.google.com/mapfiles/ms/icons/orange-dot.png";
-          var userMarker = new google.maps.Marker({
-            position: userLocation,
-            map: map,
-            title: "You are here",
-            icon: iconurl
-          });
-
-          var infoWindow = new google.maps.InfoWindow({
-            content: "You are here",
-          });
-
-          userMarker.addListener("click", function () {
-            infoWindow.open(map, userMarker);
-          });
-        });
-      } else {
-        alert("Geolocation is not supported by this browser.");
-      }
-
-      {% for coord in coords %}
-      (function () {
-        var pin = [{{ coord["latitude"] }}, {{ coord["longitude"] }}];
+  // Main pins from database
+  {% for coord in coords %}
+  (function () {
+    var pin = [{{ coord["latitude"] }}, {{ coord["longitude"] }}];
 
     var iconUrl = "";
     {% if coord["accessable"] == 0 %}
-    iconUrl = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
-    {%else%}
-    iconUrl = "http://maps.google.com/mapfiles/ms/icons/purple-dot.png";
+      iconUrl = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+    {% else %}
+      iconUrl = "http://maps.google.com/mapfiles/ms/icons/purple-dot.png";
     {% endif %}
 
     var marker = new google.maps.Marker({
@@ -112,21 +98,21 @@ function addMarker(props) {
       icon: iconUrl
     });
 
-    markers.push(marker); // Store markers for routing
+    markers.push(marker);
 
     var infoWindowContent = `
-    <div class="text-center">
-      <h3 class="special-gothic-expanded-one-regular">{{ coord["name"] }}</h3>
-      <p>Address: {{ coord["address"] }}</p>
-    </div>
-    <div class="text-center">
-      <img src="{{ coord['image'] }}" alt="{{ coord['name'] }}" style="width:200px;height:auto;" class="rounded mx-auto d-block">
-      <br><br>
-      <div class="center">
-        <a href="/updates/{{ coord['id'] }}" class="btn add-update">Add Update</a>
+      <div class="text-center">
+        <h3 class="special-gothic-expanded-one-regular">{{ coord["name"] }}</h3>
+        <p>Address: {{ coord["address"] }}</p>
       </div>
-    </div>
-  `;
+      <div class="text-center">
+        <img src="{{ coord['image'] }}" alt="{{ coord['name'] }}" style="width:200px;height:auto;" class="rounded mx-auto d-block">
+        <br><br>
+        <div class="center">
+          <a href="/updates/{{ coord['id'] }}" class="btn add-update">Add Update</a>
+        </div>
+      </div>
+    `;
 
     var infoWindow = new google.maps.InfoWindow({
       content: infoWindowContent
@@ -135,14 +121,68 @@ function addMarker(props) {
     marker.addListener('click', function () {
       infoWindow.open(map, marker);
     });
-}) ();
-    {% endfor %}
+  })();
+  {% endfor %}
+
+  // User-added pins
+  {% for pin in pins %}
+  (function () {
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng({{ pin["latitude"] }}, {{ pin["longitude"] }}),
+      map: map,
+      title: "User Pin",
+      icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+    });
+
+   var infoWindow = new google.maps.InfoWindow({
+    content: `
+      <div class="text-center">
+        <h3>Your Pin</h3>
+        <a href = "/delete_pin/{{pin['id']}}" class="btn btn-danger btn-sm mt-2">Delete</a>
+      </div>
+    `
+  });
+
+    marker.addListener("click", function () {
+      infoWindow.open(map, marker);
+    });
+  })();
+  {% endfor %}
+
+  // Click-to-add new pin
+  map.addListener("click", function(event) {
+    const lat = event.latLng.lat();
+    const lng = event.latLng.lng();
+
+    if (confirm("Do you want to add a pin here?")) {
+      fetch("/add_pin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          latitude: lat,
+          longitude: lng
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          new google.maps.Marker({
+            position: { lat: lat, lng: lng },
+            map: map,
+            icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+            title: "User Pin"
+          });
+        } else {
+          alert("Failed to add pin: " + data.message);
+        }
+      });
+    }
+  });
 }
+</script>
 
-
-
-
-  </script>
   <script>
     // Note: This example requires that you consent to location sharing when
     // prompted by your browser. If you see the error "The Geolocation service

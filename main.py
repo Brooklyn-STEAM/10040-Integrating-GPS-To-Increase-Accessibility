@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, flash, abort
+from flask import Flask, render_template, request, redirect, flash, abort, jsonify
 import pymysql
 from dynaconf import Dynaconf
 import flask_login
@@ -186,6 +186,7 @@ def sign_out():
 def maps():
     conn = connect_db()
     cursor = conn.cursor()
+    user_id = flask_login.current_user.id
 
     cursor.execute("""
         SELECT Places.*, Updates.accessable
@@ -195,14 +196,58 @@ def maps():
 
     results = cursor.fetchall()
 
+    cursor.execute(f"SELECT * FROM `Pinned` WHERE `user_id` = {user_id};")
+    results2 = cursor.fetchall()
+
     cursor.close()
     conn.close()
 
-    return render_template("maps.html.jinja", coords=results)
+    return render_template("maps.html.jinja", coords=results, pins = results2)
 
 
 
 
+@app.route("/add_pin", methods=["POST"])
+@flask_login.login_required
+def add_pin():
+    data = request.get_json()
+    latitude = data.get("latitude")
+    longitude = data.get("longitude")
+    
+    # Validate coordinates
+    if latitude is None or longitude is None:
+        return jsonify({"success": False, "message": "Missing coordinates."}), 400
+
+    user_id = flask_login.current_user.id
+
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute("""
+            INSERT INTO Pinned (user_id, latitude, longitude)
+            VALUES (%s, %s, %s)
+        """, (user_id, latitude, longitude))
+        conn.commit()
+        return jsonify({"success": True})
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": "Database error."}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
+
+
+@app.route("/delete_pin/<pin_id>")
+@flask_login.login_required
+def delete_pin(pin_id):
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    cursor.execute(f"DELETE FROM `Pinned` WHERE `id` = {pin_id};")
+
+    return redirect("/maps")
 
 
 @app.route("/updates")
