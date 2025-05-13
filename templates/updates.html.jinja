@@ -20,9 +20,9 @@
   {%include "components/navbar.html.jinja"%}
   <br>
 
-  <div class="container text-center messages rounded u-center">
+  <div class="container text-center messages rounded u-center wow animate__fadeInUp">
       <div class="col-md-auto">
-        <form method = "post" action="/updates/update" class = "wow animate__fadeInDown">
+        <form method = "post" action="/updates/update">
               <h2>
                 <label for = "place" class=" text-color-2 fs-5 pt-4 special-gothic-expanded-one-regular">Review A Place Recently Visited:</label>
                 </h2>
@@ -53,7 +53,7 @@
             <div class="row">   
               <div class="col-sm-4"></div>
                 <div class="text-center">
-                  <label class="card-title text-color-2 fs-5 pt-1" for="accessible  wow animate__fadeInDown" name="role">Was this location accessible?</label>
+                  <label class="card-title text-color-2 fs-5 pt-1" for="accessible  wow animate__fadeInUp" name="role">Was this location accessible?</label>
                     <br>
                       <label for="student" class="text-color-2 fs-5">Yes</label>
                         <input type="radio" id="viable" name="accessable" value="Yes" value="{{ request.form.get('accessable', '') }}" required>
@@ -126,6 +126,7 @@ function getSelectionText() {
         })
         wow.init();
     </script>
+    <br>
 </body>
 
 </html>
