@@ -19,7 +19,7 @@
 <body>
   {%include "components/navbar.html.jinja"%}
   <br>
-  <div class="messages rounded center">
+  <div class="messages rounded center wow animate__fadeIn">
     <h1 class="mt-2 fw-bold text-color-2 ">{{caretaker["first_name"]}} {{caretaker["last_name"]}} ~ Avg. Rating:
       {{"%.2f" |
       format(average)}}</h1>
@@ -50,7 +50,7 @@
 
   <br>
 
-  <div class="container center">
+  <div class="container center wow animate__fadeIn">
     <div class="row g-4">
       <div class="col-sm-6">
         <div class="rounded" style="background-color:white ">
