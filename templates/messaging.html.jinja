@@ -34,15 +34,15 @@
         <div class="container rounded col-8 messages">
             <br>
 
-            <h5 class="text-center wow animate__bounceInDown"> You Are Currently Talking To: {{user["first_name"]}} {{user["last_name"]}}</h5>
+            <h5 class="text-center wow animate__fadeIn"> You Are Currently Talking To: {{user["first_name"]}} {{user["last_name"]}}</h5>
 
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-sm-8">
                     <div class="m-scroll mx-auto d-grid">
-                        <img src="/static/logos/transparent_logo.png" class="img-fluid mx-auto d-block"
+                        <img src="/static/logos/transparent_logo.png" class="img-fluid mx-auto d-block wow animate__fadeIn"
                             alt="Hand In Hand Logo" height="250px" width="250px">
-                        <div class="small-font text-center">Safely message in the Hand in Hand chat!
+                        <div class="small-font text-center wow animate__fadeIn">Safely message in the Hand in Hand chat!
                         </div>
                         <br>
                         {%for message in messages%}
