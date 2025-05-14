@@ -14,6 +14,9 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+    </style>
 </head>
 
 <body>
@@ -22,23 +25,23 @@
     <div class="container u-center text-center mx-auto rounded messages wow animate__fadeIn">
         <div class="col-md-auto">
             <form method="post" action="/send">
-                <label for="user" class="text-color-2 fs-5 pt-3 pb-2 special-gothic-expanded-one-regular">Send A
+                <label for="user" class="text-color-2 fs-4 pt-3 pb-2 special-gothic-expanded-one-regular">Send A
                     Message:</label>
                 <br>
 
-                <select size="5" name="to_user" id="user" required class="h-bg-card-color u-center">
+                <select size="5" name="to_user" id="user" required class="h-bg-card-color u-center rounded">
 
                     {%for user in users%}
-                    <option value="{{user['id']}}">{{user["username"]}}</option>
+                    <option value="{{user['id']}}" class="karla-font fs-5">{{user["username"]}}</option>
                     {% endfor%}
                 </select>
                 <br>
-                <label for="user_review" class="form-label h-bg-card-color"></label>
+                <label for="user_review" class="form-label h-bg-card-color karla-font fs-5"></label>
 
                 <textarea placeholder="Message a fellow user" name="written_message"
-                    class="form-control h-bg-card-color u-center" id="customer_review" rows="3" col="20" maxlength="500"
+                    class="form-control h-bg-card-color u-center karla-font fs-5" id="customer_review" rows="3" col="20" maxlength="500"
                     required></textarea>
-                <button type="submit" class="btn h-button-color mt-3 u-center ">Send</button>
+                <button type="submit" class="btn h-button-color mt-3 u-center karla-font fs-5 ">Send</button>
 
             </form>
         </div>
@@ -50,16 +53,17 @@
         <br>
         <h3 class="text-color-2"></h3>
         <div class="card center mx-auto text-center">
-            <h5 class="card-header h-card-head-color h-card-text-color-py special-gothic-expanded-one-regular">Past
+            <h5 class="card-header h-card-head-color h-card-text-color-py special-gothic-expanded-one-regular fs-4">Past
                 Messages</h5>
             <div class="card-body h-bg-card-color">
                 <h5 class="card-title h-card-text-color-sd"></h5>
                 <div class="d-grid d-md-block">
-                    <a href="/logs/{{current_user.id}}" class="btn r-button-color col align-self-end ">View Logs</a>
+                    <a href="/logs/{{current_user.id}}" class="btn r-button-color karla-font fs-5 ">View Logs</a>
                 </div>
             </div>
         </div>
     </div>
+    <br>
 
     <script>
         var wow = new WOW({
