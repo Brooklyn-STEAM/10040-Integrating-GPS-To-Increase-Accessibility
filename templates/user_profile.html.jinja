@@ -23,23 +23,23 @@
 
     {%include "components/navbar.html.jinja"%}
     <br>
-    <div class="container center mx-auto rounded messages wow animate__fadeIn"
+    <div class="container center mx-auto rounded messages wow animate__fadeIn karla-font"
         style="background-color: rgb(181, 153, 221); color: rgb(127, 61, 219);">
-        <h1 class="mt-2 fw-bold text-color-2 special-gothic-expanded-one-regular">{{current_user["first_name"]}}
+        <h1 class="mt-2 text-color-2 special-gothic-expanded-one-regular">{{current_user["first_name"]}}
             {{current_user["last_name"]}}</h1>
         <br>
         <div class="row">
             <div class="col-sm-6">
-                <h4 class="text-color-2  fw-bold"> Contact Info:</h4>
+                <h4 class="text-color-2 karla-font fs-3 fw-bold"> Contact Info:</h4>
 
-                <h4 class="text-color-2 ">Cell: {{current_user["phone_number"]}}</h4>
+                <h4 class="text-color-2 karla-font fs-3">Cell: {{current_user["phone_number"]}}</h4>
 
-                <h4 class="text-color-2 ">Email: {{current_user["email"]}}</h4>
+                <h4 class="text-color-2 karla-font fs-3">Email: {{current_user["email"]}}</h4>
 
-                <h4 class="text-color-2 ">Age: {{current_user["age"]}}</h4>
+                <h4 class="text-color-2 karla-font fs-3">Age: {{current_user["age"]}}</h4>
             </div>
             <div class="col-sm-6">
-                <button class="btn h-button-color center m-5" type="button" data-bs-toggle="collapse"
+                <button class="btn h-button-color center m-5 karla-font fs-5" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     Edit Profile
                 </button>
@@ -48,63 +48,63 @@
                     <br>
                     <form method="POST" action="/update_profile">
                         <div class="mb-2">
-                            <label for="first_name" class="form-label fs-5">First Name:</label>
+                            <label for="first_name" class="form-label fs-4">First Name:</label>
                             <input type="text" class="form-control" id="first_name" name="first_name"
                                 value="{{ current_user['first_name'] }}">
                         </div>
 
                         <div class="mb-2">
-                            <label for="last_name" class="form-label fs-5 ">Last Name:</label>
+                            <label for="last_name" class="form-label fs-4 ">Last Name:</label>
                             <input type="text" class="form-control" id="last_name" name="last_name"
                                 value="{{ current_user['last_name'] }}">
                         </div>
 
                         <div class="mb-3">
-                            <label for="age" class="form-label fs-5">Username:</label>
+                            <label for="age" class="form-label fs-4">Username:</label>
                             <input type="text" class="form-control" id="username" name="username"
                                 value="{{ current_user['username'] }}">
                         </div>
 
                         <div class="mb-3">
-                            <label for="age" class="form-label fs-5">Password:</label>
+                            <label for="age" class="form-label fs-4">Password:</label>
                             <input type="password" class="form-control" id="password" name="password"
                                 value="{{ current_user['password'] }}">
                             <input type="checkbox" onclick="myFunction()">Show Password
                         </div>
 
                         <div class="mb-3">
-                            <label for="age" class="form-label fs-5">Confirm Password:</label>
+                            <label for="age" class="form-label fs-4">Confirm Password:</label>
                             <input type="password" class="form-control" id="confirm_password" name="confirm_password"
                                 value="{{ current_user['password'] }}">
                             <input type="checkbox" onclick="myFunction2()">Show Password
                         </div>
 
                         <div class="mb-3">
-                            <label for="phone_number" class="form-label fs-5">Phone Number:</label>
+                            <label for="phone_number" class="form-label fs-4">Phone Number:</label>
                             <input type="text" class="form-control" id="phone_number" name="phone_number"
                                 value="{{ current_user['phone_number'] }}">
                         </div>
 
                         <div class="mb-3">
-                            <label for="email" class="form-label fs-5">Email:</label>
+                            <label for="email" class="form-label fs-4">Email:</label>
                             <input type="email" class="form-control" id="email" name="email"
                                 value="{{ current_user['email'] }}">
                         </div>
 
                         <div class="mb-3">
-                            <label for="email" class="form-label fs-5">Address:</label>
+                            <label for="email" class="form-label fs-4">Address:</label>
                             <input type="text" class="form-control" id="address" name="address"
                                 value="{{ current_user['address'] }}">
                         </div>
 
                         <div class="mb-3">
-                            <label for="age" class="form-label fs-5">Age:</label>
+                            <label for="age" class="form-label fs-4">Age:</label>
                             <input type="number" class="form-control" id="age" name="age"
                                 value="{{ current_user['age'] }}">
                         </div>
 
 
-                        <button type="submit" class="btn h-button-color center m-5">Save Changes</button>
+                        <button type="submit" class="btn h-button-color center m-5 karla-font">Save Changes</button>
                     </form>
 
                 </div>
