@@ -10,12 +10,9 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-     <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
     </style>
 </head>
 
@@ -27,25 +24,25 @@
         crossorigin="anonymous"></script>
 
 
+    <div class="row">
+        {% for caretaker in caretakers%}
+        <div class="card col-4 wow animate__fadeInUp h-bg-card-color mt-3">
+            <div class="card-body ">
+                <h5 class="card-title h-card-head-color h-card-text-color-py special-gothic-expanded-one-regular">
+                    {{caretaker["first_name"]}} {{caretaker["last_name"]}}</h5>
+                    <img src="..." class="card-img-top" alt="..."> 
+                <h5 class="card-title text-color-2 fw-bold">{{caretaker["username"]}}</h5>
+                <p class="card-text h-card-text-color-sd karla-font fs-5">{{caretaker["email"]}}</p>
 
-    {% for caretaker in caretakers%}
-    <div class="card mt-5 w-75 mx-auto wow animate__fadeInUp">
-        <h5 class="card-header h-card-head-color h-card-text-color-py special-gothic-expanded-one-regular">
-            {{caretaker["first_name"]}} {{caretaker["last_name"]}}</h5>
-        <div class="card-body h-bg-card-color">
-            <h5 class="card-title text-color-2 fw-bold">{{caretaker["username"]}}</h5>
-            <p class="card-text h-card-text-color-sd karla-font fs-5">{{caretaker["email"]}}</p>
-            <div class="d-grid gap-2 d-md-block">
-
-                <a href="http://127.0.0.1:5000/hiree_profile/{{caretaker['id']}}" class="btn r-button-color karla-font fs-6">View
+                <a href="http://127.0.0.1:5000/hiree_profile/{{caretaker['id']}}"
+                    class="btn r-button-color karla-font fs-6">View
                     Profile</a>
                 <a href="/message/{{caretaker['id']}}" class="btn add-update o-text karla-font fs-6">Message</a>
 
             </div>
         </div>
+        {% endfor%}
     </div>
-
-    {% endfor%}
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=6AqfGK6s"></script> <!-- replace with KEY-->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script>
@@ -81,7 +78,7 @@
         })
         wow.init();
     </script>
-{%include "components/questions.html.jinja"%}
+    {%include "components/questions.html.jinja"%}
 </body>
 
 </html>
