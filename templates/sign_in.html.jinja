@@ -13,6 +13,9 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+    </style>
 </head>
 
 <body style="background-color:rgb(103, 65, 157)">
@@ -27,31 +30,31 @@
 
       <div class="container rounded" style="background-color: rgb(181, 153, 221); color: rgb(127, 61, 219);">
 
-        <h1 class="text-center p-3 ">Sign In</h1>
+        <h1 class="text-center p-3 fw-bold ">Sign In</h1>
         <div class="p-2 u-center">
-          <h3 class="card-title fs-4 ml-2 mt-3">Username:</h3>
+          <h3 class="card-title fs-4 ml-2 mt-3 karla-font fw-bold">Username:</h3>
           <input type="text" class="form-control p-2" name="username" placeholder="NeedAhand_1" required>
           <br>
         </div>
         <div class="p-2 u-center">
-          <h3 class="card-title fs-4">Password:</h3>
+          <h3 class="card-title fs-4 karla-font fw-bold">Password:</h3>
           <input type="password" class="form-control" name="password" placeholder="Password" id="password"
             required>
-          <div class="p-1">
+          <div class="p-1 karla-font fs-6">
             <input type="checkbox" onclick="myFunction()"> Show Password
           </div>
           <br>
         </div>
 
         <div class="d-grid col-4 mx-auto u-center">
-          <input class="btn h-button-color btn-md" type="submit" value="Sign In">
+          <input class="btn h-button-color btn-md karla-font fs-5" type="submit" value="Sign In">
         </div>
         <input name="send-to" value="" hidden>
         <br>
         <br>
-        <h4 class="fs-4">Don't have an account yet?</h4>
+        <h4 class="fs-4 karla-font fw-bold">Don't have an account yet?</h4>
         <div class="d-grid col-4 mx-auto u-center">
-          <a href="/sign_up" class="btn h-button-color btn-md"> Sign Up</a>
+          <a href="/sign_up" class="btn h-button-color btn-md karla-font fs-5"> Sign Up</a>
         </div>
         <br>
 
