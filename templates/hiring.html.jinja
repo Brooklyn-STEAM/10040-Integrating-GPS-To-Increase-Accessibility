@@ -23,25 +23,26 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
+    <div class="container">
+        <div class="row row-cols-1 justify-content-center g-2 mt-3">
+            {% for caretaker in caretakers%}
+            <div class="card col p-2 wow animate__fadeInUp h-bg-card-color m-3" style="width: 18rem;">
+                <div class="card-body ">
+                    <h5 class="card-title h-card-head-color h-card-text-color-py special-gothic-expanded-one-regular">
+                        {{caretaker["first_name"]}} {{caretaker["last_name"]}}</h5>
+                        <img src="..." class="card-img-top" alt="..."> 
+                    <h5 class="card-title text-color-2 fw-bold">{{caretaker["username"]}}</h5>
+                    <p class="card-text h-card-text-color-sd karla-font fs-5">{{caretaker["email"]}}</p>
 
-    <div class="row">
-        {% for caretaker in caretakers%}
-        <div class="card col-4 wow animate__fadeInUp h-bg-card-color mt-3">
-            <div class="card-body ">
-                <h5 class="card-title h-card-head-color h-card-text-color-py special-gothic-expanded-one-regular">
-                    {{caretaker["first_name"]}} {{caretaker["last_name"]}}</h5>
-                    <img src="..." class="card-img-top" alt="..."> 
-                <h5 class="card-title text-color-2 fw-bold">{{caretaker["username"]}}</h5>
-                <p class="card-text h-card-text-color-sd karla-font fs-5">{{caretaker["email"]}}</p>
+                    <a href="http://127.0.0.1:5000/hiree_profile/{{caretaker['id']}}"
+                        class="btn r-button-color karla-font fs-6">View
+                        Profile</a>
+                    <a href="/message/{{caretaker['id']}}" class="btn add-update o-text karla-font fs-6">Message</a>
 
-                <a href="http://127.0.0.1:5000/hiree_profile/{{caretaker['id']}}"
-                    class="btn r-button-color karla-font fs-6">View
-                    Profile</a>
-                <a href="/message/{{caretaker['id']}}" class="btn add-update o-text karla-font fs-6">Message</a>
-
+                </div>
             </div>
+            {% endfor%}
         </div>
-        {% endfor%}
     </div>
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=6AqfGK6s"></script> <!-- replace with KEY-->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
