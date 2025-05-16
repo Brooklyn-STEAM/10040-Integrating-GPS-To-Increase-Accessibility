@@ -35,12 +35,13 @@ class User:
     is_anonymous = False
     is_active = True
 
-    def __init__(self, user_id, username, email, first_name, last_name):
+    def __init__(self, user_id, username, email, first_name, last_name, role):
         self.id = user_id
         self.username = username
         self.email = email
         self.first_name = first_name
         self.last_name = last_name
+        self.role = role
 
     def get_id(self): 
         return str(self.id)
@@ -58,7 +59,7 @@ def load_user(user_id):
     conn.close()
 
     if result is not None:
-        return User(result["id"], result["username"], result["email"], result["first_name"], result["last_name"])
+        return User(result["id"], result["username"], result["email"], result["first_name"], result["last_name"], result['role'])
     
 def connect_db():
     conn = pymysql.connect(
@@ -163,7 +164,7 @@ def sign_in_page():
             elif password != result["password"]:
                 flash("Your username/password is incorrect")
             else:
-                user = User(result["id"], result["username"], result["email"], result["first_name"], result["last_name"])
+                user = User(result["id"], result["username"], result["email"], result["first_name"], result["last_name"], result["role"])
                 flask_login.login_user(user)
 
                 return redirect("/")
@@ -471,23 +472,14 @@ def user_profile(user_id):
 
     result = cursor.fetchone()
 
+    cursor.execute(f"SELECT * FROM `Caretakers` WHERE `user_id` = {user_id}")
+    result2 = cursor.fetchone()
 
-    return render_template("user_profile.html.jinja", current_user = result)
+
+    return render_template("user_profile.html.jinja", current_user = result, current_caretaker = result2)
 
 
-@app.route("/profile/<user_id>")
-@flask_login.login_required
-def profile(user_id):
-    conn = connect_db()
-    cursor = conn.cursor()
 
-    user_id = flask_login.current_user.id
-
-    cursor.execute(f"SELECT * FROM `User` WHERE `id` = {user_id}")
-
-    result = cursor.fetchone()
-
-    return render_template("profile.html.jinja", current_user = result)
 
 
 @app.route("/update_profile", methods = ["POST"])
@@ -511,16 +503,35 @@ def update_profile():
     user_id = flask_login.current_user.id
 
     if password != request.form["confirm_password"]:
-        flash("Your username/password is incorrect")
+        flash("Your username/password is incorrect!")
     else:
-        cursor.execute(f"""UPDATE `User` SET `first_name` = '{first_name}' WHERE `id` = {user_id}""")
-        cursor.execute(f"""UPDATE `User` SET `last_name` = '{last_name}' WHERE `id` = {user_id}""")
-        cursor.execute(f"""UPDATE `User` SET `email` = '{email}' WHERE `id` = {user_id}""")
-        cursor.execute(f"""UPDATE `User` SET `address` = '{address}' WHERE `id` = {user_id}""")
-        cursor.execute(f"""UPDATE `User` SET `username` = '{username}' WHERE `id` = {user_id}""")
-        cursor.execute(f"""UPDATE `User` SET `password` = '{password}' WHERE `id` = {user_id}""")
-        cursor.execute(f"""UPDATE `User` SET `age` = '{age}' WHERE `id` = {user_id}""")
-        cursor.execute(f"""UPDATE `User` SET `phone_number` = '{phone_number}' WHERE `id` = {user_id}""")
+        cursor.execute(f"""
+            UPDATE `User`
+            SET
+                `first_name` = '{first_name}',
+                `last_name` = '{last_name}',
+                `email` = '{email}',
+                `address` = '{address}',
+                `username` = '{username}',
+                `password` = '{password}',
+                `age` = '{age}',
+                `phone_number` = '{phone_number}'
+            WHERE `id` = {user_id};
+            """)
+        
+        if flask_login.current_user.role == 1:
+            experience = request.form["experience"]
+            cursor.execute(f"""
+                INSERT INTO `Caretakers`
+                (`user_id`,`experience`)
+                VALUES
+                ("{user_id}", "{experience}")
+                ON DUPLICATE KEY UPDATE
+                `experience` = "{experience}"
+        """)
+        else: 
+            flash("Only Caretakers may post experience!")
+    
 
         return redirect(f"/user_profile/{user_id}")
     
