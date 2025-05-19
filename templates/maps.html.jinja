@@ -36,10 +36,10 @@
   <div id="map-legend" class ="wow animate__fadeInBottomLeft">
     <h4 class="special-gothic-expanded-one-regular">Map Key</h4>
 
-    <div class="karla-font fs-6"><img src="http://maps.google.com/mapfiles/ms/icons/orange-dot.png"> You</div>
-    <div><img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png"> Your Pins</div>
-    <div class="karla-font fs-6"><img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png"> Accessible</div>
-    <div class="karla-font fs-6"><img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png"> Inaccessible</div>
+    <div class="karla-font fs-6"><img src="http://maps.google.com/mapfiles/ms/icons/orange-dot.png" alt="Orange colored pin used to represent your current location"> You</div>
+    <div><img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png" alt="Green colored pin used to represent your dropped pins on the map"> Your Pins</div>
+    <div class="karla-font fs-6"><img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png" alt="Purple colored pin used to represent that a location is accessibile"> Accessible</div>
+    <div class="karla-font fs-6"><img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png" alt="Red colored pin used to represent that a location is inaccessibile"> Inaccessible</div>
 
   </div>
 
@@ -113,21 +113,12 @@ function myMap() {
       <p class="karla-font fs-6">Address: {{ coord["address"] }}</p>
     </div>
     <div class="text-center">
-      <img src="{{ coord['image'] }}" alt="{{ coord['name'] }}" style="width:200px;height:auto;" class="rounded mx-auto d-block">
+      <img src="{{ coord['image'] }}" alt="{{ coord['name'] }}" style="width:200px;height:auto;" alt="Image of location stated"class="rounded mx-auto d-block">
       <br><br>
       <div class="center">
-        <a href="/updates/{{ coord['id'] }}" class="btn add-update karla-font o-text">Add Update</a>
 
-      </div>
-      <div class="text-center">
-        <img src="{{ coord['image'] }}" alt="{{ coord['name'] }}" style="width:200px;height:auto;" class="rounded mx-auto d-block">
-        <br><br>
-        <div class="center">
+        <a href="/updates/{{ coord['id'] }}" class="btn add-update karla-font o-text">View Location</a>
 
-          <a href="/updates/{{ coord['id'] }}" class="btn add-update">View Location</a>
-
-        </div>
-      </div>
     `;
 
     var infoWindow = new google.maps.InfoWindow({
