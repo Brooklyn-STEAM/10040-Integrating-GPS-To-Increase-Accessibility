@@ -14,6 +14,10 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+    </style>
+    <script src="https://cdn.userway.org/widget.js" data-account="EhJYDcVyH5"></script>
 </head>
 
 <body>
@@ -31,10 +35,12 @@
 
   <div id="map-legend" class ="wow animate__fadeInBottomLeft">
     <h4 class="special-gothic-expanded-one-regular">Map Key</h4>
-    <div><img src="http://maps.google.com/mapfiles/ms/icons/orange-dot.png"> You</div>
+
+    <div class="karla-font fs-6"><img src="http://maps.google.com/mapfiles/ms/icons/orange-dot.png"> You</div>
     <div><img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png"> Your Pins</div>
-    <div><img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png"> Accessible</div>
-    <div><img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png"> Inaccessible</div>
+    <div class="karla-font fs-6"><img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png"> Accessible</div>
+    <div class="karla-font fs-6"><img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png"> Inaccessible</div>
+
   </div>
 
 
@@ -101,15 +107,25 @@ function myMap() {
     markers.push(marker);
 
     var infoWindowContent = `
-      <div class="text-center">
-        <h3 class="special-gothic-expanded-one-regular">{{ coord["name"] }}</h3>
-        <p>Address: {{ coord["address"] }}</p>
+
+    <div class="text-center">
+      <h3 class="special-gothic-expanded-one-regular">{{ coord["name"] }}</h3>
+      <p class="karla-font fs-6">Address: {{ coord["address"] }}</p>
+    </div>
+    <div class="text-center">
+      <img src="{{ coord['image'] }}" alt="{{ coord['name'] }}" style="width:200px;height:auto;" class="rounded mx-auto d-block">
+      <br><br>
+      <div class="center">
+        <a href="/updates/{{ coord['id'] }}" class="btn add-update karla-font o-text">Add Update</a>
+
       </div>
       <div class="text-center">
         <img src="{{ coord['image'] }}" alt="{{ coord['name'] }}" style="width:200px;height:auto;" class="rounded mx-auto d-block">
         <br><br>
         <div class="center">
-          <a href="/updates/{{ coord['id'] }}" class="btn add-update">View place</a>
+
+          <a href="/updates/{{ coord['id'] }}" class="btn add-update">View Location</a>
+
         </div>
       </div>
     `;

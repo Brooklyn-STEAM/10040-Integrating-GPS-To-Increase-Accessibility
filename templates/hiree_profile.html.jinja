@@ -14,18 +14,41 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+    </style>
+    <script src="https://cdn.userway.org/widget.js" data-account="EhJYDcVyH5"></script>
 </head>
 
 <body>
   {%include "components/navbar.html.jinja"%}
   <br>
-  <div class="messages rounded center wow animate__fadeIn">
+  <div class="messages rounded center wow animate__fadeIn karla-font">
     <h1 class="mt-2 fw-bold text-color-2 ">{{caretaker["first_name"]}} {{caretaker["last_name"]}} ~ Avg. Rating:
       {{"%.2f" |
       format(average)}}</h1>
+      <br>
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="" class="card-img-top" alt="..."> 
+        </div>
+        <div class="col-sm-6 text-center">
+          <h3 class="text-color-2 center mb-1">About Me:</h3>
+        
+        
+        </div>
+
+    </div>
+  </div>
+
+<br>
+
+
+
+  <div class="messages rounded center wow animate__fadeIn karla-font">
     <br>
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-6 ">
         <h4 class="text-color-2  fw-bold"> Contact Info:</h4>
 
         <h4 class="text-color-2 ">Cell: {{caretaker["phone_number"]}}</h4>
@@ -35,11 +58,11 @@
         <h4 class="text-color-2 ">Age: {{caretaker["age"]}}</h4>
       </div>
       <div class="col-sm-6 text-center">
-        <h3 class="text-color-2 center mb-1">Would You Like To Hire This Caretaker?</h3>
+        <h3 class="text-color-2 center">Would You Like To Hire This Caretaker?</h3>
         <div class="row">
           <div class="mx-auto">
 
-            <a class="btn btn-success center" type="submit" value="Yes" href="/message/{{caretaker['id']}}">Send a
+            <a class="btn btn-success center fs-5" type="submit" value="Yes" href="/message/{{caretaker['id']}}">Send a
               Message</a>
 
           </div>
@@ -56,15 +79,15 @@
         <div class="rounded" style="background-color:white ">
           <form method="post" action="/hiree_profile/{{caretaker['id']}}/review" class="center">
             <label for="user_review"
-              class="form-label r-card-text-color-sd fs-5 special-gothic-expanded-one-regular">Review This
+              class="form-label r-card-text-color-sd fs-4 special-gothic-expanded-one-regular">Review This
               Caretaker:</label>
-            <textarea name="written_review" class="form-control text-break r-bg-card-color " id="customer_review"
+            <textarea name="written_review" class="form-control text-break r-bg-card-color karla-font " id="customer_review"
               rows="3" maxlength="500" style="resize:none" required></textarea>
-            <h5 class="mt-2 r-card-text-color-sd special-gothic-expanded-one-regular">Rating out of 5:</h5>
+            <h5 class="mt-2 r-card-text-color-sd special-gothic-expanded-one-regular fs-5">Rating out of 5:</h5>
             <input type="number" class="form-control r-bg-card-color" id="rating" min="1" value="1" max="5"
               name="rating" required>
 
-            <button type="submit" class="btn r-button-color mt-3 w-100">Post</button>
+            <button type="submit" class="btn r-button-color mt-3 w-100 fs-6 karla-font">Post</button>
           </form>
         </div>
       </div>
@@ -73,11 +96,11 @@
         {%for review in reviews%}
         <div class="card p-2">
           <div class="card-body r-bg-card-color">
-            <h4 class="r-card-text-color-py ">{{review["username"]}}</h4>
+            <h4 class="r-card-text-color-py fw-bold ">{{review["username"]}}</h4>
             <br>
             <h5 class="r-card-text-color-py">Rating: {{review["rating"]}}/5</h5>
-            <p class="r-card-text-color-sd">{{review["written_review"]}}</p>
-            <p class="r-card-text-color-sd">{{review["timestamp"].strftime("%Y-%d-%m")}}</p>
+            <p class="r-card-text-color-sd karla-font fs-5">{{review["written_review"]}}</p>
+            <p class="r-card-text-color-sd karla-font">{{review["timestamp"].strftime("%Y-%d-%m")}}</p>
 
           </div>
         </div>

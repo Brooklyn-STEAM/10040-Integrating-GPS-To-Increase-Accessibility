@@ -14,17 +14,21 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+    </style>
+    <script src="https://cdn.userway.org/widget.js" data-account="EhJYDcVyH5"></script>
 </head>
 
 <body>
   {%include "components/navbar.html.jinja"%}
   <br>
 
-  <div class="container text-center messages rounded u-center wow animate__fadeInUp">
+  <div class="container text-center messages rounded u-center wow animate__fadeInUp karla-font fs-5">
       <div class="col-md-auto">
         <form method = "post" action="/updates/update">
               <h2>
-                <label for = "place" class=" text-color-2 fs-5 pt-4 special-gothic-expanded-one-regular">Review A Place Recently Visited:</label>
+                <label for = "place" class=" text-color-2 fs-4 pt-4 special-gothic-expanded-one-regular">Review A Place Recently Visited:</label>
                 </h2>
                 <br>
                   
@@ -40,7 +44,7 @@
         <div class="row">   
             <div>
                 <textarea placeholder="Write about the change of accessibility of a place here:" rows="3" cols="100" 
-                name="written_update" value = '{{request.form.get("written_update", "")}}' maxlength = "1500" class="form-control h-bg-card-color center" required></textarea>
+                name="written_update" value = '{{request.form.get("written_update", "")}}' maxlength = "1500" class="form-control h-bg-card-color center fs-5" required></textarea>
             </div>
         </div>
         <br>
@@ -52,12 +56,12 @@
 
             <div class="row">   
               <div class="col-sm-4"></div>
-                <div class="text-center">
-                  <label class="card-title text-color-2 fs-5 pt-1" for="accessible  wow animate__fadeInUp" name="role">Was this location accessible?</label>
+                <div class="text-center karla-font">
+                  <label class="card-title text-color-2 fs-4 pt-1" for="accessible  wow animate__fadeInUp" name="role">Was this location accessible?</label>
                     <br>
-                      <label for="student" class="text-color-2 fs-5">Yes</label>
+                      <label for="student" class="text-color-2 fs-4">Yes</label>
                         <input type="radio" id="viable" name="accessable" value="Yes" value="{{ request.form.get('accessable', '') }}" required>
-                          <label for="teacher" class="text-color-2 fs-5">No</label>
+                          <label for="teacher" class="text-color-2 fs-4">No</label>
                             <input type="radio" id="non-viable" name="accessable" value="No"  value="{{ request.form.get('accessable', '') }}" required>
 
                 </div>
@@ -65,7 +69,7 @@
           <div class="col-sm-4"></div>
 
             <div class="p-2">
-              <button type="submit" class="btn h-button-color mt-3 s-center" action="postupdate">Add Update </button>
+              <button type="submit" class="btn h-button-color mt-3 s-center karla-font fs-5" action="postupdate">Add Update </button>
             </div>
             <br>
         </form>
@@ -84,9 +88,9 @@
             <h4 class="text-color-2 playwrite-au-sa-uniquifier">{{update["name"]}} ~ Accessible</h4>
           {%endif%}
             <br>
-            <p class="text-color-2">{{update["username"]}}</p>
-            <p class="text-color-2">{{update["written_update"]}}</p>
-            <p class="text-color-2">{{update["timestamp"].strftime("%Y-%d-%m")}}</p>
+            <p class="text-color-2 fw-bold fs-5">{{update["username"]}}</p>
+            <p class="text-color-2 karla-font fs-5">{{update["written_update"]}}</p>
+            <p class="text-color-2 karla-font fs-5">{{update["timestamp"].strftime("%Y-%d-%m")}}</p>
           </div>
         </div>
       
@@ -127,7 +131,7 @@ function getSelectionText() {
         wow.init();
     </script>
     
-{%include "components/questions.html.jinja"%}
+
 </body>
 
 </html>

@@ -13,6 +13,14 @@
   font-style: normal;
 }
 
+.karla-font{
+  font-family: "Karla", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
 Nav {
     color: rgb(69,9,147);
     text-align: top;
@@ -106,7 +114,7 @@ h4{
 }
 
 .r-button-color{
-  color:rgb(181, 217, 251);
+  color:rgb(210, 233, 255);
   background-color:rgb(21, 126, 212);
 }
 
@@ -190,7 +198,7 @@ h4{
 }
 
 .o-text{
-  color:rgb(247, 219, 208)
+  color:rgb(255, 241, 237)
 }
 
 .nav-button{
