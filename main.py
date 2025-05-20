@@ -312,7 +312,6 @@ def update():
 
 
 
-
 @app.route("/hiring")
 def hiring():
 
@@ -320,7 +319,9 @@ def hiring():
 
     cursor = conn.cursor()
 
-    cursor.execute(f"SELECT * FROM `User` WHERE `role` = 1;")
+    cursor.execute(f"""SELECT * FROM `User`
+                   JOIN `Caretakers` ON `user_id` = `User`.`id` 
+                   WHERE `role` = 1;""")
     
     results = cursor.fetchall()
 
@@ -343,6 +344,10 @@ def hiree_profile(caretaker_id):
         cursor.execute(f"SELECT * FROM `User` WHERE `id` = {caretaker_id}")
 
         result = cursor.fetchone()
+
+        cursor.execute(f"SELECT * FROM `Caretakers` WHERE `user_id` = {caretaker_id}")
+
+        result2 = cursor.fetchone()
         
         if result is None:
             abort (404)
@@ -377,26 +382,10 @@ def hiree_profile(caretaker_id):
         cursor.close()
         conn.close()
 
-        return render_template("hiree_profile.html.jinja", caretaker = result, reviews = results, average = average)
+        return render_template("hiree_profile.html.jinja", caretaker = result, reviews = results, average = average, extra = result2)
     
 
 
-
-
-
-
-@app.route("/message")
-@flask_login.login_required
-def message():
-    conn = connect_db()
-
-    cursor = conn.cursor()
-
-    cursor.execute(f"SELECT * FROM `User`;")
-
-    results = cursor.fetchall()
-
-    return render_template("message.html.jinja", users = results)
 
 
 @app.route("/send", methods = ["POST"])
@@ -541,13 +530,21 @@ def update_profile():
 
 
 
-@app.route("/logs/<user_id>")
+@app.route("/message")
 @flask_login.login_required
-def logs(user_id):
+def logs():
     conn = connect_db()
     cursor = conn.cursor()
 
     user_id = flask_login.current_user.id  # Get logged-in user's ID
+
+    conn = connect_db()
+
+    cursor = conn.cursor()
+
+    cursor.execute(f"SELECT * FROM `User`;")
+
+    results1 = cursor.fetchall()
 
     # SQL query to get chat sessions (for both 'from_user' and 'to_user')
     query = """
@@ -588,7 +585,7 @@ def logs(user_id):
         if other_user_id not in chat_sessions:
             chat_sessions[other_user_id] = row  # Store the latest message for the other user
 
-    return render_template("logs.html.jinja", chat_sessions=chat_sessions)
+    return render_template("logs.html.jinja", chat_sessions=chat_sessions, users = results1)
 
 
 
@@ -639,4 +636,6 @@ def solo_updates(places_id):
                         ("{user_id}", "{places_id}", "{written_update}", "{accessable}");""")
 
     return redirect(f"/updates/{places_id}")
+
+
 
