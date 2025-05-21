@@ -615,7 +615,20 @@ def solo_update(places_id):
                     ORDER BY `timestamp` DESC LIMIT 4;""")
     results_2 = cursor.fetchall()
 
-    return render_template("solo_updates.html.jinja", place = results, updates = results_2)
+    cursor.execute(f"SELECT * FROM `Updates` WHERE `places_id` = {places_id}")
+    results_3 = cursor.fetchall()
+
+    total = 0
+    average = 0
+    for post in results_3:
+        if post["accessable"] == 1:
+
+            total+=1
+        count = len(results_3)
+        average = (total/count) * 100
+
+
+    return render_template("solo_updates.html.jinja", place = results, updates = results_2, average = average)
 
 
 
