@@ -69,12 +69,12 @@ function myMap() {
       var userMarker = new google.maps.Marker({
         position: userLocation,
         map: map,
-        title: "You are here",
+        title: "You Are Here",
         icon: iconurl
       });
 
       var infoWindow = new google.maps.InfoWindow({
-        content: "You are here",
+        content: "You Are Here",
       });
 
       userMarker.addListener("click", function () {
@@ -100,7 +100,7 @@ function myMap() {
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(pin[0], pin[1]),
       map: map,
-      title: "PIN",
+      title: "Click To View",
       icon: iconUrl
     });
 
@@ -145,8 +145,8 @@ function myMap() {
    var infoWindow = new google.maps.InfoWindow({
     content: `
       <div class="text-center">
-        <h3>Your Pin</h3>
-        <a href = "/delete_pin/{{pin['id']}}" class="btn btn-danger btn-sm mt-2">Delete</a>
+        <h3 class="special-gothic-expanded-one-regular">Your Pin</h3>
+        <a href = "/delete_pin/{{pin['id']}}" class="btn btn-danger btn-sm mt-2 karla-font o-text">Delete</a>
       </div>
     `
   });
