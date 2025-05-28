@@ -27,14 +27,14 @@
         <div class="messages rounded center">
             <h1 class="mt-2 text-color-2 special-gothic-expanded-one-regular wow animate__fadeInLeftBig">{{place["name"]}}</h1>
             <img src="{{place['image']}}" alt="{{place['name']}}" style="width:342px;height:auto;"
-                class="rounded mx-auto d-block pb-2 wow animate__fadeInRightBig">
+                class="rounded mx-auto img-fluid d-block pb-2 wow animate__fadeInRightBig">
             <p class = "text-color-2 special-gothic-expanded-one-regular">{{"%.2f" | format(average)}} % of people found this place accessible!</p>
         </div>
 
         <br>
 
 
-        <div class="messages container rounded u-center">
+        <div class="messages container rounded center">
             <div class="row">
                 <div class="col-sm-6">
                     <form method="POST" action="/updates/{{place['id']}}/update" class="text-center">
