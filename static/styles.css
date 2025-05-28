@@ -244,6 +244,7 @@ h4{
   z-index: 5;
   border-radius: 8px;
 }
+
 #map-legend img {
   vertical-align: middle;
   width: 18px;
@@ -256,3 +257,18 @@ h4{
   color:rgb(187, 138, 240);
 }
 
+/* Make the legend smaller on phones */
+@media (max-width: 600px) {
+  #map-legend {
+    font-size: 12px;
+    padding: 6px;
+    max-width: 150px;
+    bottom: 20px;
+    left: 20px;
+  }
+
+  #map-legend img {
+    width: 14px;
+    margin-right: 4px;
+  }
+}
