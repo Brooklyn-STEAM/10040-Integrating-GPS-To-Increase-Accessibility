@@ -249,4 +249,10 @@ h4{
   width: 18px;
   margin-right: 6px;
 }
+.hover:hover{
+  color:rgb(222, 101, 249);
+}
+.nav-link{
+  color:rgb(187, 138, 240);
+}
 
