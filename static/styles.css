@@ -257,6 +257,12 @@ h4{
   color:rgb(187, 138, 240);
 }
 
+.w_bg{
+  background-color: white;
+  height: 100%;
+}
+
+
 /* Make the legend smaller on phones */
 @media (max-width: 600px) {
   #map-legend {
@@ -271,4 +277,10 @@ h4{
     width: 14px;
     margin-right: 4px;
   }
+
+  .w_bg {
+    background-color: transparent;
+  }
+
 }
+
