@@ -184,6 +184,7 @@ def sign_out():
 
 
 @app.route("/maps")
+@flask_login.login_required
 def maps():
     conn = connect_db()
     cursor = conn.cursor()
