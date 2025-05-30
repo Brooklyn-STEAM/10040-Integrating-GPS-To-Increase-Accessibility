@@ -18,14 +18,14 @@
     @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
     </style>
     <script src="https://cdn.userway.org/widget.js" data-account="EhJYDcVyH5"></script>
+    
 </head>
 
 <body>
   {%include "components/navbar.html.jinja"%}
   <br>
 
-  <div class="container text-center messages rounded u-center wow animate__fadeInUp karla-font fs-5">
-      <div class="col-md-auto">
+  <div class="container col-md-8 text-center w_bg rounded  wow animate__fadeInUp karla-font fs-5">
         <form method = "post" action="/updates/update">
               <h2>
                 <label for = "place" class=" text-color-2 fs-4 pt-4 special-gothic-expanded-one-regular">Review A Place Recently Visited:</label>
@@ -40,7 +40,6 @@
                     </select>
                     <br>
                     <br>
-      </div>
         <div class="row">   
             <div>
                 <textarea placeholder="Write about the change of accessibility of a place here:" rows="3" cols="100" 
@@ -73,6 +72,7 @@
             </div>
             <br>
         </form>
+    
   </div>
 
 <br>
