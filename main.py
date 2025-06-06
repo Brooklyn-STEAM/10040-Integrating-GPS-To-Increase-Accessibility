@@ -385,7 +385,27 @@ def hiree_profile(caretaker_id):
 
         return render_template("hiree_profile.html.jinja", caretaker = result, reviews = results, average = average, extra = result2)
     
+@app.route("/hiree_profile/<caretaker_id>/review", methods = ["POST"])
+@flask_login.login_required
+def review(caretaker_id):
+    conn = connect_db()
+    cursor = conn.cursor()
 
+    reviewer_id = flask_login.current_user.id
+
+    written_review = request.form["written_review"]
+    rating = request.form["rating"]
+
+    cursor.execute(f"""INSERT INTO `Reviews`
+                   (`caretaker_id`, `reviewer_id`, `written_review`, `rating`)
+                   VALUES
+                   ("{caretaker_id}", "{reviewer_id}", "{written_review}", "{rating}")
+                   ON DUPLICATE KEY UPDATE
+                   `written_review` = "{written_review}",
+                   `rating` = "{rating}";
+                    """)
+    
+    return redirect(f"/hiree_profile/{caretaker_id}")
 
 
 
